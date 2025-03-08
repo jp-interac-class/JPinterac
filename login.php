@@ -1,38 +1,62 @@
 <?php
 session_start();
-include 'db_connect.php'; // Ensure the database connection file exists
+include 'db_connect.php'; // Ensure this file connects to your database
 
-// Debugging: Check request method
-if ($_SERVER["REQUEST_METHOD"] != "POST") {
-    http_response_code(405);
-    die("405 Method Not Allowed - Only POST requests are allowed.");
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+
+    // Query the database
+    $stmt = $conn->prepare("SELECT name, password FROM teachers WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $stmt->store_result();
+    
+    if ($stmt->num_rows > 0) {
+        $stmt->bind_result($name, $db_password);
+        $stmt->fetch();
+        
+        if ($password === $db_password) { // Direct password match
+            $_SESSION["teacher_name"] = $name;  // Ensure consistency
+            $_SESSION["teacher_email"] = $email;
+            header("Location: teacherdashboard.php");
+            exit();
+        } else {
+            $error = "Invalid email or password!";
+        }
+    } else {
+        $error = "Invalid email or password!";
+    }
+
+    $stmt->close();
+    $conn->close();
 }
-
-$email = $_POST["email"] ?? null;
-$password = $_POST["password"] ?? null;
-
-// Debugging: Check if form data is received
-if (!$email || !$password) {
-    die("Error: No email or password received.");
-}
-
-// Prepare SQL query
-$stmt = $conn->prepare("SELECT name, password FROM teachers WHERE email = ?");
-$stmt->bind_param("s", $email);
-$stmt->execute();
-$stmt->store_result();
-$stmt->bind_result($name, $hashed_password);
-$stmt->fetch();
-
-if ($stmt->num_rows > 0 && password_verify($password, $hashed_password)) {
-    $_SESSION["name"] = $name;
-    $_SESSION["email"] = $email;
-    header("Location: teacherdashboard.php"); // Redirect to teacher's dashboard
-    exit();
-} else {
-    echo "Invalid email or password!";
-}
-
-$stmt->close();
-$conn->close();
 ?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <h2>Welcome Back!</h2>
+            <p>Please enter your details.</p>
+            <?php if (isset($error)) { echo "<p class='error'>$error</p>"; } ?>
+            <form action="login.php" method="POST">
+                <input type="email" name="email" placeholder="Enter your email" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit">Sign in</button>
+            </form>
+        </div>
+        <div class="right">
+            <img src="Logo/Logo.png" alt="J-P NETWORK ENGLISH" class="logo">
+        </div>
+    </div>
+</body>
+</html>

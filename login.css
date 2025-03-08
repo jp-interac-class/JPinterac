@@ -1,5 +1,3 @@
-/* Updated Login Page CSS */
-
 * {
     margin: 0;
     padding: 0;
@@ -9,78 +7,80 @@
 
 body {
     display: flex;
-    height: 100vh;
-    background-color: #f4f4f4;
     justify-content: center;
     align-items: center;
+    height: 100vh;
+    background: #f8f9fa;
 }
 
 .container {
     display: flex;
-    width: 800px;
-    height: 500px;
+    width: 750px;
     background: white;
-    border-radius: 15px;
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
     overflow: hidden;
 }
 
 .left {
-    width: 50%;
     padding: 40px;
+    width: 50%;
+}
+
+.right {
+    width: 50%;
+    background: #f8f9fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right .logo {
+    max-width: 80%;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+form {
     display: flex;
     flex-direction: column;
-    justify-content: center;
 }
 
-.left h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.left p {
-    font-size: 14px;
-    color: gray;
-    margin-bottom: 20px;
-}
-
-.left input {
+input {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     margin-bottom: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
     border-radius: 5px;
 }
 
-.left .remember {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    font-size: 14px;
-}
-
-.left button {
-    width: 100%;
-    padding: 10px;
-    background-color: #6c47ff;
+button {
+    padding: 12px;
+    background: #6a32f3;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #4c1db3;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
     margin-bottom: 10px;
-}
-
-.right {
-    width: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #f0f0f5;
-    position: relative;
-}
-
-.right .logo {
-    max-width: 600px;
-    height: auto;
 }
