@@ -13,7 +13,6 @@ body {
 }
 
 /* SIDEBAR */
-/* Sidebar Container */
 .sidebar {
   background-color: #111;
   color: white;
@@ -27,7 +26,6 @@ body {
   box-sizing: border-box;
 }
 
-/* Logo Section */
 .logo {
   display: flex;
   flex-direction: column;
@@ -51,7 +49,6 @@ body {
   color: #bbb;
 }
 
-/* Navigation Wrapper (Centers nav) */
 .nav-wrapper {
   flex: 1;
   display: flex;
@@ -59,13 +56,12 @@ body {
   justify-content: center;
 }
 
-/* Navigation Items */
 .nav {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 40px;
-  padding: 0 20px;  /* ← MATCHES logout */
+  padding: 0 20px;
   width: 100%;
 }
 
@@ -80,14 +76,12 @@ body {
   width: 100%;
 }
 
-/* HOVER EFFECT (optional) */
 .nav-item:hover {
   background-color: #1a1a1a;
   border-radius: 6px;
   padding-left: 6px;
 }
 
-/* LOGOUT SECTION */
 .logout {
   color: #ffc107;
   text-decoration: none;
@@ -96,10 +90,9 @@ body {
   align-items: center;
   gap: 10px;
   justify-content: flex-start;
-  padding: 10px 20px;  /* ← Matches nav */
+  padding: 10px 20px;
   width: 100%;
 }
-
 
 /* MAIN PANEL */
 .main {
@@ -109,7 +102,7 @@ body {
 }
 
 h1 {
-  font-family: 'Great Vibes', cursive; /* or your preferred font */
+  font-family: 'Great Vibes', cursive;
   font-size: 50px;
   font-weight: 600;
   color: #111;
@@ -125,27 +118,25 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  flex: 1;
+  min-width: 300px;
 }
 
 .lesson {
-  background-color: #ffffff;
-  border: 1px solid #ccc; /* full light-gray border */
-  border-left: 6px solid #2c2c1e; /* still keeps the accent */
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-left: 6px solid #2c2c1e;
   border-radius: 12px;
   padding: 16px 20px;
   margin-bottom: 15px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  max-width: 360px;
-  font-family: 'Inter', sans-serif;
-  cursor: default;
+  transition: all 0.3s ease;
 }
 
 .lesson:hover {
   transform: translateY(-3px) scale(1.01);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
-
 
 .lesson-time {
   font-weight: 600;
@@ -159,10 +150,24 @@ h2 {
   margin-top: 4px;
 }
 
+.lesson-scroll {
+  max-height: 500px;
+  overflow-y: auto;
+  flex: 1;
+  padding-right: 6px;
+}
+
+.lesson-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.lesson-scroll::-webkit-scrollbar-thumb {
+  background-color: #bbb;
+  border-radius: 4px;
+}
 
 /* RIGHT PANEL */
 .right-panel {
-  width: 320px; /* or 340px */
+  width: 320px;
   padding: 40px 20px;
   display: flex;
   flex-direction: column;
@@ -179,7 +184,7 @@ h2 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: 'Inter', sans-serif; /* back to original font */
+  font-family: 'Inter', sans-serif;
   background-color: #fff;
   padding: 30px 10px;
   border: 3px solid #4a4a2f;
@@ -201,8 +206,6 @@ h2 {
   color: #555;
 }
 
-
-/* CALENDAR */
 .calendar {
   background: white;
   color: #000;
@@ -241,7 +244,6 @@ h2 {
   padding: 8px 0;
 }
 
-/* HIGHLIGHT TODAY */
 .today {
   background-color: #4a4a2f;
   color: white;
@@ -251,23 +253,19 @@ h2 {
 
 .main-content-row {
   display: flex;
-  gap: 40px;
+  gap: 24px;
   align-items: flex-start;
-  flex-wrap: wrap; /* allows stacking on smaller screens */
-}
-
-.lessons {
-  flex: 1;
-  min-width: 300px;
+  justify-content: space-between;
 }
 
 .announcement-board {
-  max-width: 400px;
+  background-color: #fffbe8;
   padding: 20px;
-  border: 2px solid #ddd;
-  border-radius: 10px;
-  background-color: #fffce8;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  border: 1px solid #eee;
+  width: 350px;
+  height: fit-content;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .announcement-board h2 {

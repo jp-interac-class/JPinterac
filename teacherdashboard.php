@@ -56,6 +56,37 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
       border-radius: 50%;
       font-weight: bold;
     }
+
+    .main-content-row {
+      display: flex;
+      gap: 30px;
+      align-items: flex-start;
+    }
+
+    .lesson-scroll {
+      max-height: 500px;
+      overflow-y: auto;
+      flex: 1;
+      padding-right: 10px;
+    }
+
+    .lesson-scroll::-webkit-scrollbar {
+      width: 6px;
+    }
+    .lesson-scroll::-webkit-scrollbar-thumb {
+      background-color: #ccc;
+      border-radius: 4px;
+    }
+
+    .announcement-board {
+      width: 320px;
+      background-color: #fffbe8;
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid #eee;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      flex-shrink: 0;
+    }
   </style>
 </head>
 <body>
@@ -87,74 +118,16 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
   <div class="main-content-row">
     <!-- Lesson List -->
-    <div class="lessons">
-    <div class="lesson">
-      <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
-      <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
+    <div class="lesson-scroll">
+      <div class="lessons">
+        <?php for ($i = 0; $i < 13; $i++): ?>
+        <div class="lesson">
+          <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
+          <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
+        </div>
+        <?php endfor; ?>
+      </div>
     </div>
-
-      <div class="lesson">
-        <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
-        <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
-      </div>
-
-      <div class="lesson">
-        <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
-        <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
-      </div>
-
-      <div class="lesson">
-        <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
-        <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
-      </div>
-
-      <div class="lesson">
-        <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
-        <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
-      </div>
-
-      <div class="lesson">
-        <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
-        <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
-      </div>
-
-      <div class="lesson">
-        <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
-        <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
-      </div>
-
-      <div class="lesson">
-        <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
-        <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
-      </div>
-
-      <div class="lesson">
-        <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
-        <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
-      </div>
-
-      <div class="lesson">
-        <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
-        <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
-      </div>
-
-      <div class="lesson">
-        <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
-        <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
-      </div>
-
-      <div class="lesson">
-        <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
-        <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
-      </div>
-
-      <div class="lesson">
-        <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
-        <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
-      </div>
-      <!-- Repeat as needed -->
-    </div>
-
 
     <!-- Announcement Board -->
     <div class="announcement-board">
@@ -162,7 +135,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
       <ul>
         <li>Always SMILE.</li>
         <li>Double-check date, time, material, and meeting link.</li>
-        <li>Send "I will finish" on Zoom 2 minutes before the end. If not on the channel, message us on Viber.</li>
+        <li>Send "I will finish" on Zoom 2 minutes before the end.<br> If not on the channel, message us on Viber.</li>
         <li>Report any lesson issues to Customer Support for immediate help.</li>
       </ul>
     </div>
