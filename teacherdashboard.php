@@ -83,10 +83,10 @@
   <div class="main-content-row">
     <!-- Lesson List -->
     <div class="lessons">
-      <div class="lesson">
-        <div class="lesson-time">9:00 - 9:15 JST</div>
-        <div class="lesson-location">Kanzaki City | Kanzaki ES</div>
-      </div>
+    <div class="lesson">
+      <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
+      <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
+    </div>
 
       <div class="lesson">
         <div class="lesson-time">9:30 - 9:45 JST</div>
@@ -108,11 +108,12 @@
 
     <!-- Announcement Board -->
     <div class="announcement-board">
-      <h2>📢 Announcements</h2>
+      <h2>🔔 Reminders</h2>
       <ul>
-        <li>Don't forget to submit your lesson reports by 5:00 PM.</li>
+        <li>Double check the date and time.</li>
         <li>Power interruption advisory for April 7 in Davao.</li>
         <li>Zoom backgrounds must be updated before next Monday.</li>
+        
       </ul>
     </div>
   </div>
