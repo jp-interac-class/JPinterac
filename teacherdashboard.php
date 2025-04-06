@@ -1,4 +1,10 @@
 <?php
+session_start();
+
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+    header("Location: login.php");
+    exit;
+}
   date_default_timezone_set('Asia/Tokyo');
   $currentTime = date("H:i");
   $currentYear = date("Y");
@@ -76,7 +82,7 @@
 </aside>
 
     <main class="main">
-  <h1>Hi, Teacher Lisse!</h1>
+    <h1>Hi, Teacher <?= htmlspecialchars($_SESSION["teacher_name"]); ?>!</h1>
   <h2>Upcoming Lessons</h2>
 
   <div class="main-content-row">

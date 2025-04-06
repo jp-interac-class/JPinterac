@@ -17,6 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->fetch();
         
         if ($password === $db_password) { // Direct password match
+            $_SESSION["loggedin"] = true; // ✅ REQUIRED to know if logged in
             $_SESSION["teacher_name"] = $name;  // Ensure consistency
             $_SESSION["teacher_email"] = $email;
             header("Location: teacherdashboard.php");
