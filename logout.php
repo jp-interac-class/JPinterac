@@ -22,4 +22,8 @@ session_destroy();
         });
     </script>
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> 348029ba3aeba2edaad36b635a5676567531541d
