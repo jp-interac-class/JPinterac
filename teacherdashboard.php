@@ -39,8 +39,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name=<<<<<<< HEAD
-  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Teacher Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -58,13 +56,14 @@
   <div class="container">
   <aside class="sidebar">
   <div class="logo">
-    <img src="Logo/logo1.png" alt="Logo" />
+    <img src="Logo/logo1.png" alt="J-P Network English Corp Logo" />
     <div class="logo-text">
       <strong>J-P Network English Corp</strong><br />
       <span>Interac Classes</span>
     </div>
   </div>
 
+  <!-- Wrap nav in a bordered container -->
   <div class="nav-wrapper">
     <nav class="nav">
       <a href="#" class="nav-item">🏠 Dashboard</a>
@@ -73,7 +72,7 @@
     </nav>
   </div>
 
-  <a href="#" class="logout">🔓 Logout</a>
+  <a href="logout.php" class="logout">🔓 Logout</a>
 </aside>
 
     <main class="main">
