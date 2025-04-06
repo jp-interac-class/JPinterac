@@ -1,11 +1,12 @@
 body {
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Inter', sans-serif;
     background-color: #f7f7f7;
   }
   
   .container {
     display: flex;
+    width: 100%;
     min-height: 100vh;
   }
   
@@ -21,20 +22,27 @@ body {
   }
   
   .logo {
-    display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    text-align: center;
+    gap: 6px;
+    padding: 0 20px;
   }
   
   .logo img {
-    width: 120px;
+    width: 160px;
   }
   
-  .logo-text {
-    text-align: center;
-    font-size: 13px;
+  .logo-text strong {
+    font-size: 14px;
+    color: white;
   }
+  
+  .logo-text span {
+    font-size: 13px;
+    color: #bbb;
+  }
+  
   
   .nav-wrapper {
     flex-grow: 1;
@@ -46,13 +54,21 @@ body {
   .nav {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 0 20px;
+    width: 100%;
   }
   
   .nav-item {
     color: white;
     text-decoration: none;
     font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.2s;
+    width: 100%;
   }
   
   .logout {

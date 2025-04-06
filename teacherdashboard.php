@@ -104,7 +104,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
   <div class="nav-wrapper">
     <nav class="nav">
       <a href="teacherdashboard.php" class="nav-item">🏠 Dashboard</a>
-      <a href="#" class="nav-item">📖 Schedule</a>
+      <a href="weeklyschedule.php" class="nav-item">📖 Schedule</a>
       <a href="#" class="nav-item">✔️ FAQ</a>
     </nav>
   </div>
