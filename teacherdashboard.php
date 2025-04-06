@@ -101,6 +101,51 @@
         <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
         <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
       </div>
+
+      <div class="lesson">
+        <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
+        <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
+      </div>
+
+      <div class="lesson">
+        <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
+        <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
+      </div>
+
+      <div class="lesson">
+        <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
+        <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
+      </div>
+
+      <div class="lesson">
+        <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
+        <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
+      </div>
+
+      <div class="lesson">
+        <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
+        <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
+      </div>
+
+      <div class="lesson">
+        <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
+        <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
+      </div>
+
+      <div class="lesson">
+        <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
+        <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
+      </div>
+
+      <div class="lesson">
+        <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
+        <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
+      </div>
+
+      <div class="lesson">
+        <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
+        <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
+      </div>
       <!-- Repeat as needed -->
     </div>
 
