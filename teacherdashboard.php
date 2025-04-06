@@ -38,7 +38,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<<<<<<< HEAD
+  <meta charset="UTF-8" />
+  <meta name=<<<<<<< HEAD
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Teacher Dashboard</title>
@@ -57,40 +58,13 @@
   <div class="container">
   <aside class="sidebar">
   <div class="logo">
-    <img src="Logo/logo1.png" alt="J-P Network English Corp Logo" />
+    <img src="Logo/logo1.png" alt="Logo" />
     <div class="logo-text">
       <strong>J-P Network English Corp</strong><br />
       <span>Interac Classes</span>
-=======
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teacher Dashboard</title>
-    <link rel="stylesheet" href="teacherdashboard.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</head>
-<body>
-    <script>
-        Swal.fire({ 
-            title: "Successfully Logged In!", 
-            icon: "success", 
-            draggable: true 
-        });
-    </script>
-    
-    <div class="sidebar">
-        <div class="logo">
-            <img src="Logo/Logo.png" alt="Logo">
-        </div>
-        <ul>
-            <li class="active"><a href="#">Dashboard</a></li>
-            <li><a href="#">My Lessons</a></li>
-            <li><a href="logout.php">Logout</a></li>
-        </ul>
->>>>>>> 348029ba3aeba2edaad36b635a5676567531541d
     </div>
   </div>
 
-  <!-- Wrap nav in a bordered container -->
   <div class="nav-wrapper">
     <nav class="nav">
       <a href="#" class="nav-item">🏠 Dashboard</a>
@@ -99,7 +73,7 @@
     </nav>
   </div>
 
-  <a href="logout.php" class="logout">🔓 Logout</a>
+  <a href="#" class="logout">🔓 Logout</a>
 </aside>
 
     <main class="main">

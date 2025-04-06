@@ -13,6 +13,7 @@ body {
 }
 
 /* SIDEBAR */
+/* Sidebar Container */
 .sidebar {
   background-color: #111;
   color: white;
@@ -20,23 +21,24 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: stretch;
   justify-content: space-between;
-  align-items: center;
   padding: 20px 0;
   box-sizing: border-box;
 }
 
+/* Logo Section */
 .logo {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 40px;
   text-align: center;
-  gap: 0px; /* was 12px, increased spacing */
+  gap: 6px;
+  padding: 0 20px;
 }
 
 .logo img {
-  width: 140px;
+  width: 80px;
 }
 
 .logo-text strong {
@@ -49,28 +51,21 @@ body {
   color: #bbb;
 }
 
-/* Center nav block vertically */
+/* Navigation Wrapper (Centers nav) */
 .nav-wrapper {
-  flex-grow: 1;
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  padding: 20px 0;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  /* Removed:
-  border-top: 1px solid #333;
-  border-bottom: 1px solid #333;
-  */
 }
 
-
+/* Navigation Items */
 .nav {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 20px;
+  padding-left: 20px;
 }
 
 .nav-item {
@@ -80,15 +75,16 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 8px 20px;
   transition: background 0.2s;
 }
 
 .nav-item:hover {
   background-color: #1a1a1a;
-  border-radius: 8px;
+  border-radius: 6px;
+  padding-left: 6px;
 }
 
+/* Logout Button */
 .logout {
   color: #ffc107;
   text-decoration: none;
@@ -96,9 +92,8 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  justify-content: center;
-  width: 100%;
-  padding-bottom: 10px;
+  justify-content: flex-start;
+  padding: 10px 20px;
 }
 
 
