@@ -88,18 +88,18 @@
     </div>
 
       <div class="lesson">
-        <div class="lesson-time">9:30 - 9:45 JST</div>
-        <div class="lesson-location">Ureshino City | Ureshino ES</div>
+        <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
+        <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
       </div>
 
       <div class="lesson">
-        <div class="lesson-time">9:30 - 9:45 JST</div>
-        <div class="lesson-location">Ureshino City | Ureshino ES</div>
+        <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
+        <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
       </div>
 
       <div class="lesson">
-        <div class="lesson-time">9:30 - 9:45 JST</div>
-        <div class="lesson-location">gbzsrheth | sgsRg</div>
+        <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
+        <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
       </div>
       <!-- Repeat as needed -->
     </div>
@@ -109,10 +109,10 @@
     <div class="announcement-board">
       <h2>🔔 Reminders</h2>
       <ul>
-        <li>Double check the date and time.</li>
-        <li>Power interruption advisory for April 7 in Davao.</li>
-        <li>Zoom backgrounds must be updated before next Monday.</li>
-        
+        <li>Always SMILE.</li>
+        <li>Double-check date, time, material, and meeting link.</li>
+        <li>Send "I will finish" on Zoom 2 minutes before the end. If not on the channel, message us on Viber.</li>
+        <li>Report any lesson issues to Customer Support for immediate help.</li>
       </ul>
     </div>
   </div>
