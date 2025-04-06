@@ -83,24 +83,24 @@
   <div class="main-content-row">
     <!-- Lesson List -->
     <div class="lessons">
-    <div class="lesson">
-      <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
-      <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
-    </div>
-
       <div class="lesson">
-        <div class="lesson-time">9:30 - 9:45 JST</div>
-        <div class="lesson-location">Ureshino City | Ureshino ES</div>
+        <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
+        <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
       </div>
 
       <div class="lesson">
-        <div class="lesson-time">9:30 - 9:45 JST</div>
-        <div class="lesson-location">Ureshino City | Ureshino ES</div>
+        <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
+        <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
       </div>
 
       <div class="lesson">
-        <div class="lesson-time">9:30 - 9:45 JST</div>
-        <div class="lesson-location">gbzsrheth | sgsRg</div>
+        <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
+        <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
+      </div>
+
+      <div class="lesson">
+        <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
+       <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
       </div>
       <!-- Repeat as needed -->
     </div>
@@ -110,8 +110,8 @@
     <div class="announcement-board">
       <h2>🔔 Reminders</h2>
       <ul>
-        <li>Double check the date and time.</li>
-        <li>Power interruption advisory for April 7 in Davao.</li>
+        <li>Double check the date, time, lesson material, and meeting link.</li>
+        <li>Send an "I will finish" message to the Zoom channel </li>
         <li>Zoom backgrounds must be updated before next Monday.</li>
         
       </ul>
