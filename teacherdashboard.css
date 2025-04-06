@@ -38,7 +38,7 @@ body {
 }
 
 .logo img {
-  width: 80px;
+  width: 160px;
 }
 
 .logo-text strong {
@@ -64,8 +64,9 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 20px;
-  padding-left: 20px;
+  gap: 40px;
+  padding: 0 20px;  /* ← MATCHES logout */
+  width: 100%;
 }
 
 .nav-item {
@@ -76,15 +77,17 @@ body {
   align-items: center;
   gap: 10px;
   transition: background 0.2s;
+  width: 100%;
 }
 
+/* HOVER EFFECT (optional) */
 .nav-item:hover {
   background-color: #1a1a1a;
   border-radius: 6px;
   padding-left: 6px;
 }
 
-/* Logout Button */
+/* LOGOUT SECTION */
 .logout {
   color: #ffc107;
   text-decoration: none;
@@ -93,7 +96,8 @@ body {
   align-items: center;
   gap: 10px;
   justify-content: flex-start;
-  padding: 10px 20px;
+  padding: 10px 20px;  /* ← Matches nav */
+  width: 100%;
 }
 
 
