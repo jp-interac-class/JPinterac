@@ -109,8 +109,10 @@ body {
 }
 
 h1 {
-  font-size: 28px;
-  margin-bottom: 10px;
+  font-family: 'Great Vibes', cursive; /* or your preferred font */
+  font-size: 50px;
+  font-weight: 600;
+  color: #111;
 }
 
 h2 {
