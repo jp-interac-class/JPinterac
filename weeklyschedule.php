@@ -17,22 +17,25 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 <div class="container">
   <!-- Sidebar -->
   <aside class="sidebar">
-    <div class="logo">
-      <img src="Logo/logo1.png" alt="Logo" />
-      <div class="logo-text">
-        <strong>J-P Network English Corp</strong><br />
-        <span>Interac Classes</span>
-      </div>
+  <div class="logo">
+    <img src="Logo/logo1.png" alt="J-P Network English Corp Logo" />
+    <div class="logo-text">
+      <strong>J-P Network English Corp</strong><br />
+      <span>Interac Classes</span>
     </div>
-    <div class="nav-wrapper">
-      <nav class="nav">
-        <a href="teacherdashboard.php" class="nav-item">🏠 Dashboard</a>
-        <a href="weeklyschedule.php" class="nav-item">📖 Schedule</a>
-        <a href="#" class="nav-item">✔️ FAQ</a>
-      </nav>
-    </div>
-    <a href="logout.php" class="logout">🔓 Logout</a>
-  </aside>
+  </div>
+
+  <div class="nav-wrapper">
+    <nav class="nav">
+      <a href="teacherdashboard.php" class="nav-item">🏠 Dashboard</a>
+      <a href="weeklyschedule.php" class="nav-item">📖 Schedule</a>
+      <a href="#" class="nav-item">✔️ FAQ</a>
+    </nav>
+  </div>
+
+  <a href="logout.php" class="logout">🔓 Logout</a>
+</aside>
+
 
   <!-- Main Content -->
   <main class="main">
