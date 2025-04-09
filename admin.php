@@ -7,100 +7,88 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION
 }
 
 date_default_timezone_set('Asia/Tokyo');
-$currentTime = date("H:i");
-$currentYear = date("Y");
-
-// Calendar logic
+$currentTime = date("H:i:s");
 $today = date("j");
 $month = date("n");
 $year = date("Y");
-
+$monthName = date("F");
 $firstDayOfMonth = mktime(0, 0, 0, $month, 1, $year);
-$daysInMonth = date("t", $firstDayOfMonth);
-$monthName = date("F", $firstDayOfMonth);
 $startDay = date("w", $firstDayOfMonth);
-
-$calendar = "<div class='calendar'>
-  <div class='calendar-header'>
-    <span class='month'>$monthName</span>
-    <span class='year'>$year</span>
-  </div>
-  <div class='calendar-grid'>
-    <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>";
-
-$day = 1;
-for ($i = 0; $i < $startDay; $i++) {
-  $calendar .= "<div></div>";
-}
-
-for ($i = $startDay; $i < $startDay + $daysInMonth; $i++) {
-  $highlight = ($day == $today) ? "today" : "";
-  $calendar .= "<div class='$highlight'>$day</div>";
-  $day++;
-}
-
-$calendar .= "</div></div>";
+$daysInMonth = date("t", $firstDayOfMonth);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Admin Panel</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="teacherdashboard.css" />
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="admin.css">
 </head>
 <body>
-  <div class="container">
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <div class="logo">
-        <img src="Logo/logo1.png" alt="J-P Network English Corp Logo" />
-        <div class="logo-text">
-          <strong>J-P Network English Corp</strong><br />
-          <span>Interac Classes</span>
-        </div>
+<div class="container">
+  <aside class="sidebar">
+    <div class="logo">
+      <img src="Logo/logo1.png" alt="Logo">
+      <div class="logo-text">
+        <strong>J-P Network English Corp</strong><br>
+        <span>Interac Classes</span>
       </div>
-      <div class="nav-wrapper">
-        <nav class="nav">
-          <a href="admin.php" class="nav-item">🏠 Dashboard</a>
-          <a href="logout.php" class="logout">🔓 Logout</a>
-        </nav>
-      </div>
-    </aside>
+    </div>
+    <div class="nav-wrapper">
+      <nav class="nav">
+        <a href="admin.php" class="nav-item">🏠 Dashboard</a>
+        <a href="registerteacher.php" class="nav-item">🖊️ Register New Teacher</a>
+      </nav>
+    </div>
+    <a href="logout.php" class="logout">🔒 Logout</a>
+  </aside>
 
-    <!-- Main Panel -->
-    <main class="main">
-      <h1>Hi, Admin!</h1>
+  <main class="main">
+    <h1>Hi, Admin!</h1>
+    <div class="upload-section">
       <h2>Upload Lesson File</h2>
-      <form action="upload.php" method="POST" enctype="multipart/form-data">
+      <form action="upload_handler.php" method="POST" enctype="multipart/form-data">
         <input type="file" name="lesson_file" required>
         <button type="submit">Upload</button>
       </form>
-    </main>
+    </div>
+  </main>
 
-    <!-- Right Panel -->
-    <section class="right-panel">
-      <div class="clock" id="live-clock">
-        <span id="time">--:--:--</span><br/>
-        <span>Japanese Standard Time</span>
+  <section class="right-panel">
+    <div class="clock">
+      <span id="time">--:--:--</span>
+      <span>Japanese Standard Time</span>
+    </div>
+    <div class="calendar">
+      <div class="calendar-header">
+        <span class="month"><?php echo $monthName; ?></span>
+        <span class="year"><?php echo $year; ?></span>
       </div>
-      <?php echo $calendar; ?>
-    </section>
-  </div>
-
-  <script>
-    function updateClock() {
-      const now = new Date();
-      const japanTime = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
-      const hours = String(japanTime.getHours()).padStart(2, '0');
-      const minutes = String(japanTime.getMinutes()).padStart(2, '0');
-      const seconds = String(japanTime.getSeconds()).padStart(2, '0');
-      document.getElementById('time').textContent = `${hours}:${minutes}:${seconds}`;
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
-  </script>
+      <div class="calendar-grid">
+        <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+        <?php
+        for ($i = 0; $i < $startDay; $i++) echo "<div></div>";
+        for ($day = 1; $day <= $daysInMonth; $day++) {
+          $highlight = ($day == $today) ? "today" : "";
+          echo "<div class='$highlight'>$day</div>";
+        }
+        ?>
+      </div>
+    </div>
+  </section>
+</div>
+<script>
+function updateClock() {
+  const now = new Date();
+  const japanTime = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
+  const hours = String(japanTime.getHours()).padStart(2, '0');
+  const minutes = String(japanTime.getMinutes()).padStart(2, '0');
+  const seconds = String(japanTime.getSeconds()).padStart(2, '0');
+  document.getElementById('time').textContent = `${hours}:${minutes}:${seconds}`;
+}
+setInterval(updateClock, 1000);
+updateClock();
+</script>
 </body>
 </html>

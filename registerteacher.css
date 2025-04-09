@@ -1,6 +1,7 @@
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
+    display: flex;
     background: #f9f9f9;
     color: #222;
     overflow-y: scroll;
@@ -12,6 +13,7 @@ body {
     min-height: 100vh;
   }
   
+  /* SIDEBAR */
   .sidebar {
     background-color: #111;
     color: white;
@@ -58,12 +60,11 @@ body {
   .nav {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* align to the left */
+    align-items: flex-start;
     gap: 40px;
     padding: 0 20px;
     width: 100%;
   }
-  
   
   .nav-item {
     color: white;
@@ -74,7 +75,7 @@ body {
     gap: 10px;
     transition: background 0.2s;
     width: 100%;
-  }  
+  }
   
   .nav-item:hover {
     background-color: #1a1a1a;
@@ -91,8 +92,10 @@ body {
     gap: 10px;
     justify-content: flex-start;
     padding: 10px 20px;
+    width: 100%;
   }
   
+  /* MAIN */
   .main {
     flex: 1;
     padding: 40px;
@@ -107,6 +110,13 @@ body {
     font-size: 50px;
     font-weight: 600;
     color: #111;
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: #2b2b2b;
   }
   
   .upload-section {
@@ -119,13 +129,22 @@ body {
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
   }
   
-  .upload-section h2 {
-    margin-bottom: 16px;
+  .upload-section label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    margin-top: 12px;
   }
   
-  .upload-section input[type="file"] {
-    display: block;
+  .upload-section input[type="text"],
+  .upload-section input[type="email"],
+  .upload-section input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
     margin-bottom: 12px;
+    box-sizing: border-box;
   }
   
   .upload-section button {
@@ -135,12 +154,14 @@ body {
     padding: 10px 20px;
     border-radius: 6px;
     cursor: pointer;
+    font-size: 16px;
   }
   
   .upload-section button:hover {
     background-color: #333;
   }
   
+  /* RIGHT PANEL */
   .right-panel {
     width: 320px;
     padding: 40px 20px;
@@ -207,7 +228,6 @@ body {
     font-size: 14px;
     padding: 10px;
     color: #000;
-    text-align: center;
     background: #fff;
     border: 1px solid #ddd;
     border-top: none;
