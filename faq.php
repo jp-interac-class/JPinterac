@@ -75,6 +75,12 @@ $calendar .= "</div></div>";
         <p>Please be guided about our updated policy.</p>
         <a href="https://docs.google.com/spreadsheets/d/1G_kRRavs20TfnA2JYou5fLbRVeeASA6mshi3dlI0KiA/edit?gid=0#gid=0" target="_blank">View Penalty Guide</a>
       </div>
+      
+      <div class="faq-item">
+        <h3>📢 Important Announcements</h3>
+        <p>This document contains updates from management, system maintenance, and policy changes.</p>
+        <a href="https://docs.google.com/document/d/your-announcement-link" target="_blank">Read Announcements</a>
+      </div>
 
       <div class="faq-item">
         <h3>📄 Zoom Troubleshooting Guide</h3>
@@ -92,12 +98,6 @@ $calendar .= "</div></div>";
         <h3>📊 Daily Progress Tracker (Google Sheet)</h3>
         <p>Use this sheet to input daily updates and view progress per school or student.</p>
         <a href="https://docs.google.com/spreadsheets/d/your-daily-progress-link" target="_blank">Go to Tracker Sheet</a>
-      </div>
-
-      <div class="faq-item">
-        <h3>📢 Important Announcements</h3>
-        <p>This document contains updates from management, system maintenance, and policy changes.</p>
-        <a href="https://docs.google.com/document/d/your-announcement-link" target="_blank">Read Announcements</a>
       </div>
     </div>
   </main>
