@@ -120,12 +120,13 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <!-- Lesson List -->
     <div class="lesson-scroll">
       <div class="lessons">
-        <?php for ($i = 0; $i < 13; $i++): ?>
-        <div class="lesson">
-          <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
-          <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
-        </div>
-        <?php endfor; ?>
+      <?php for ($i = 0; $i < 13; $i++): ?>
+      <div class="lesson">
+        <div class="lesson-time">🕘 9:30 – 9:45 JST</div>
+        <div class="lesson-location">🏫 Ureshino City | Ureshino ES</div>
+      </div>
+      <?php endfor; ?>
+
       </div>
     </div>
 
