@@ -35,7 +35,7 @@ for ($i = $startDay; $i < $startDay + $daysInMonth; $i++) {
 }
 $calendar .= "</div></div>";
 
-$lessonId = $_GET['id'] ?? 'Not provided';
+$lessonId = isset($_GET['id']) ? ((int)$_GET['id'] + 1) : 'Not provided';
 ?>
 
 <!DOCTYPE html>
@@ -50,10 +50,9 @@ $lessonId = $_GET['id'] ?? 'Not provided';
     .lesson-info-grid {
       display: grid;
       grid-template-columns: 160px 1fr;
-      gap: 10px 18px;
-      margin-top: 1rem;
-      font-size: 14px;
-      padding: 16px;
+      gap: 8px 16px;
+      font-size: 13px;
+      padding: 16px 24px;
       background: #f1f5ff;
       border-radius: 10px;
       border: 1px solid #cdd6f4;
@@ -70,6 +69,33 @@ $lessonId = $_GET['id'] ?? 'Not provided';
 
     .lesson-info-grid a:hover {
       text-decoration: underline;
+    }
+
+    .main {
+      flex: 1;
+      padding: 24px 32px;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      max-height: 100vh;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    .faq-container {
+      flex: 1;
+      overflow-y: auto;
+      margin-top: 10px;
+    }
+
+    .faq-item {
+      background: #ffffff;
+      border: 1px solid #ddd;
+      border-left: 5px solid #4a4a2f;
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
     }
   </style>
 </head>
@@ -99,13 +125,11 @@ $lessonId = $_GET['id'] ?? 'Not provided';
     <h1>Lesson Details</h1>
     <div class="faq-container">
       <div class="faq-item">
-        <h3>📘 Lesson ID: <?= htmlspecialchars($lessonId) ?></h3>
-        <p>This page will show full details about the lesson. You can display:</p>
+        <h3>📘 Lesson #<?= htmlspecialchars($lessonId) ?></h3>
         <div class="lesson-info-grid">
           <div>Access Time:</div> <div>9:20 AM JST</div>
           <div>Start Time:</div> <div>9:30 AM JST</div>
           <div>End Time:</div> <div>9:45 AM JST</div>
-          <div>Lesson Type:</div> <div>English Conversation</div>
           <div>Area (BoE):</div> <div>Ureshino City</div>
           <div>School:</div> <div>Ureshino Elementary School</div>
           <div>Grade:</div> <div>5</div>
