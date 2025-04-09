@@ -45,7 +45,33 @@ $lessonId = $_GET['id'] ?? 'Not provided';
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lesson Details</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="faq.css" />
+  <link rel="stylesheet" href="lessondetails.css" />
+  <style>
+    .lesson-info-grid {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 10px 18px;
+      margin-top: 1rem;
+      font-size: 14px;
+      padding: 16px;
+      background: #f1f5ff;
+      border-radius: 10px;
+      border: 1px solid #cdd6f4;
+    }
+
+    .lesson-info-grid div {
+      line-height: 1.5;
+    }
+
+    .lesson-info-grid a {
+      color: #2a6edb;
+      text-decoration: none;
+    }
+
+    .lesson-info-grid a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
 <div class="container">
@@ -75,12 +101,22 @@ $lessonId = $_GET['id'] ?? 'Not provided';
       <div class="faq-item">
         <h3>📘 Lesson ID: <?= htmlspecialchars($lessonId) ?></h3>
         <p>This page will show full details about the lesson. You can display:</p>
-        <ul>
-          <li>🕒 Time: 9:30 – 9:45 JST</li>
-          <li>🏫 School: Ureshino City | Ureshino ES</li>
-          <li>👨‍🏫 Teacher: <?= htmlspecialchars($_SESSION["teacher_name"]) ?></li>
-          <li>📎 Materials: <a href="#">Lesson Link</a></li>
-        </ul>
+        <div class="lesson-info-grid">
+          <div>Access Time:</div> <div>9:20 AM JST</div>
+          <div>Start Time:</div> <div>9:30 AM JST</div>
+          <div>End Time:</div> <div>9:45 AM JST</div>
+          <div>Lesson Type:</div> <div>English Conversation</div>
+          <div>Area (BoE):</div> <div>Ureshino City</div>
+          <div>School:</div> <div>Ureshino Elementary School</div>
+          <div>Grade:</div> <div>5</div>
+          <div>Class:</div> <div>A</div>
+          <div>Lesson Period:</div> <div>2nd</div>
+          <div>Student:</div> <div>Tanaka</div>
+          <div>Join Meeting:</div> <div><a href="#">Click here</a></div>
+          <div>Material:</div> <div>“Unit 3 – Greetings”</div>
+          <div>Open Material:</div> <div><a href="#">View</a></div>
+          <div>Feedback Form:</div> <div><a href="#">Submit</a></div>
+        </div>
       </div>
     </div>
   </main>
