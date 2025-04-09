@@ -17,25 +17,24 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 <div class="container">
   <!-- Sidebar -->
   <aside class="sidebar">
-  <div class="logo">
-    <img src="Logo/logo1.png" alt="J-P Network English Corp Logo" />
-    <div class="logo-text">
-      <strong>J-P Network English Corp</strong><br />
-      <span>Interac Classes</span>
+    <div class="logo">
+      <img src="Logo/logo1.png" alt="J-P Network English Corp Logo" />
+      <div class="logo-text">
+        <strong>J-P Network English Corp</strong><br />
+        <span>Interac Classes</span>
+      </div>
     </div>
-  </div>
 
-  <div class="nav-wrapper">
-    <nav class="nav">
-      <a href="teacherdashboard.php" class="nav-item">🏠 Dashboard</a>
-      <a href="weeklyschedule.php" class="nav-item">📖 Schedule</a>
-      <a href="faq.php" class="nav-item">✔️ FAQ</a>
-    </nav>
-  </div>
+    <div class="nav-wrapper">
+      <nav class="nav">
+        <a href="teacherdashboard.php" class="nav-item">🏠 Dashboard</a>
+        <a href="weeklyschedule.php" class="nav-item">📖 Schedule</a>
+        <a href="faq.php" class="nav-item">✔️ FAQ</a>
+      </nav>
+    </div>
 
-  <a href="logout.php" class="logout">🔓 Logout</a>
-</aside>
-
+    <a href="logout.php" class="logout">🔓 Logout</a>
+  </aside>
 
   <!-- Main Content -->
   <main class="main">
@@ -66,7 +65,11 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         echo "</div>";
         echo "<div class='slots'>";
         for ($i = 0; $i < 10; $i++) {
+          // Assuming each slot corresponds to a lesson with a unique ID
+          $lessonId = $i + 1; // Replace this with the actual lesson ID
+          echo "<a href='lessondetails.php?id={$lessonId}' class='slot-link'>";
           echo "<div class='slot'></div>";
+          echo "</a>";
         }
         echo "</div>";
         echo "</div>";
