@@ -1,12 +1,51 @@
 <?php
 session_start();
+include 'db_connect.php'; // 🔗 Connects to teachers_db
 
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION["user_type"] !== "admin") {
     header("Location: login.php");
     exit;
 }
 
-// Calendar setup
+$success = "";
+$error = "";
+
+// ✅ Handle form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = trim($_POST["name"]);
+    $email = trim($_POST["email"]);
+    $password = trim($_POST["password"]);
+
+    if (empty($name) || empty($email) || empty($password)) {
+        $error = "All fields are required.";
+    } else {
+        $check = $conn->prepare("SELECT id FROM teachers WHERE email = ?");
+        $check->bind_param("s", $email);
+        $check->execute();
+        $check->store_result();
+
+        if ($check->num_rows > 0) {
+            $error = "A teacher with this email already exists.";
+        } else {
+            $stmt = $conn->prepare("INSERT INTO teachers (name, email, password, created_at) VALUES (?, ?, ?, NOW())");
+            $stmt->bind_param("sss", $name, $email, $password);
+
+            if ($stmt->execute()) {
+                $success = "Teacher successfully registered.";
+            } else {
+                $error = "Something went wrong. Try again.";
+            }
+
+            $stmt->close();
+        }
+
+        $check->close();
+    }
+
+    $conn->close();
+}
+
+// Calendar Setup
 date_default_timezone_set('Asia/Tokyo');
 $today = date("j");
 $month = date("n");
@@ -29,7 +68,6 @@ for ($day = 1; $day <= $daysInMonth; $day++) {
 }
 $calendar .= "</div></div>";
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,7 +103,14 @@ $calendar .= "</div></div>";
 
     <div class="upload-section">
       <h2>Register New Teacher</h2>
-      <form action="process_register.php" method="POST">
+
+      <?php if ($success): ?>
+        <p style="color: green;"><?= $success ?></p>
+      <?php elseif ($error): ?>
+        <p style="color: red;"><?= $error ?></p>
+      <?php endif; ?>
+
+      <form action="registerteacher.php" method="POST">
         <label for="name">Teacher's Name:</label>
         <input type="text" id="name" name="name" required>
 
