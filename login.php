@@ -1,38 +1,64 @@
 <?php
 session_start();
-include 'db_connect.php'; // Ensure this file connects to your database
+include 'db_connect.php'; // Connects to teachers_db
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    // Query the database
-    $stmt = $conn->prepare("SELECT name, password FROM teachers WHERE email = ?");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $stmt->store_result();
-    
-    if ($stmt->num_rows > 0) {
-        $stmt->bind_result($name, $db_password);
-        $stmt->fetch();
-        
-        if ($password === $db_password) { // Direct password match
-            $_SESSION["loggedin"] = true; // ✅ REQUIRED to know if logged in
-            $_SESSION["teacher_name"] = $name;  // Ensure consistency
-            $_SESSION["teacher_email"] = $email;
-            header("Location: teacherdashboard.php");
+    // ✅ First, check if it's an admin
+    $adminStmt = $conn->prepare("SELECT password FROM admins WHERE email = ?");
+    $adminStmt->bind_param("s", $email);
+    $adminStmt->execute();
+    $adminStmt->store_result();
+
+    if ($adminStmt->num_rows > 0) {
+        $adminStmt->bind_result($admin_password);
+        $adminStmt->fetch();
+
+        if ($password === $admin_password) {
+            $_SESSION["loggedin"] = true;
+            $_SESSION["admin_email"] = $email;
+            $_SESSION["user_type"] = "admin";
+            header("Location: admin.php");
             exit();
         } else {
             $error = "Invalid email or password!";
         }
+
+        $adminStmt->close();
     } else {
-        $error = "Invalid email or password!";
+        // ✅ Then check if it's a teacher
+        $stmt = $conn->prepare("SELECT name, password FROM teachers WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $stmt->store_result();
+
+        if ($stmt->num_rows > 0) {
+            $stmt->bind_result($name, $db_password);
+            $stmt->fetch();
+
+            if ($password === $db_password) {
+                $_SESSION["loggedin"] = true;
+                $_SESSION["teacher_name"] = $name;
+                $_SESSION["teacher_email"] = $email;
+                $_SESSION["user_type"] = "teacher";
+                header("Location: teacherdashboard.php");
+                exit();
+            } else {
+                $error = "Invalid email or password!";
+            }
+        } else {
+            $error = "Invalid email or password!";
+        }
+
+        $stmt->close();
     }
 
-    $stmt->close();
     $conn->close();
 }
 ?>
+
 
 
 <!DOCTYPE html>
