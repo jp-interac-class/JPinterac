@@ -29,7 +29,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <nav class="nav">
       <a href="teacherdashboard.php" class="nav-item">🏠 Dashboard</a>
       <a href="weeklyschedule.php" class="nav-item">📖 Schedule</a>
-      <a href="#" class="nav-item">✔️ FAQ</a>
+      <a href="faq.php" class="nav-item">✔️ FAQ</a>
     </nav>
   </div>
 
