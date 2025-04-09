@@ -130,6 +130,7 @@ $lessonId = isset($_GET['id']) ? ((int)$_GET['id'] + 1) : 'Not provided';
           <div>Access Time:</div> <div>9:20 AM JST</div>
           <div>Start Time:</div> <div>9:30 AM JST</div>
           <div>End Time:</div> <div>9:45 AM JST</div>
+          <div>Lesson Type:</div> <div>1:1</div>
           <div>Area (BoE):</div> <div>Ureshino City</div>
           <div>School Name:</div> <div>Ureshino Elementary School</div>
           <div>Meeting Group:</div> <div>Tanaka</div>
