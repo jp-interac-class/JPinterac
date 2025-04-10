@@ -4,6 +4,19 @@ session_start();
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION["user_type"] !== "admin") {
     header("Location: login.php");
     exit;
+
+
+
+    if (isset($_SESSION['upload_message'])): ?>
+  <div class="message-box">
+    <?php 
+      echo $_SESSION['upload_message']; 
+      unset($_SESSION['upload_message']);
+    ?>
+  </div>
+<?php endif;
+
+
 }
 
 date_default_timezone_set('Asia/Tokyo');
@@ -24,8 +37,27 @@ $daysInMonth = date("t", $firstDayOfMonth);
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
   <title>Admin Dashboard</title>
   <link rel="stylesheet" href="admin.css">
+
+ <!-- SweetAlert2 Script -->
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>  
+
 </head>
 <body>
+
+<!--- SweetAlert2--->
+<?php if (isset($_SESSION['upload_message'])): ?>
+  <script>
+    Swal.fire({
+      icon: 'success',
+      title: 'Upload Complete',
+      text: '<?php echo $_SESSION['upload_message']; ?>',
+      confirmButtonColor: '#3085d6'
+    });
+  </script>
+  <?php unset($_SESSION['upload_message']); ?>
+<?php endif; ?>
+
 <div class="container">
   <aside class="sidebar">
     <div class="logo">
