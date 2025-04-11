@@ -12,3 +12,39 @@ main website (login.php)
 
 always start with localhost/(folder name where all the files is)/(name of the php file)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<--------------UPLOADING CSV------------->
+
+Might get an error when you try to upload the CSV po. 
+
+Go to file explorer po and paste this po in the address bar. 
+
+            C:\xampp\mysql\bin\my.ini
+
+then open it using notepad, and search "max_allowed_packet"
+
+it would look like this: max_allowed_packet=64M or max_allowed_packet=1M
+
+change it to max_allowed_packet=10000M
+
