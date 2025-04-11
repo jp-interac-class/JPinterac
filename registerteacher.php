@@ -71,6 +71,9 @@ $calendar .= "</div></div>";
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Register Teacher</title>
@@ -89,10 +92,11 @@ $calendar .= "</div></div>";
       </div>
     </div>
     <div class="nav-wrapper">
-      <nav class="nav">
-        <a href="admin.php" class="nav-item">🏠 Dashboard</a>
-        <a href="registerteacher.php" class="nav-item">🖊️ Register New Teacher</a>
-      </nav>
+    <nav class="nav">
+  <a href="admin.php" class="nav-item">🏠 Dashboard</a>
+  <a href="registerteacher.php" class="nav-item">🖊️ Register New Teacher</a>
+  <a href="viewteachers.php" class="nav-item">👩‍🏫 View Teachers</a>
+</nav>
     </div>
     <a href="logout.php" class="logout">🔓 Logout</a>
   </aside>
@@ -105,10 +109,24 @@ $calendar .= "</div></div>";
       <h2>Register New Teacher</h2>
 
       <?php if ($success): ?>
-        <p style="color: green;"><?= $success ?></p>
-      <?php elseif ($error): ?>
-        <p style="color: red;"><?= $error ?></p>
-      <?php endif; ?>
+  <script>
+    Swal.fire({
+      icon: 'success',
+      title: 'Success!',
+      text: '<?= $success ?>',
+      confirmButtonColor: '#4a4a2f'
+    });
+  </script>
+<?php elseif ($error): ?>
+  <script>
+    Swal.fire({
+      icon: 'error',
+      title: 'Error!',
+      text: '<?= $error ?>',
+      confirmButtonColor: '#d33'
+    });
+  </script>
+<?php endif; ?>
 
       <form action="registerteacher.php" method="POST">
         <label for="name">Teacher's Name:</label>

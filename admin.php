@@ -68,12 +68,14 @@ $daysInMonth = date("t", $firstDayOfMonth);
       </div>
     </div>
     <div class="nav-wrapper">
-      <nav class="nav">
-        <a href="admin.php" class="nav-item">🏠 Dashboard</a>
-        <a href="registerteacher.php" class="nav-item">🖊️ Register New Teacher</a>
-      </nav>
+    <nav class="nav">
+    <a href="admin.php" class="nav-item">🏠 Dashboard</a>
+    <a href="registerteacher.php" class="nav-item">🖊️ Register New Teacher</a>
+    <a href="viewteachers.php" class="nav-item">👩‍🏫 View Teachers</a>
+</nav>
+
     </div>
-    <a href="logout.php" class="logout">🔒 Logout</a>
+    <a href="logout.php" class="logout">🔓 Logout</a>
   </aside>
 
   <main class="main">
