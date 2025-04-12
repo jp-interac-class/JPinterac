@@ -197,6 +197,7 @@ h1 {
   color: #555;
 }
 
+/* CALENDAR */
 .calendar {
   background: white;
   color: #000;
@@ -240,4 +241,21 @@ h1 {
   color: white;
   border-radius: 50%;
   font-weight: bold;
+}
+
+/* BACK TO DASHBOARD BUTTON */
+.back-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 18px;
+  background-color: #2c2c1e;
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.back-btn:hover {
+  background-color: #000;
 }

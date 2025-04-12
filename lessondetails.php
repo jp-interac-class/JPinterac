@@ -1,5 +1,7 @@
 <?php
 session_start();
+include 'db_connect.php';
+
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
   header("Location: login.php");
   exit;
@@ -7,35 +9,28 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
 date_default_timezone_set('Asia/Tokyo');
 
-// Calendar logic
-$today = date("j");
-$month = date("n");
-$year = date("Y");
-$firstDayOfMonth = mktime(0, 0, 0, $month, 1, $year);
-$daysInMonth = date("t", $firstDayOfMonth);
-$monthName = date("F", $firstDayOfMonth);
-$startDay = date("w", $firstDayOfMonth);
+$teacherEmail = $_SESSION["teacher_email"];
+$accessTime = $_GET['access_time'] ?? '';
+$meetingGroup = $_GET['meeting_group'] ?? '';
+$todayDate = date("Y-m-d");
 
-$calendar = "<div class='calendar'>
-  <div class='calendar-header'>
-    <span class='month'>$monthName</span>
-    <span class='year'>$year</span>
-  </div>
-  <div class='calendar-grid'>
-    <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>";
+// Get the lesson details
+$stmt = $conn->prepare("
+  SELECT * FROM lessons 
+  WHERE teacher_email = ? AND date = ? AND access_time = ? AND meeting_group = ?
+  LIMIT 1
+");
+$stmt->bind_param("ssss", $teacherEmail, $todayDate, $accessTime, $meetingGroup);
+$stmt->execute();
+$result = $stmt->get_result();
+$lesson = $result->fetch_assoc();
 
-$day = 1;
-for ($i = 0; $i < $startDay; $i++) {
-  $calendar .= "<div></div>";
+if (!$lesson) {
+  echo "Lesson not found.";
+  exit;
 }
-for ($i = $startDay; $i < $startDay + $daysInMonth; $i++) {
-  $highlight = ($day == $today) ? "today" : "";
-  $calendar .= "<div class='$highlight'>$day</div>";
-  $day++;
-}
-$calendar .= "</div></div>";
 
-$lessonId = isset($_GET['id']) ? ((int)$_GET['id'] + 1) : 'Not provided';
+$lessonPeriod = $lesson['lesson_period'] ?: 'N/A';
 ?>
 
 <!DOCTYPE html>
@@ -46,58 +41,6 @@ $lessonId = isset($_GET['id']) ? ((int)$_GET['id'] + 1) : 'Not provided';
   <title>Lesson Details</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="lessondetails.css" />
-  <style>
-    .lesson-info-grid {
-      display: grid;
-      grid-template-columns: 160px 1fr;
-      gap: 8px 16px;
-      font-size: 13px;
-      padding: 16px 24px;
-      background: #f1f5ff;
-      border-radius: 10px;
-      border: 1px solid #cdd6f4;
-    }
-
-    .lesson-info-grid div {
-      line-height: 1.5;
-    }
-
-    .lesson-info-grid a {
-      color: #2a6edb;
-      text-decoration: none;
-    }
-
-    .lesson-info-grid a:hover {
-      text-decoration: underline;
-    }
-
-    .main {
-      flex: 1;
-      padding: 24px 32px;
-      background: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      max-height: 100vh;
-      overflow: hidden;
-      box-sizing: border-box;
-    }
-
-    .faq-container {
-      flex: 1;
-      overflow-y: auto;
-      margin-top: 10px;
-    }
-
-    .faq-item {
-      background: #ffffff;
-      border: 1px solid #ddd;
-      border-left: 5px solid #4a4a2f;
-      border-radius: 8px;
-      padding: 16px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
-    }
-  </style>
 </head>
 <body>
 <div class="container">
@@ -127,21 +70,25 @@ $lessonId = isset($_GET['id']) ? ((int)$_GET['id'] + 1) : 'Not provided';
       <div class="faq-item">
         <h3>📘 Please see the details below for your reference:</h3>
         <div class="lesson-info-grid">
-          <div>Access Time:</div> <div>9:20 AM JST</div>
-          <div>Start Time:</div> <div>9:30 AM JST</div>
-          <div>End Time:</div> <div>9:45 AM JST</div>
-          <div>Lesson Type:</div> <div>1:1</div>
-          <div>Area (BoE):</div> <div>Ureshino City</div>
-          <div>School Name:</div> <div>Ureshino Elementary School</div>
-          <div>Meeting Group:</div> <div>Tanaka</div>
-          <div>Grade:</div> <div>5</div>
-          <div>Class:</div> <div>A</div>
-          <div>Lesson Period:</div> <div>2nd</div>
-          <div>Meeting Link:</div> <div><a href="#">Enter the link</a></div>
-          <div>Material:</div> <div>“Unit 3 – Greetings”</div>
-          <div>Material Link:</div> <div><a href="#">View</a></div>
-          <div>Feedback Form:</div> <div><a href="#">Submit your feedback here</a></div>
+          <div>Access Time:</div> <div><?= date("H:i", strtotime($lesson['access_time'])) ?></div>
+          <div>Start Time:</div> <div><?= date("H:i", strtotime($lesson['start_time'])) ?></div>
+          <div>End Time:</div> <div><?= date("H:i", strtotime($lesson['end_time'])) ?></div>
+          <div>Lesson Type:</div> <div><?= htmlspecialchars($lesson['lesson_type']) ?></div>
+          <div>Area (BoE):</div> <div><?= htmlspecialchars($lesson['area']) ?></div>
+          <div>School Name:</div> <div><?= htmlspecialchars($lesson['school']) ?></div>
+          <div>Meeting Group:</div> <div><?= htmlspecialchars($lesson['meeting_group']) ?></div>
+          <div>Grade:</div> <div><?= htmlspecialchars($lesson['grade']) ?></div>
+          <div>Class:</div> <div><?= htmlspecialchars($lesson['class']) ?></div>
+          <div>Lesson Period:</div> <div><?= htmlspecialchars($lessonPeriod) ?></div>
+          <div>Meeting Link:</div> 
+            <div><a href="<?= htmlspecialchars($lesson['meeting_link']) ?>" target="_blank">Enter the link</a></div>
+          <div>Material:</div> <div><?= htmlspecialchars($lesson['material']) ?></div>
+          <div>Material Link:</div> 
+            <div><a href="<?= htmlspecialchars($lesson['material_link']) ?>" target="_blank">View</a></div>
+          <div>Feedback Form:</div> 
+            <div><a href="<?= htmlspecialchars($lesson['feedback_form']) ?>" target="_blank">Submit your feedback here</a></div>
         </div>
+        <a href="teacherdashboard.php" class="back-btn">⬅ Back to Dashboard</a>
       </div>
     </div>
   </main>
@@ -152,7 +99,31 @@ $lessonId = isset($_GET['id']) ? ((int)$_GET['id'] + 1) : 'Not provided';
       <span id="time">--:--:--</span><br/>
       <span>Japanese Standard Time</span>
     </div>
-    <?php echo $calendar; ?>
+
+    <?php
+    $firstDayOfMonth = mktime(0, 0, 0, date("n"), 1, date("Y"));
+    $daysInMonth = date("t", $firstDayOfMonth);
+    $monthName = date("F", $firstDayOfMonth);
+    $startDay = date("w", $firstDayOfMonth);
+    $today = date("j");
+
+    echo "<div class='calendar'>
+            <div class='calendar-header'>
+              <span class='month'>$monthName</span>
+              <span class='year'>" . date("Y") . "</span>
+            </div>
+            <div class='calendar-grid'>";
+    echo "<div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>";
+
+    for ($i = 0; $i < $startDay; $i++) {
+      echo "<div></div>";
+    }
+    for ($i = 1; $i <= $daysInMonth; $i++) {
+      $highlight = ($i == $today) ? "today" : "";
+      echo "<div class='$highlight'>$i</div>";
+    }
+    echo "</div></div>";
+    ?>
   </section>
 </div>
 
