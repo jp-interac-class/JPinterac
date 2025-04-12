@@ -140,7 +140,7 @@ body {
   border-radius: 6px;
 }
 
-/* Weekly Schedule Layout */
+/* Weekly Schedule Grid */
 .week-schedule {
   display: flex;
   justify-content: space-between;
@@ -156,14 +156,23 @@ body {
   padding: 10px;
   border-radius: 10px;
   min-width: 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
+/* 🔶 Highlight today's column */
+.today-column {
+  background-color: #fffde7;
+  border: 2px solid #ffcc00;
+}
+
+/* Day header */
 .day-header {
   text-align: center;
   background: #e0e0e0;
   padding: 10px;
   border-radius: 8px;
-  margin-bottom: 10px;
 }
 
 .day-name {
@@ -178,6 +187,7 @@ body {
   margin-top: 2px;
 }
 
+/* Slots per day */
 .slots {
   display: flex;
   flex-direction: column;
@@ -186,7 +196,6 @@ body {
 
 .lesson-card {
   display: block;
-  text-decoration: none;
   background-color: white;
   border: 1px solid #ccc;
   padding: 12px;
@@ -207,7 +216,16 @@ body {
 }
 
 .lesson-location {
-  font-size: 12px;
+  font-size: 13px;
   color: #666;
   line-height: 1.4;
+}
+
+/* No lessons placeholder */
+.no-lesson {
+  text-align: center;
+  background-color: #fafafa;
+  color: #999;
+  font-style: italic;
+  border: 1px dashed #ddd;
 }
