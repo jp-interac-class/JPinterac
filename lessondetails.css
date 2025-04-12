@@ -1,27 +1,23 @@
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
-  display: flex;
-  background: #f9f9f9;
+  background-color: #f9f9f9;
   color: #222;
-  overflow-y: scroll;
+  overflow: hidden;
 }
 
 .container {
   display: flex;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
 }
 
-/* SIDEBAR */
 .sidebar {
   background-color: #111;
   color: white;
   width: 240px;
-  height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   justify-content: space-between;
   padding: 20px 0;
   box-sizing: border-box;
@@ -31,7 +27,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
   gap: 6px;
   padding: 0 20px;
 }
@@ -60,7 +55,6 @@ body {
 .nav {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: 40px;
   padding: 0 20px;
   width: 100%;
@@ -74,7 +68,6 @@ body {
   align-items: center;
   gap: 10px;
   transition: background 0.2s;
-  width: 100%;
 }
 
 .nav-item:hover {
@@ -87,29 +80,21 @@ body {
   color: #ffc107;
   text-decoration: none;
   font-size: 15px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  justify-content: flex-start;
   padding: 10px 20px;
-  width: 100%;
 }
 
-/* MAIN PANEL */
 .main {
   flex: 1;
   padding: 40px;
   background: white;
   display: flex;
   flex-direction: column;
-  max-height: 100vh;
-  box-sizing: border-box;
+  overflow-y: auto;
 }
 
 h1 {
   font-family: 'Great Vibes', cursive;
-  font-size: 50px;
-  font-weight: 600;
+  font-size: 48px;
   color: #111;
 }
 
@@ -157,24 +142,20 @@ h1 {
   text-decoration: underline;
 }
 
-/* BACK BUTTON */
-.back-btn {
+.back-button {
   display: inline-block;
   margin-top: 20px;
-  padding: 10px 18px;
-  background-color: #2c2c1e;
+  background: #333;
   color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
   text-decoration: none;
-  font-size: 14px;
-  border-radius: 8px;
-  transition: background-color 0.2s ease;
 }
 
-.back-btn:hover {
-  background-color: #000;
+.back-button:hover {
+  background-color: #555;
 }
 
-/* RIGHT PANEL */
 .right-panel {
   width: 320px;
   padding: 40px 20px;
@@ -182,7 +163,6 @@ h1 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 20px;
   background-color: #f3f3ef;
   height: 100vh;
   box-sizing: border-box;
@@ -191,9 +171,7 @@ h1 {
 .clock {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  font-family: 'Inter', sans-serif;
   background-color: #fff;
   padding: 30px 10px;
   border: 3px solid #4a4a2f;
@@ -207,7 +185,6 @@ h1 {
   font-size: 48px;
   margin-bottom: 10px;
   text-align: center;
-  width: 100%;
 }
 
 .clock span:last-child {
@@ -215,7 +192,6 @@ h1 {
   color: #555;
 }
 
-/* CALENDAR */
 .calendar {
   background: white;
   color: #000;
@@ -258,4 +234,21 @@ h1 {
   color: white;
   border-radius: 50%;
   font-weight: bold;
+}
+
+/* BACK TO DASHBOARD BUTTON */
+.back-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 18px;
+  background-color: #2c2c1e;
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.back-btn:hover {
+  background-color: #000;
 }

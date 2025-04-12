@@ -119,7 +119,8 @@ $result = $stmt->get_result();
                       $lessonClass = "lesson lesson-upcoming";
                   }
                 ?>
-                <a href="lessondetails.php?access_time=<?= urlencode($row['access_time']) ?>&meeting_group=<?= urlencode($row['meeting_group']) ?>" class="lesson-link">
+                <a href="lessondetails.php?access_time=<?= urlencode($row['access_time']) ?>&meeting_group=<?= urlencode($row['meeting_group']) ?>">
+
                   <div class="<?= $lessonClass ?>">
                     <div class="lesson-time">🕘 <?= $accessTimeFormatted ?> – <?= $endTimeFormatted ?></div>
                     <div class="lesson-location">🏫 <?= htmlspecialchars($row['area']) ?> | <?= htmlspecialchars($row['meeting_group']) ?></div>

@@ -16,6 +16,7 @@ $accessTime = $_GET['access_time'] ?? '';
 $meetingGroup = $_GET['meeting_group'] ?? '';
 $date = $_GET['date'] ?? '';
 $startTime = $_GET['start_time'] ?? '';
+$from = $_GET['from'] ?? '';
 
 // Fetch lesson
 $lesson = null;
@@ -107,7 +108,9 @@ $formattedDate = $lesson ? date("F j, Y", strtotime($lesson['date'])) : '';
         <?php else: ?>
           <p style="color: red; font-weight: bold;">❌ No lesson found for this slot.</p>
         <?php endif; ?>
-        <a href="teacherdashboard.php" class="back-btn">⬅️ Back to Dashboard</a>
+        <a href="<?= $from === 'schedule' ? 'weeklyschedule.php' : 'teacherdashboard.php' ?>" class="back-btn">
+          ⬅️ Back to <?= $from === 'schedule' ? 'Weekly Schedule' : 'Dashboard' ?>
+        </a>
       </div>
     </div>
   </main>

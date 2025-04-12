@@ -111,7 +111,7 @@ while ($row = $result->fetch_assoc()) {
             $encodedDate = urlencode($lesson['date']);
             $encodedStart = urlencode($lesson['start_time']);
 
-            echo "<a href='lessondetails.php?date=$encodedDate&start_time=$encodedStart' class='lesson-card'>";
+            echo "<a href='lessondetails.php?date={$encodedDate}&start_time={$encodedStart}&from=schedule' class='lesson-card'>";
             echo "<div class='lesson-time'>⏰ $start – $end</div>";
             echo "<div class='lesson-location'>📍 $area</div>";
             echo "</a>";
