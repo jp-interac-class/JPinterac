@@ -299,7 +299,7 @@ h2 {
   line-height: 1.4;
 }
 
-/* ✅ LESSON STATUS STYLES */
+/* LESSON STATUS */
 .lesson-past {
   background-color: #d4d4d4;
   border-left-color: #aaa;
@@ -318,7 +318,7 @@ h2 {
   opacity: 1;
 }
 
-/* ✅ OPTIONAL LEGEND STYLES */
+/* LEGEND */
 .legend {
   margin-bottom: 10px;
   font-size: 14px;
@@ -345,4 +345,45 @@ h2 {
 
 .legend .past {
   background-color: #d4d4d4;
+}
+
+/* ✅ NO LESSONS BLOCK */
+.no-lessons {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #fefefe;
+  border: 1px dashed #ddd;
+  border-radius: 12px;
+  margin-top: 30px;
+  color: #444;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.no-lessons-img {
+  width: 120px;
+  opacity: 0.85;
+  margin-bottom: 15px;
+}
+
+.no-lessons-msg {
+  font-size: 16px;
+  margin: 0 0 10px;
+  color: #333;
+  line-height: 1.5;
+}
+
+.check-week {
+  font-size: 14px;
+  text-decoration: none;
+  color: #2a6edb;
+  font-weight: 500;
+}
+
+.check-week:hover {
+  text-decoration: underline;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }

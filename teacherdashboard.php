@@ -39,7 +39,7 @@ for ($i = $startDay; $i < $startDay + $daysInMonth; $i++) {
 }
 $calendar .= "</div></div>";
 
-// Fetch lessons for today
+// Fetch today's lessons
 $teacherEmail = $_SESSION["teacher_email"];
 $todayDate = date("Y-m-d");
 
@@ -65,6 +65,7 @@ $result = $stmt->get_result();
 </head>
 <body>
   <div class="container">
+    <!-- Sidebar -->
     <aside class="sidebar">
       <div class="logo">
         <img src="Logo/logo1.png" alt="J-P Network English Corp Logo" />
@@ -83,6 +84,7 @@ $result = $stmt->get_result();
       <a href="logout.php" class="logout">🔓 Logout</a>
     </aside>
 
+    <!-- Main Content -->
     <main class="main">
       <h1>Hi, Teacher <?= htmlspecialchars($_SESSION["teacher_name"]); ?>!</h1>
       <h2>Upcoming Lessons (<?= date("F j, Y") ?>)</h2>
@@ -95,6 +97,7 @@ $result = $stmt->get_result();
       </div>
 
       <div class="main-content-row">
+        <!-- Lesson Column -->
         <div class="lesson-scroll">
           <div class="lessons">
             <?php if ($result->num_rows > 0): ?>
@@ -124,11 +127,16 @@ $result = $stmt->get_result();
                 </a>
               <?php endwhile; ?>
             <?php else: ?>
-              <div>No lessons scheduled for today.</div>
+              <div class="no-lessons">
+                <img src="Images/no-lesson.jpeg" alt="No lessons" class="no-lessons-img" />
+                <p class="no-lessons-msg">No lessons scheduled for today.<br>Enjoy your free time!</p>
+                <a href="weeklyschedule.php" class="check-week">📅 View your weekly schedule</a>
+              </div>
             <?php endif; ?>
           </div>
         </div>
 
+        <!-- Announcement Board -->
         <div class="announcement-board">
           <h2>🔔 Reminders</h2>
           <ul>
@@ -142,6 +150,7 @@ $result = $stmt->get_result();
       </div>
     </main>
 
+    <!-- Right Panel: Clock & Calendar -->
     <section class="right-panel">
       <div class="clock" id="live-clock">
         <span id="time">--:--:--</span><br/>
