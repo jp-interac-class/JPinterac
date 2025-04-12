@@ -237,3 +237,8 @@ body {
     font-weight: bold;
   }
   
+
+  .delete-btn svg:hover {
+    fill: darkred;
+  }
+  

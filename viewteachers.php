@@ -93,19 +93,28 @@ $calendar .= "</div></div>";
       <?php else: ?>
         <div style="max-height: 400px; overflow-y: auto; border: 1px solid #ccc; border-radius: 6px;">
           <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse;">
-            <thead>
-              <tr style="background-color: #f3f3f3;">
-                <th style="text-align: left;">Name</th>
-                <th style="text-align: left;">Email</th>
-              </tr>
-            </thead>
+          <thead>
+          <tr style="background-color: #f3f3f3;">
+          <th style="text-align: left;">Name</th>
+          <th style="text-align: left;">Email</th>
+          <th style="text-align: left;">Delete</th>
+          </tr>
+          </thead>
             <tbody>
-              <?php foreach ($teachers as $teacher): ?>
-                <tr>
-                  <td><?= htmlspecialchars($teacher['name']) ?></td>
-                  <td><?= htmlspecialchars($teacher['email']) ?></td>
-                </tr>
-              <?php endforeach; ?>
+            <?php foreach ($teachers as $teacher): ?>
+  <tr data-email="<?= htmlspecialchars($teacher['email']) ?>">
+    <td><?= htmlspecialchars($teacher['name']) ?></td>
+    <td><?= htmlspecialchars($teacher['email']) ?></td>
+    <td style="text-align: center;">
+  <button class="delete-btn" style="background: none; border: none; cursor: pointer;" title="Delete">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="red" viewBox="0 0 24 24">
+      <path d="M3 6h18v2H3V6zm2 3h14l-1.5 13h-11L5 9zm4 2v9h2v-9H9zm4 0v9h2v-9h-2z"/>
+    </svg>
+  </button>
+</td>
+
+  </tr>
+<?php endforeach; ?>
             </tbody>
           </table>
         </div>
@@ -148,6 +157,38 @@ document.getElementById('searchInput').addEventListener('input', function () {
   });
 });
 </script>
+<script>
+document.querySelectorAll(".delete-btn").forEach(button => {
+  button.addEventListener("click", function () {
+    const row = this.closest("tr");
+    const email = row.getAttribute("data-email");
 
+    Swal.fire({
+      title: "Are you sure?",
+      text: `This will delete ${email}.`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch("delete_teacher.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: `email=${encodeURIComponent(email)}`
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            row.remove();
+            Swal.fire("Deleted!", "The teacher has been removed.", "success");
+          } else {
+            Swal.fire("Error!", data.message || "Something went wrong.", "error");
+          }
+        });
+      }
+    });
+  });
+});
+</script>
 </body>
 </html>
