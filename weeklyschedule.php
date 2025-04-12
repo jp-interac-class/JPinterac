@@ -4,6 +4,25 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     header("Location: login.php");
     exit;
 }
+
+// Get week offset from URL (default is 0)
+$offset = isset($_GET['week_offset']) ? intval($_GET['week_offset']) : 0;
+
+// Set base week start date (adjust as needed)
+$baseDate = new DateTime("2024-04-07"); // This should be a Sunday or start of your calendar logic
+$startDate = clone $baseDate;
+$startDate->modify("+{$offset} weeks");
+
+// Calculate end of the week
+$endDate = clone $startDate;
+$endDate->modify('+5 days');
+
+// Format for display
+$weekStart = $startDate->format("F j");
+$weekEnd = $endDate->format("F j");
+
+// Weekday names (6 days only)
+$days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,69 +33,65 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
   <link rel="stylesheet" href="weeklyschedule.css" />
 </head>
 <body>
-<div class="container">
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <div class="logo">
-      <img src="Logo/logo1.png" alt="J-P Network English Corp Logo" />
-      <div class="logo-text">
-        <strong>J-P Network English Corp</strong><br />
-        <span>Interac Classes</span>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">
+        <img src="Logo/logo1.png" alt="J-P Network English Corp Logo" />
+        <div class="logo-text">
+          <strong>J-P Network English Corp</strong><br />
+          <span>Interac Classes</span>
+        </div>
       </div>
-    </div>
 
-    <div class="nav-wrapper">
-      <nav class="nav">
-        <a href="teacherdashboard.php" class="nav-item">🏠 Dashboard</a>
-        <a href="weeklyschedule.php" class="nav-item">📖 Schedule</a>
-        <a href="faq.php" class="nav-item">✔️ FAQ</a>
-      </nav>
-    </div>
-
-    <a href="logout.php" class="logout">🔓 Logout</a>
-  </aside>
-
-  <!-- Main Content -->
-  <main class="main">
-    <div class="header-center">
-      <span class="arrow">&#9664;</span>
-      <div class="header-text">
-        <h1>Weekly Schedule</h1>
-        <h2>April 7 - 12</h2>
+      <div class="nav-wrapper">
+        <nav class="nav">
+          <a href="teacherdashboard.php" class="nav-item">🏠 Dashboard</a>
+          <a href="weeklyschedule.php" class="nav-item">📖 Schedule</a>
+          <a href="faq.php" class="nav-item">✔️ FAQ</a>
+        </nav>
       </div>
-      <span class="arrow">&#9654;</span>
-    </div>
 
-    <div class="week-schedule">
-      <?php
-      $days = [
-        ['Monday', '04-07', '💖', '#A3C93A'],
-        ['Tuesday', '04-08', '📱', '#A879E6'],
-        ['Wednesday', '04-09', '🌸', '#F2C94C'],
-        ['Thursday', '04-10', '❓', '#56CCF2'],
-        ['Friday', '04-11', '🎉', '#F58BCF'],
-        ['Saturday', '04-12', '🍬', '#F2994A'],
-      ];
+      <a href="logout.php" class="logout">🔓 Logout</a>
+    </aside>
 
-      foreach ($days as $day) {
-        echo "<div class='day-column'>";
-        echo "<div class='day-header' style='background: {$day[3]}'>";
-        echo "<div class='day-title'>{$day[2]}<br><strong>{$day[0]}</strong><br><span>{$day[1]}</span></div>";
-        echo "</div>";
-        echo "<div class='slots'>";
-        for ($i = 0; $i < 10; $i++) {
-          // Assuming each slot corresponds to a lesson with a unique ID
-          $lessonId = $i + 1; // Replace this with the actual lesson ID
-          echo "<a href='lessondetails.php?id={$lessonId}' class='slot-link'>";
-          echo "<div class='slot'></div>";
-          echo "</a>";
+    <!-- Main Panel -->
+    <main class="main">
+      <div class="header-center">
+        <a href="weeklyschedule.php?week_offset=<?= $offset - 1 ?>" class="arrow">&#9664;</a>
+        <div class="header-text">
+          <h1>Weekly Schedule</h1>
+          <h2><?= $weekStart . " - " . $weekEnd ?></h2>
+        </div>
+        <a href="weeklyschedule.php?week_offset=<?= $offset + 1 ?>" class="arrow">&#9654;</a>
+      </div>
+
+      <div class="week-schedule">
+        <?php
+        for ($i = 0; $i < count($days); $i++) {
+          $currentDate = clone $startDate;
+          $currentDate->modify("+$i days");
+          $formattedDate = $currentDate->format("M j");
+
+          echo "<div class='day-column'>";
+          echo "<div class='day-header'>";
+          echo "<div class='day-name'>{$days[$i]}</div>";
+          echo "<div class='day-date'>{$formattedDate}</div>";
+          echo "</div>";
+
+          echo "<div class='slots'>";
+          for ($j = 0; $j < 3; $j++) {
+            echo "<a href='lessondetails.php?id={$days[$i]}-{$j}' class='lesson-card'>";
+            echo "<div class='lesson-time'>🕘 9:30 – 9:45 JST</div>";
+            echo "<div class='lesson-location'>🏫 Ureshino City<br>Ureshino ES</div>";
+            echo "</a>";
+          }
+          echo "</div>";
+          echo "</div>";
         }
-        echo "</div>";
-        echo "</div>";
-      }
-      ?>
-    </div>
-  </main>
-</div>
+        ?>
+      </div>
+    </main>
+  </div>
 </body>
 </html>
