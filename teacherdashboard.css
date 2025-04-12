@@ -129,7 +129,6 @@ h2 {
 
 .lesson {
   background-color: #fff;
-  border: 1px solid #ddd;
   border-left: 6px solid #2c2c1e;
   border-radius: 12px;
   padding: 16px 20px;
@@ -166,15 +165,31 @@ h2 {
 .lesson-scroll::-webkit-scrollbar {
   width: 6px;
 }
+
 .lesson-scroll::-webkit-scrollbar-thumb {
   background-color: #bbb;
   border-radius: 4px;
 }
 
+/* ✅ FIXED: Remove underline on links and prevent default browser styles */
+a, a:visited, a:hover, a:active {
+  text-decoration: none !important;
+  color: inherit !important;
+}
+
 .lesson-link {
-  text-decoration: none;
-  color: inherit;
   display: block;
+}
+
+.lesson-link *,
+.lesson-link *:visited,
+.lesson-link *:hover,
+.lesson-link *:active {
+  text-decoration: none !important;
+  color: inherit !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 /* RIGHT PANEL */
@@ -347,7 +362,7 @@ h2 {
   background-color: #d4d4d4;
 }
 
-/* ✅ NO LESSONS BLOCK */
+/* NO LESSONS */
 .no-lessons {
   text-align: center;
   padding: 40px 20px;
