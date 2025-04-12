@@ -140,7 +140,11 @@ body {
   border-radius: 6px;
 }
 
+<<<<<<< HEAD
 /* WEEK LAYOUT */
+=======
+/* Weekly Schedule Grid */
+>>>>>>> 1a496d2dd401a25c3dd0f23d49a012c5089ab0a0
 .week-schedule {
   display: flex;
   justify-content: space-between;
@@ -157,8 +161,13 @@ body {
   padding: 10px;
   border-radius: 10px;
   min-width: 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: background-color 0.3s ease;
 }
 
+<<<<<<< HEAD
 /* Highlight today’s column */
 .today-column {
   border: 2px solid #4a4a2f;
@@ -166,12 +175,20 @@ body {
 }
 
 /* DAY HEADER */
+=======
+/* 🔶 Highlight today's column */
+.today-column {
+  background-color: #fffde7;
+  border: 2px solid #ffcc00;
+}
+
+/* Day header */
+>>>>>>> 1a496d2dd401a25c3dd0f23d49a012c5089ab0a0
 .day-header {
   text-align: center;
   background: #e0e0e0;
   padding: 10px;
   border-radius: 8px;
-  margin-bottom: 10px;
 }
 
 .day-name {
@@ -186,17 +203,24 @@ body {
   margin-top: 2px;
 }
 
+<<<<<<< HEAD
 /* SLOTS */
+=======
+/* Slots per day */
+>>>>>>> 1a496d2dd401a25c3dd0f23d49a012c5089ab0a0
 .slots {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
+<<<<<<< HEAD
 /* LESSON CARD */
+=======
+/* Lesson card with clickable link */
+>>>>>>> 1a496d2dd401a25c3dd0f23d49a012c5089ab0a0
 .lesson-card {
   display: block;
-  text-decoration: none;
   background-color: white;
   border: 1px solid #ccc;
   padding: 12px;
@@ -204,10 +228,12 @@ body {
   transition: all 0.2s ease;
   color: #222;
   font-size: 13px;
+  text-decoration: none;
 }
 
 .lesson-card:hover {
   background-color: #f0f0f0;
+  cursor: pointer;
 }
 
 .lesson-time {
@@ -217,7 +243,16 @@ body {
 }
 
 .lesson-location {
-  font-size: 12px;
+  font-size: 13px;
   color: #666;
   line-height: 1.4;
+}
+
+/* No lessons placeholder */
+.no-lesson {
+  text-align: center;
+  background-color: #fafafa;
+  color: #999;
+  font-style: italic;
+  border: 1px dashed #ddd;
 }

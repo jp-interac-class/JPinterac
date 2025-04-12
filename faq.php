@@ -82,23 +82,6 @@ $calendar .= "</div></div>";
         <a href="https://docs.google.com/document/d/your-announcement-link" target="_blank">Read Announcements</a>
       </div>
 
-      <div class="faq-item">
-        <h3>📄 Zoom Troubleshooting Guide</h3>
-        <p>Follow this step-by-step guide if you're having trouble connecting to Zoom before your lesson.</p>
-        <a href="https://docs.google.com/document/d/your-zoom-guide-link" target="_blank">View Zoom Guide</a>
-      </div>
-
-      <div class="faq-item">
-        <h3>🗂️ Student Materials (Lesson Flow)</h3>
-        <p>Access all lesson materials and instructions in this Google Drive folder.</p>
-        <a href="https://drive.google.com/drive/folders/your-materials-folder" target="_blank">Open Lesson Materials Folder</a>
-      </div>
-
-      <div class="faq-item">
-        <h3>📊 Daily Progress Tracker (Google Sheet)</h3>
-        <p>Use this sheet to input daily updates and view progress per school or student.</p>
-        <a href="https://docs.google.com/spreadsheets/d/your-daily-progress-link" target="_blank">Go to Tracker Sheet</a>
-      </div>
     </div>
   </main>
 
