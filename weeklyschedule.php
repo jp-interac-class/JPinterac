@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 include 'db_connect.php';
 
@@ -11,21 +10,29 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 date_default_timezone_set('Asia/Tokyo');
 $teacherEmail = $_SESSION["teacher_email"];
 
-// Week offset from URL
+// Get offset from URL
 $offset = isset($_GET['week_offset']) ? intval($_GET['week_offset']) : 0;
 
-// Start of the week (Monday)
-$baseDate = new DateTime('monday this week');
-$startDate = clone $baseDate;
-$startDate->modify("+{$offset} weeks");
-$endDate = clone $startDate;
-$endDate->modify('+5 days'); // Mon–Sat
+// Get today's date and find the Monday of this week
+$today = new DateTime();
+$dayOfWeek = $today->format('w'); // 0 (Sun) - 6 (Sat)
+$daysToSubtract = ($dayOfWeek == 0) ? 6 : $dayOfWeek - 1;
+$baseMonday = $today->modify("-$daysToSubtract days");
 
+// Apply offset (e.g., -1 week, +1 week)
+$startDate = clone $baseMonday;
+$startDate->modify("{$offset} weeks");
+$endDate = clone $startDate;
+$endDate->modify('+5 days'); // Monday to Saturday
+
+// Format for header display
 $weekStart = $startDate->format("F j");
 $weekEnd = $endDate->format("F j");
+
+// Weekday labels (Monday–Saturday only)
 $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-// Fetch lessons for this teacher within the current week
+// Fetch lessons between start and end date
 $startStr = $startDate->format("Y-m-d");
 $endStr = $endDate->format("Y-m-d");
 
@@ -93,7 +100,7 @@ while ($row = $result->fetch_assoc()) {
         $currentDate->modify("+$i days");
         $dateKey = $currentDate->format("Y-m-d");
         $formattedDate = $currentDate->format("M j");
-        $isToday = ($dateKey === date("Y-m-d"));
+        $isToday = ($dateKey === (new DateTime())->format("Y-m-d"));
         $todayClass = $isToday ? " today-column" : "";
 
         echo "<div class='day-column$todayClass'>";
