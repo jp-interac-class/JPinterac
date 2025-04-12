@@ -8,23 +8,26 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 }
 
 date_default_timezone_set('Asia/Tokyo');
+
+// Logged-in teacher's email
 $teacherEmail = $_SESSION["teacher_email"];
 
-// Get week offset from URL
+// Week offset logic
 $offset = isset($_GET['week_offset']) ? intval($_GET['week_offset']) : 0;
 
-// Set base Sunday (week starts)
-$baseDate = new DateTime("2024-04-07");
+// Use current Monday as base
+$baseDate = new DateTime('monday this week');
 $startDate = clone $baseDate;
 $startDate->modify("+{$offset} weeks");
 $endDate = clone $startDate;
-$endDate->modify('+5 days'); // Mon to Sat
+$endDate->modify('+5 days'); // Monday–Saturday
 
+// Format range
 $weekStart = $startDate->format("F j");
 $weekEnd = $endDate->format("F j");
 $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-// Fetch lessons for current teacher
+// Fetch from database
 $startStr = $startDate->format("Y-m-d");
 $endStr = $endDate->format("Y-m-d");
 
@@ -74,7 +77,7 @@ while ($row = $result->fetch_assoc()) {
     <a href="logout.php" class="logout">🔓 Logout</a>
   </aside>
 
-  <!-- Main Content -->
+  <!-- Main -->
   <main class="main">
     <div class="header-center">
       <a href="weeklyschedule.php?week_offset=<?= $offset - 1 ?>" class="arrow">&#9664;</a>
@@ -93,7 +96,7 @@ while ($row = $result->fetch_assoc()) {
         $dateKey = $currentDate->format("Y-m-d");
         $formattedDate = $currentDate->format("M j");
 
-        // Highlight today's column
+        // ✅ Highlight today's column
         $isToday = ($dateKey === date("Y-m-d"));
         $todayClass = $isToday ? " today-column" : "";
 
@@ -118,8 +121,7 @@ while ($row = $result->fetch_assoc()) {
         } else {
           echo "<div class='lesson-card no-lesson'>No lessons</div>";
         }
-        echo "</div>";
-        echo "</div>";
+        echo "</div></div>";
       }
       ?>
     </div>
