@@ -195,6 +195,7 @@ body {
   gap: 12px;
 }
 
+/* Lesson card with clickable link */
 .lesson-card {
   display: block;
   background-color: white;
@@ -204,10 +205,12 @@ body {
   transition: all 0.2s ease;
   color: #222;
   font-size: 13px;
+  text-decoration: none;
 }
 
 .lesson-card:hover {
   background-color: #f0f0f0;
+  cursor: pointer;
 }
 
 .lesson-time {

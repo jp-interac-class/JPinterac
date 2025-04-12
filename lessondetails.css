@@ -1,8 +1,7 @@
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
-  display: flex;
-  background: #f9f9f9;
+  background-color: #f9f9f9;
   color: #222;
   overflow: hidden;
 }
@@ -13,12 +12,10 @@ body {
   height: 100vh;
 }
 
-/* SIDEBAR */
 .sidebar {
   background-color: #111;
   color: white;
   width: 240px;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -30,7 +27,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
   gap: 6px;
   padding: 0 20px;
 }
@@ -59,7 +55,6 @@ body {
 .nav {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: 40px;
   padding: 0 20px;
   width: 100%;
@@ -73,7 +68,6 @@ body {
   align-items: center;
   gap: 10px;
   transition: background 0.2s;
-  width: 100%;
 }
 
 .nav-item:hover {
@@ -86,36 +80,26 @@ body {
   color: #ffc107;
   text-decoration: none;
   font-size: 15px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  justify-content: flex-start;
   padding: 10px 20px;
-  width: 100%;
 }
 
-/* MAIN PANEL */
 .main {
   flex: 1;
-  padding: 24px 32px;
+  padding: 40px;
   background: white;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  box-sizing: border-box;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 h1 {
   font-family: 'Great Vibes', cursive;
   font-size: 48px;
-  font-weight: 600;
   color: #111;
 }
 
 .faq-container {
   flex: 1;
-  overflow-y: auto;
   margin-top: 10px;
 }
 
@@ -138,7 +122,7 @@ h1 {
   display: grid;
   grid-template-columns: 160px 1fr;
   gap: 8px 16px;
-  font-size: 13px;
+  font-size: 14px;
   padding: 16px 24px;
   background: #f1f5ff;
   border-radius: 10px;
@@ -146,7 +130,7 @@ h1 {
 }
 
 .lesson-info-grid div {
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .lesson-info-grid a {
@@ -158,7 +142,20 @@ h1 {
   text-decoration: underline;
 }
 
-/* RIGHT PANEL */
+.back-button {
+  display: inline-block;
+  margin-top: 20px;
+  background: #333;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+.back-button:hover {
+  background-color: #555;
+}
+
 .right-panel {
   width: 320px;
   padding: 40px 20px;
@@ -166,7 +163,6 @@ h1 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 20px;
   background-color: #f3f3ef;
   height: 100vh;
   box-sizing: border-box;
@@ -175,7 +171,6 @@ h1 {
 .clock {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   background-color: #fff;
   padding: 30px 10px;
@@ -197,7 +192,6 @@ h1 {
   color: #555;
 }
 
-/* CALENDAR */
 .calendar {
   background: white;
   color: #000;
@@ -225,7 +219,6 @@ h1 {
   font-size: 14px;
   padding: 10px;
   color: #000;
-  text-align: center;
   background: #fff;
   border: 1px solid #ddd;
   border-top: none;
@@ -241,21 +234,4 @@ h1 {
   color: white;
   border-radius: 50%;
   font-weight: bold;
-}
-
-/* BACK TO DASHBOARD BUTTON */
-.back-btn {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 10px 18px;
-  background-color: #2c2c1e;
-  color: white;
-  text-decoration: none;
-  font-size: 14px;
-  border-radius: 8px;
-  transition: background-color 0.2s ease;
-}
-
-.back-btn:hover {
-  background-color: #000;
 }

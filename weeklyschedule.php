@@ -8,26 +8,23 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 }
 
 date_default_timezone_set('Asia/Tokyo');
-
-// Logged-in teacher's email
 $teacherEmail = $_SESSION["teacher_email"];
 
-// Week offset logic
+// Week offset from URL
 $offset = isset($_GET['week_offset']) ? intval($_GET['week_offset']) : 0;
 
-// Use current Monday as base
+// Start of the week (Monday)
 $baseDate = new DateTime('monday this week');
 $startDate = clone $baseDate;
 $startDate->modify("+{$offset} weeks");
 $endDate = clone $startDate;
-$endDate->modify('+5 days'); // Monday–Saturday
+$endDate->modify('+5 days'); // Mon–Sat
 
-// Format range
 $weekStart = $startDate->format("F j");
 $weekEnd = $endDate->format("F j");
 $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-// Fetch from database
+// Fetch lessons for this teacher within the current week
 $startStr = $startDate->format("Y-m-d");
 $endStr = $endDate->format("Y-m-d");
 
@@ -41,7 +38,6 @@ $stmt->bind_param("sss", $teacherEmail, $startStr, $endStr);
 $stmt->execute();
 $result = $stmt->get_result();
 
-// Group lessons by date
 $lessonsByDate = [];
 while ($row = $result->fetch_assoc()) {
     $lessonsByDate[$row['date']][] = $row;
@@ -95,8 +91,6 @@ while ($row = $result->fetch_assoc()) {
         $currentDate->modify("+$i days");
         $dateKey = $currentDate->format("Y-m-d");
         $formattedDate = $currentDate->format("M j");
-
-        // ✅ Highlight today's column
         $isToday = ($dateKey === date("Y-m-d"));
         $todayClass = $isToday ? " today-column" : "";
 
@@ -112,11 +106,13 @@ while ($row = $result->fetch_assoc()) {
             $start = date("H:i", strtotime($lesson['start_time']));
             $end = date("H:i", strtotime($lesson['end_time']));
             $area = htmlspecialchars($lesson['area']);
+            $encodedDate = urlencode($lesson['date']);
+            $encodedStart = urlencode($lesson['start_time']);
 
-            echo "<div class='lesson-card'>";
+            echo "<a href='lessondetails.php?date=$encodedDate&start_time=$encodedStart' class='lesson-card'>";
             echo "<div class='lesson-time'>⏰ $start – $end</div>";
             echo "<div class='lesson-location'>📍 $area</div>";
-            echo "</div>";
+            echo "</a>";
           }
         } else {
           echo "<div class='lesson-card no-lesson'>No lessons</div>";
