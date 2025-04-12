@@ -140,11 +140,7 @@ body {
   border-radius: 6px;
 }
 
-<<<<<<< HEAD
-/* WEEK LAYOUT */
-=======
 /* Weekly Schedule Grid */
->>>>>>> 1a496d2dd401a25c3dd0f23d49a012c5089ab0a0
 .week-schedule {
   display: flex;
   justify-content: space-between;
@@ -167,15 +163,6 @@ body {
   transition: background-color 0.3s ease;
 }
 
-<<<<<<< HEAD
-/* Highlight today’s column */
-.today-column {
-  border: 2px solid #4a4a2f;
-  background-color: #fffde7;
-}
-
-/* DAY HEADER */
-=======
 /* 🔶 Highlight today's column */
 .today-column {
   background-color: #fffde7;
@@ -183,7 +170,6 @@ body {
 }
 
 /* Day header */
->>>>>>> 1a496d2dd401a25c3dd0f23d49a012c5089ab0a0
 .day-header {
   text-align: center;
   background: #e0e0e0;
@@ -203,22 +189,14 @@ body {
   margin-top: 2px;
 }
 
-<<<<<<< HEAD
-/* SLOTS */
-=======
 /* Slots per day */
->>>>>>> 1a496d2dd401a25c3dd0f23d49a012c5089ab0a0
 .slots {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-<<<<<<< HEAD
-/* LESSON CARD */
-=======
 /* Lesson card with clickable link */
->>>>>>> 1a496d2dd401a25c3dd0f23d49a012c5089ab0a0
 .lesson-card {
   display: block;
   background-color: white;
