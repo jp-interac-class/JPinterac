@@ -101,7 +101,7 @@ body {
   overflow-y: auto;
 }
 
-/* Header Section */
+/* HEADER */
 .header-center {
   display: flex;
   align-items: center;
@@ -140,7 +140,7 @@ body {
   border-radius: 6px;
 }
 
-/* Weekly Schedule Layout */
+/* WEEK LAYOUT */
 .week-schedule {
   display: flex;
   justify-content: space-between;
@@ -150,6 +150,7 @@ body {
   padding-bottom: 40px;
 }
 
+/* DAY COLUMN */
 .day-column {
   flex: 1;
   background-color: #f4f4f4;
@@ -158,6 +159,13 @@ body {
   min-width: 160px;
 }
 
+/* Highlight today’s column */
+.today-column {
+  border: 2px solid #4a4a2f;
+  background-color: #fffde7;
+}
+
+/* DAY HEADER */
 .day-header {
   text-align: center;
   background: #e0e0e0;
@@ -178,12 +186,14 @@ body {
   margin-top: 2px;
 }
 
+/* SLOTS */
 .slots {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
+/* LESSON CARD */
 .lesson-card {
   display: block;
   text-decoration: none;

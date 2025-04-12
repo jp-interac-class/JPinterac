@@ -1,27 +1,29 @@
 <?php
+
 session_start();
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     header("Location: login.php");
     exit;
 }
 
-// Get week offset from URL (default is 0)
+date_default_timezone_set("Asia/Tokyo");
+
+// Get the offset from the URL
 $offset = isset($_GET['week_offset']) ? intval($_GET['week_offset']) : 0;
 
-// Set base week start date (adjust as needed)
-$baseDate = new DateTime("2024-04-07"); // This should be a Sunday or start of your calendar logic
-$startDate = clone $baseDate;
-$startDate->modify("+{$offset} weeks");
+// Base date: current week's Monday
+$today = new DateTimeImmutable("today", new DateTimeZone("Asia/Tokyo"));
+$baseMonday = $today->modify('monday this week');
 
-// Calculate end of the week
-$endDate = clone $startDate;
-$endDate->modify('+5 days');
+// Apply week offset
+$startOfWeek = $baseMonday->modify("+{$offset} weeks");      // Monday
+$endOfWeek = $startOfWeek->modify('+5 days');                // Saturday
 
-// Format for display
-$weekStart = $startDate->format("F j");
-$weekEnd = $endDate->format("F j");
+$weekStart = $startOfWeek->format("M j");
+$weekEnd = $endOfWeek->format("M j");
 
-// Weekday names (6 days only)
+$isThisWeek = $today >= $startOfWeek && $today <= $endOfWeek;
+
 $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 ?>
 <!DOCTYPE html>
@@ -31,6 +33,7 @@ $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Weekly Schedule</title>
   <link rel="stylesheet" href="weeklyschedule.css" />
+  <meta http-equiv="Cache-Control" content="no-store" />
 </head>
 <body>
   <div class="container">
@@ -43,7 +46,6 @@ $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
           <span>Interac Classes</span>
         </div>
       </div>
-
       <div class="nav-wrapper">
         <nav class="nav">
           <a href="teacherdashboard.php" class="nav-item">🏠 Dashboard</a>
@@ -51,17 +53,21 @@ $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
           <a href="faq.php" class="nav-item">✔️ FAQ</a>
         </nav>
       </div>
-
       <a href="logout.php" class="logout">🔓 Logout</a>
     </aside>
 
-    <!-- Main Panel -->
+    <!-- Main Content -->
     <main class="main">
       <div class="header-center">
         <a href="weeklyschedule.php?week_offset=<?= $offset - 1 ?>" class="arrow">&#9664;</a>
         <div class="header-text">
           <h1>Weekly Schedule</h1>
           <h2><?= $weekStart . " - " . $weekEnd ?></h2>
+          <?php if (!$isThisWeek): ?>
+            <div style="margin-top: 8px;">
+              <a href="weeklyschedule.php" style="font-size: 13px; color: #2a6edb;">🔄 Back to current week</a>
+            </div>
+          <?php endif; ?>
         </div>
         <a href="weeklyschedule.php?week_offset=<?= $offset + 1 ?>" class="arrow">&#9654;</a>
       </div>
@@ -69,11 +75,13 @@ $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
       <div class="week-schedule">
         <?php
         for ($i = 0; $i < count($days); $i++) {
-          $currentDate = clone $startDate;
-          $currentDate->modify("+$i days");
+          $currentDate = $startOfWeek->modify("+$i days");
           $formattedDate = $currentDate->format("M j");
 
-          echo "<div class='day-column'>";
+          $isToday = $currentDate->format('Y-m-d') === $today->format('Y-m-d');
+          $todayClass = $isToday ? ' today-column' : '';
+
+          echo "<div class='day-column$todayClass'>";
           echo "<div class='day-header'>";
           echo "<div class='day-name'>{$days[$i]}</div>";
           echo "<div class='day-date'>{$formattedDate}</div>";
@@ -82,12 +90,12 @@ $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
           echo "<div class='slots'>";
           for ($j = 0; $j < 3; $j++) {
             echo "<a href='lessondetails.php?id={$days[$i]}-{$j}' class='lesson-card'>";
-            echo "<div class='lesson-time'>🕘 9:30 – 9:45 JST</div>";
+            echo "<div class='lesson-time'>🕘 09:30 – 09:45</div>";
             echo "<div class='lesson-location'>🏫 Ureshino City<br>Ureshino ES</div>";
             echo "</a>";
           }
-          echo "</div>";
-          echo "</div>";
+          echo "</div>"; // slots
+          echo "</div>"; // day-column
         }
         ?>
       </div>
