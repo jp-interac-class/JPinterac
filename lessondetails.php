@@ -80,6 +80,10 @@ $calendar .= "</div></div>";
         <h3>📘 Please see the details below for your reference:</h3>
         <?php if ($lesson): ?>
           <div class="lesson-info-grid">
+            <?php
+              $formattedDate = date("F j, Y", strtotime($lesson['date']));
+            ?>
+            <div>Date:</div> <div><?= $formattedDate ?></div>
             <div>Access Time:</div> <div><?= date("H:i", strtotime($lesson['access_time'])) ?></div>
             <div>Start Time:</div> <div><?= date("H:i", strtotime($lesson['start_time'])) ?></div>
             <div>End Time:</div> <div><?= date("H:i", strtotime($lesson['end_time'])) ?></div>
