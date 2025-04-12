@@ -8,6 +8,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 }
 
 date_default_timezone_set('Asia/Tokyo');
+
+// Calendar setup
 $currentTime = date("H:i");
 $currentYear = date("Y");
 $today = date("j");
@@ -37,6 +39,7 @@ for ($i = $startDay; $i < $startDay + $daysInMonth; $i++) {
 }
 $calendar .= "</div></div>";
 
+// Fetch lessons for today
 $teacherEmail = $_SESSION["teacher_email"];
 $todayDate = date("Y-m-d");
 
@@ -84,6 +87,13 @@ $result = $stmt->get_result();
       <h1>Hi, Teacher <?= htmlspecialchars($_SESSION["teacher_name"]); ?>!</h1>
       <h2>Upcoming Lessons (<?= date("F j, Y") ?>)</h2>
 
+      <!-- Legend -->
+      <div class="legend">
+        <span class="dot ongoing"></span> Ongoing
+        <span class="dot upcoming"></span> Upcoming
+        <span class="dot past"></span> Past
+      </div>
+
       <div class="main-content-row">
         <div class="lesson-scroll">
           <div class="lessons">
@@ -93,9 +103,10 @@ $result = $stmt->get_result();
                   $accessTimeFormatted = date("H:i", strtotime($row['access_time']));
                   $endTimeFormatted = date("H:i", strtotime($row['end_time']));
 
-                  $accessTimeRaw = strtotime($row['access_time']);
-                  $endTimeRaw = strtotime($row['end_time']);
-                  $nowRaw = strtotime(date("H:i"));
+                  $todayFull = date("Y-m-d");
+                  $nowRaw = strtotime("$todayFull " . date("H:i"));
+                  $accessTimeRaw = strtotime("$todayFull " . $row['access_time']);
+                  $endTimeRaw = strtotime("$todayFull " . $row['end_time']);
 
                   if ($nowRaw >= $endTimeRaw) {
                       $lessonClass = "lesson lesson-past";
@@ -105,10 +116,12 @@ $result = $stmt->get_result();
                       $lessonClass = "lesson lesson-upcoming";
                   }
                 ?>
-                <div class="<?= $lessonClass ?>">
-                  <div class="lesson-time">🕘 <?= $accessTimeFormatted ?> – <?= $endTimeFormatted ?></div>
-                  <div class="lesson-location">🏫 <?= htmlspecialchars($row['area']) ?> | <?= htmlspecialchars($row['meeting_group']) ?></div>
-                </div>
+                <a href="lessondetails.php?access_time=<?= urlencode($row['access_time']) ?>&meeting_group=<?= urlencode($row['meeting_group']) ?>" class="lesson-link">
+                  <div class="<?= $lessonClass ?>">
+                    <div class="lesson-time">🕘 <?= $accessTimeFormatted ?> – <?= $endTimeFormatted ?></div>
+                    <div class="lesson-location">🏫 <?= htmlspecialchars($row['area']) ?> | <?= htmlspecialchars($row['meeting_group']) ?></div>
+                  </div>
+                </a>
               <?php endwhile; ?>
             <?php else: ?>
               <div>No lessons scheduled for today.</div>

@@ -125,7 +125,7 @@ $lessonId = isset($_GET['id']) ? ((int)$_GET['id'] + 1) : 'Not provided';
     <h1>Lesson Details</h1>
     <div class="faq-container">
       <div class="faq-item">
-        <h3>📘 Lesson #<?= htmlspecialchars($lessonId) ?></h3>
+        <h3>📘 Please see the details below for your reference:</h3>
         <div class="lesson-info-grid">
           <div>Access Time:</div> <div>9:20 AM JST</div>
           <div>Start Time:</div> <div>9:30 AM JST</div>

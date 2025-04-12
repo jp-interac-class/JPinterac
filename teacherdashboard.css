@@ -171,6 +171,12 @@ h2 {
   border-radius: 4px;
 }
 
+.lesson-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
 /* RIGHT PANEL */
 .right-panel {
   width: 320px;
@@ -293,24 +299,50 @@ h2 {
   line-height: 1.4;
 }
 
-.lesson-link {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-}
-
-/* ✅ NEW STYLES FOR LESSON STATUS */
+/* ✅ LESSON STATUS STYLES */
 .lesson-past {
-  background-color: #e0e0e0;
+  background-color: #d4d4d4;
+  border-left-color: #aaa;
   opacity: 0.6;
 }
 
 .lesson-ongoing {
   background-color: #fff4ce;
   border-left-color: #d4af37;
+  opacity: 1;
 }
 
 .lesson-upcoming {
-  background-color: #f0f0f0;
-  opacity: 0.6;
+  background-color: #e3f2fd;
+  border-left-color: #64b5f6;
+  opacity: 1;
+}
+
+/* ✅ OPTIONAL LEGEND STYLES */
+.legend {
+  margin-bottom: 10px;
+  font-size: 14px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.legend .dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 6px;
+  border-radius: 50%;
+}
+
+.legend .ongoing {
+  background-color: #fff4ce;
+}
+
+.legend .upcoming {
+  background-color: #e3f2fd;
+}
+
+.legend .past {
+  background-color: #d4d4d4;
 }
