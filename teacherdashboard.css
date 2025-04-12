@@ -4,7 +4,7 @@ body {
   display: flex;
   background: #f9f9f9;
   color: #222;
-    overflow-y: scroll; /* 👈 Forces vertical scrollbar even when not needed */
+  overflow-y: scroll;
 }
 
 .container {
@@ -156,7 +156,7 @@ h2 {
 }
 
 .lesson-scroll {
-  height: calc(100vh - 240px); /* Adjust based on actual top section height */
+  height: calc(100vh - 240px);
   overflow-y: auto;
   flex: 1;
   padding-right: 6px;
@@ -297,4 +297,20 @@ h2 {
   text-decoration: none;
   color: inherit;
   display: block;
+}
+
+/* ✅ NEW STYLES FOR LESSON STATUS */
+.lesson-past {
+  background-color: #e0e0e0;
+  opacity: 0.6;
+}
+
+.lesson-ongoing {
+  background-color: #fff4ce;
+  border-left-color: #d4af37;
+}
+
+.lesson-upcoming {
+  background-color: #f0f0f0;
+  opacity: 0.6;
 }
