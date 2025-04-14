@@ -1,4 +1,3 @@
-/* GENERAL */
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
@@ -13,7 +12,7 @@ body {
     min-height: 100vh;
   }
   
-  /* SIDEBAR (Copied from admin.css) */
+  /* SIDEBAR */
   .sidebar {
     background-color: #111;
     color: white;
@@ -60,7 +59,7 @@ body {
   .nav {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* copied from admin.css */
+    align-items: flex-start;
     gap: 40px;
     padding: 0 20px;
     width: 100%;
@@ -94,7 +93,7 @@ body {
     padding: 10px 20px;
   }
   
-  /* MAIN CONTENT */
+  /* MAIN */
   .main {
     flex: 1;
     padding: 40px;
@@ -109,88 +108,74 @@ body {
     font-size: 50px;
     font-weight: 600;
     color: #111;
+    margin-bottom: 30px;
   }
   
-  /* FORM SECTION (same style as upload-section in admin.css) */
-  .update-section {
-    margin-top: 30px;
+  /* Wrapper for spacing */
+  .lesson-update-wrapper {
+    max-width: 900px;
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  /* Form box */
+  .lesson-update-form {
     padding: 20px;
+    background: #fff;
     border: 1px solid #ddd;
     border-radius: 10px;
-    background: #fff;
-    max-width: 600px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  }
-  
-  .update-section h2 {
-    margin-bottom: 16px;
-  }
-  
-  .update-form {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
     display: flex;
     flex-direction: column;
     gap: 16px;
   }
   
-  .update-form label {
-    font-weight: 600;
-    font-size: 14px;
-  }
-  
-  .update-form input,
-  .update-form select {
-    padding: 10px;
-    font-size: 14px;
+  /* Inputs */
+  .lesson-update-form input[type="text"],
+  .lesson-update-form input[type="date"],
+  .lesson-update-form input[type="time"] {
+    padding: 10px 12px;
+    width: 100%;
     border: 1px solid #ccc;
     border-radius: 6px;
+    box-sizing: border-box;
   }
   
-  .update-form button {
+  .lesson-update-form button {
     background-color: #4a4a2f;
     color: white;
-    border: none;
     padding: 10px 20px;
+    border: none;
     border-radius: 6px;
     cursor: pointer;
+    align-self: flex-start;
   }
   
-  .update-form button:hover {
+  .lesson-update-form button:hover {
     background-color: #333;
   }
   
-  /* RESULT TABLE */
-  .results-table-wrapper {
-    margin-top: 30px;
-    max-width: 700px;
-  }
-  
-  .results-table {
+  /* Table */
+  .lesson-preview-table {
     width: 100%;
     border-collapse: collapse;
-    background: #fff;
+    margin-top: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  .lesson-preview-table th,
+  .lesson-preview-table td {
     border: 1px solid #ddd;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  }
-  
-  .results-table th {
-    background-color: #f9f9f9;
-    padding: 12px 16px;
+    padding: 10px;
     text-align: left;
-    font-weight: 600;
-    font-size: 14px;
-    border-bottom: 1px solid #eee;
   }
   
-  .results-table td {
-    padding: 12px 16px;
-    font-size: 14px;
-    border-bottom: 1px solid #eee;
-  }
-  
-  .results-table tr:last-child td {
-    border-bottom: none;
+  .lesson-preview-table th {
+    background-color: #f4f4f4;
   }
   
   /* RIGHT PANEL */
@@ -233,7 +218,6 @@ body {
     color: #555;
   }
   
-  /* CALENDAR */
   .calendar {
     background: white;
     color: #000;
@@ -261,7 +245,6 @@ body {
     font-size: 14px;
     padding: 10px;
     color: #000;
-    text-align: center;
     background: #fff;
     border: 1px solid #ddd;
     border-top: none;
