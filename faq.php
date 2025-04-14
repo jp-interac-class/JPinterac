@@ -69,19 +69,20 @@ $calendar .= "</div></div>";
   <!-- Main Content -->
   <main class="main">
     <h1>FAQ & Resources</h1>
-    <div class="faq-container">
-      <div class="faq-item">
-        <h3>🚫 Offenses and Penalties</h3>
-        <p>Please be guided about our updated policy.</p>
-        <a href="https://docs.google.com/spreadsheets/d/1G_kRRavs20TfnA2JYou5fLbRVeeASA6mshi3dlI0KiA/edit?gid=0#gid=0" target="_blank">View Penalty Guide</a>
+    <div class="main-scroll">
+      <div class="faq-container">
+        <div class="faq-item">
+          <h3>🚫 Offenses and Penalties</h3>
+          <p>Please be guided about our updated policy.</p>
+          <a href="https://docs.google.com/spreadsheets/d/1G_kRRavs20TfnA2JYou5fLbRVeeASA6mshi3dlI0KiA/edit?gid=0#gid=0" target="_blank">View Penalty Guide</a>
+        </div>
+        
+        <div class="faq-item">
+          <h3>📢 Important Announcements</h3>
+          <p>This document contains updates from management, system maintenance, and policy changes.</p>
+          <a href="https://docs.google.com/document/d/your-announcement-link" target="_blank">Read Announcements</a>
+        </div>
       </div>
-      
-      <div class="faq-item">
-        <h3>📢 Important Announcements</h3>
-        <p>This document contains updates from management, system maintenance, and policy changes.</p>
-        <a href="https://docs.google.com/document/d/your-announcement-link" target="_blank">Read Announcements</a>
-      </div>
-
     </div>
   </main>
 

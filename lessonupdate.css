@@ -3,13 +3,13 @@ body {
     font-family: 'Inter', sans-serif;
     background: #f9f9f9;
     color: #222;
-    overflow-y: scroll;
+    overflow: hidden;
   }
   
   .container {
     display: flex;
     width: 100%;
-    min-height: 100vh;
+    height: 100vh;
   }
   
   /* SIDEBAR */
@@ -101,6 +101,8 @@ body {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+    height: 100vh;
+    overflow-y: auto;
   }
   
   h1 {
@@ -111,7 +113,6 @@ body {
     margin-bottom: 30px;
   }
   
-  /* Wrapper for spacing */
   .lesson-update-wrapper {
     max-width: 900px;
     width: 100%;
@@ -121,7 +122,6 @@ body {
     gap: 30px;
   }
   
-  /* Form box */
   .lesson-update-form {
     padding: 20px;
     background: #fff;
@@ -133,7 +133,6 @@ body {
     gap: 16px;
   }
   
-  /* Inputs */
   .lesson-update-form input[type="text"],
   .lesson-update-form input[type="date"],
   .lesson-update-form input[type="time"] {
@@ -158,7 +157,6 @@ body {
     background-color: #333;
   }
   
-  /* Table */
   .lesson-preview-table {
     width: 100%;
     border-collapse: collapse;
@@ -181,6 +179,7 @@ body {
   /* RIGHT PANEL */
   .right-panel {
     width: 320px;
+    height: 100vh;
     padding: 40px 20px;
     display: flex;
     flex-direction: column;
@@ -188,8 +187,8 @@ body {
     justify-content: center;
     gap: 20px;
     background-color: #f3f3ef;
-    height: 100vh;
     box-sizing: border-box;
+    flex-shrink: 0;
   }
   
   .clock {

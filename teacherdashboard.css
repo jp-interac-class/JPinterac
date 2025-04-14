@@ -1,16 +1,19 @@
-body {
+/* RESET & BASE LAYOUT */
+html, body {
   margin: 0;
+  padding: 0;
   font-family: 'Inter', sans-serif;
-  display: flex;
   background: #f9f9f9;
   color: #222;
-  overflow-y: scroll;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .container {
   display: flex;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
 /* SIDEBAR */
@@ -102,8 +105,9 @@ body {
   background: white;
   display: flex;
   flex-direction: column;
-  max-height: 100vh;
   box-sizing: border-box;
+  height: 100vh;
+  overflow: hidden;
 }
 
 h1 {
@@ -119,6 +123,7 @@ h2 {
   color: #2b2b2b;
 }
 
+/* LESSONS */
 .lessons {
   display: flex;
   flex-direction: column;
@@ -132,7 +137,6 @@ h2 {
   border-left: 6px solid #2c2c1e;
   border-radius: 12px;
   padding: 16px 20px;
-  margin-bottom: 15px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
   transition: all 0.3s ease;
 }
@@ -155,11 +159,14 @@ h2 {
 }
 
 .lesson-scroll {
-  height: calc(100vh - 240px);
-  overflow-y: auto;
   flex: 1;
+  min-height: 0;
+  max-height: 100%;
+  overflow-y: auto;
   padding-right: 6px;
   box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-gutter: stable;
 }
 
 .lesson-scroll::-webkit-scrollbar {
@@ -171,7 +178,7 @@ h2 {
   border-radius: 4px;
 }
 
-/* ✅ FIXED: Remove underline on links and prevent default browser styles */
+/* CLEAN LINK STYLES */
 a, a:visited, a:hover, a:active {
   text-decoration: none !important;
   color: inherit !important;
@@ -181,10 +188,8 @@ a, a:visited, a:hover, a:active {
   display: block;
 }
 
-.lesson-link *,
-.lesson-link *:visited,
-.lesson-link *:hover,
-.lesson-link *:active {
+.lesson-link *, .lesson-link *:visited,
+.lesson-link *:hover, .lesson-link *:active {
   text-decoration: none !important;
   color: inherit !important;
   border: none !important;
@@ -278,14 +283,18 @@ a, a:visited, a:hover, a:active {
   font-weight: bold;
 }
 
+/* CONTENT ROW */
 .main-content-row {
   display: flex;
   gap: 24px;
   align-items: flex-start;
   justify-content: space-between;
-  height: 100%;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
+/* ANNOUNCEMENTS */
 .announcement-board {
   background-color: #fffbe8;
   padding: 20px;
@@ -314,7 +323,7 @@ a, a:visited, a:hover, a:active {
   line-height: 1.4;
 }
 
-/* LESSON STATUS */
+/* LESSON STATUS COLORS */
 .lesson-past {
   background-color: #d4d4d4;
   border-left-color: #aaa;
@@ -398,6 +407,7 @@ a, a:visited, a:hover, a:active {
   text-decoration: underline;
 }
 
+/* ANIMATION */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }

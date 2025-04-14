@@ -39,12 +39,7 @@ $selectedTime = $_GET['access_time'] ?? '';
 $selectedTeacher = $_GET['teacher_name'] ?? '';
 
 if ($selectedDate && $selectedTime && $selectedTeacher) {
-    $stmt = $conn->prepare("
-        SELECT lessons.teacher_email, teachers.name AS teacher_name, lessons.area, lessons.meeting_group, lessons.start_time, lessons.end_time
-        FROM lessons
-        LEFT JOIN teachers ON lessons.teacher_email = teachers.email
-        WHERE lessons.date = ? AND lessons.access_time = ? AND teachers.name LIKE ?
-    ");
+    $stmt = $conn->prepare("SELECT lessons.teacher_email, teachers.name AS teacher_name, lessons.area, lessons.meeting_group, lessons.start_time, lessons.end_time FROM lessons LEFT JOIN teachers ON lessons.teacher_email = teachers.email WHERE lessons.date = ? AND lessons.access_time = ? AND teachers.name LIKE ?");
     $likeTeacher = "%" . $selectedTeacher . "%";
     $stmt->bind_param("sss", $selectedDate, $selectedTime, $likeTeacher);
     $stmt->execute();
@@ -101,24 +96,26 @@ if ($selectedDate && $selectedTime && $selectedTeacher) {
       </form>
 
       <?php if (!empty($lessons)): ?>
-        <table class="lesson-preview-table">
-          <tr>
-            <th>Teacher Name</th>
-            <th>Area</th>
-            <th>Meeting Group</th>
-            <th>Start Time</th>
-            <th>End Time</th>
-          </tr>
-          <?php foreach ($lessons as $lesson): ?>
+        <div class="scroll-section">
+          <table class="lesson-preview-table">
             <tr>
-              <td><?= htmlspecialchars($lesson['teacher_name']) ?></td>
-              <td><?= htmlspecialchars($lesson['area']) ?></td>
-              <td><?= htmlspecialchars($lesson['meeting_group']) ?></td>
-              <td><?= htmlspecialchars($lesson['start_time']) ?></td>
-              <td><?= htmlspecialchars($lesson['end_time']) ?></td>
+              <th>Teacher Name</th>
+              <th>Area</th>
+              <th>Meeting Group</th>
+              <th>Start Time</th>
+              <th>End Time</th>
             </tr>
-          <?php endforeach; ?>
-        </table>
+            <?php foreach ($lessons as $lesson): ?>
+              <tr>
+                <td><?= htmlspecialchars($lesson['teacher_name']) ?></td>
+                <td><?= htmlspecialchars($lesson['area']) ?></td>
+                <td><?= htmlspecialchars($lesson['meeting_group']) ?></td>
+                <td><?= htmlspecialchars($lesson['start_time']) ?></td>
+                <td><?= htmlspecialchars($lesson['end_time']) ?></td>
+              </tr>
+            <?php endforeach; ?>
+          </table>
+        </div>
 
         <form action="processlessonupdate.php" method="POST" class="lesson-update-form">
           <input type="hidden" name="date" value="<?= htmlspecialchars($selectedDate) ?>">
