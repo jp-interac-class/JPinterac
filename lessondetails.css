@@ -171,22 +171,35 @@ h2 {
   text-decoration: underline;
 }
 
+/* ✅ Back Button — Fixed for text/icon visibility */
 .back-button,
 .back-btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   margin-top: 20px;
   padding: 10px 20px;
   background-color: #2c2c1e;
-  color: white;
-  text-decoration: none;
+  color: white !important;
+  font-weight: 500;
+  text-decoration: none !important;
   font-size: 14px;
   border-radius: 8px;
+  border: none;
   transition: background-color 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* ✅ Apply white to any child like emoji/spans/icons */
+.back-button *,
+.back-btn * {
+  color: white !important;
+  fill: white !important;
 }
 
 .back-button:hover,
 .back-btn:hover {
-  background-color: #000;
+  background-color: #444;
 }
 
 /* RIGHT PANEL */
@@ -274,7 +287,7 @@ h2 {
   font-weight: bold;
 }
 
-/* LINK RESET */
+/* GLOBAL LINK RESET */
 a, a:visited, a:hover, a:active {
   text-decoration: none !important;
   color: inherit !important;

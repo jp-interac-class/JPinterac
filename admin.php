@@ -64,7 +64,7 @@ $daysInMonth = date("t", $firstDayOfMonth);
       <img src="Logo/logo1.png" alt="Logo">
       <div class="logo-text">
         <strong>J-P Network English Corp</strong><br>
-        <span>Interac Classes</span>
+        <span>Admin Panel</span>
       </div>
     </div>
     <div class="nav-wrapper">
@@ -72,6 +72,7 @@ $daysInMonth = date("t", $firstDayOfMonth);
     <a href="admin.php" class="nav-item">🏠 Dashboard</a>
     <a href="registerteacher.php" class="nav-item">🖊️ Register New Teacher</a>
     <a href="viewteachers.php" class="nav-item">👩‍🏫 View Teachers</a>
+    <a href="lessonupdate.php" class="nav-item">🛠️ Lesson Update</a>
 </nav>
 
     </div>
