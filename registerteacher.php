@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'db_connect.php'; // 🔗 Connects to teachers_db
+include 'db_connect.php';
 
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION["user_type"] !== "admin") {
     header("Location: login.php");
@@ -10,7 +10,6 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION
 $success = "";
 $error = "";
 
-// ✅ Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = trim($_POST["name"]);
     $email = trim($_POST["email"]);
@@ -45,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->close();
 }
 
-// Calendar Setup
+// Calendar
 date_default_timezone_set('Asia/Tokyo');
 $today = date("j");
 $month = date("n");
@@ -71,17 +70,16 @@ $calendar .= "</div></div>";
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Register Teacher</title>
   <link rel="stylesheet" href="registerteacher.css" />
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 <div class="container">
+
   <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="logo">
@@ -92,55 +90,57 @@ $calendar .= "</div></div>";
       </div>
     </div>
     <div class="nav-wrapper">
-    <nav class="nav">
-  <a href="admin.php" class="nav-item">🏠 Dashboard</a>
-  <a href="registerteacher.php" class="nav-item">🖊️ Register New Teacher</a>
-  <a href="viewteachers.php" class="nav-item">👩‍🏫 View Teachers</a>
-  <a href="lessonupdate.php" class="nav-item">🛠️ Lesson Update</a>
-</nav>
+      <nav class="nav">
+        <a href="admin.php" class="nav-item">🏠 Dashboard</a>
+        <a href="registerteacher.php" class="nav-item">🖊️ Register New Teacher</a>
+        <a href="viewteachers.php" class="nav-item">👩‍🏫 View Teachers</a>
+        <a href="lessonupdate.php" class="nav-item">🛠️ Lesson Update</a>
+      </nav>
     </div>
     <a href="logout.php" class="logout">🔓 Logout</a>
   </aside>
 
   <!-- MAIN CONTENT -->
   <main class="main">
-    <h1>Hi, Admin!</h1>
+    <div class="main-scroll">
+      <h1>Hi, Admin!</h1>
 
-    <div class="upload-section">
-      <h2>Register New Teacher</h2>
+      <div class="upload-section">
+        <h2>Register New Teacher</h2>
 
-      <?php if ($success): ?>
-  <script>
-    Swal.fire({
-      icon: 'success',
-      title: 'Success!',
-      text: '<?= $success ?>',
-      confirmButtonColor: '#4a4a2f'
-    });
-  </script>
-<?php elseif ($error): ?>
-  <script>
-    Swal.fire({
-      icon: 'error',
-      title: 'Error!',
-      text: '<?= $error ?>',
-      confirmButtonColor: '#d33'
-    });
-  </script>
-<?php endif; ?>
+        <?php if ($success): ?>
+          <script>
+            Swal.fire({
+              icon: 'success',
+              title: 'Success!',
+              text: '<?= $success ?>',
+              confirmButtonColor: '#4a4a2f'
+            });
+          </script>
+        <?php elseif ($error): ?>
+          <script>
+            Swal.fire({
+              icon: 'error',
+              title: 'Error!',
+              text: '<?= $error ?>',
+              confirmButtonColor: '#d33'
+            });
+          </script>
+        <?php endif; ?>
 
-      <form action="registerteacher.php" method="POST">
-        <label for="name">Teacher's Name:</label>
-        <input type="text" id="name" name="name" required>
+        <form action="registerteacher.php" method="POST">
+          <label for="name">Teacher's Name:</label>
+          <input type="text" id="name" name="name" required>
 
-        <label for="email">Teacher's Email:</label>
-        <input type="email" id="email" name="email" required>
+          <label for="email">Teacher's Email:</label>
+          <input type="email" id="email" name="email" required>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required>
 
-        <button type="submit">Register</button>
-      </form>
+          <button type="submit">Register</button>
+        </form>
+      </div>
     </div>
   </main>
 

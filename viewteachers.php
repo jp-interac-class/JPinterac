@@ -1,13 +1,13 @@
 <?php
 session_start();
-include 'db_connect.php'; // connects to teachers_db
+include 'db_connect.php';
 
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION["user_type"] !== "admin") {
     header("Location: login.php");
     exit;
 }
 
-// Fetch teachers from database
+// Fetch teachers
 $teachers = [];
 $result = $conn->query("SELECT name, email FROM teachers ORDER BY name ASC");
 if ($result) {
@@ -16,7 +16,7 @@ if ($result) {
     }
 }
 
-// Calendar Setup
+// Calendar setup
 date_default_timezone_set('Asia/Tokyo');
 $today = date("j");
 $month = date("n");
@@ -76,50 +76,51 @@ $calendar .= "</div></div>";
 
   <!-- MAIN CONTENT -->
   <main class="main">
-    <h1>Registered Teachers</h1>
-    <div class="upload-section" style="max-width: 900px; width: 100%;">
-  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-    <h2 style="margin: 0;">List of Teachers</h2>
-    <input
-      type="text"
-      id="searchInput"
-      placeholder="Search by name or email..."
-      style="padding: 8px; border-radius: 6px; border: 1px solid #ccc; width: 250px;"
-    >
-  </div>
+    <div class="main-scroll">
+      <h1>Registered Teachers</h1>
 
-
-      <?php if (empty($teachers)): ?>
-        <p>No teachers registered yet.</p>
-      <?php else: ?>
-        <div style="max-height: 400px; overflow-y: auto; border: 1px solid #ccc; border-radius: 6px;">
-          <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse;">
-          <thead>
-          <tr style="background-color: #f3f3f3;">
-          <th style="text-align: left;">Name</th>
-          <th style="text-align: left;">Email</th>
-          <th style="text-align: left;">Delete</th>
-          </tr>
-          </thead>
-            <tbody>
-            <?php foreach ($teachers as $teacher): ?>
-  <tr data-email="<?= htmlspecialchars($teacher['email']) ?>">
-    <td><?= htmlspecialchars($teacher['name']) ?></td>
-    <td><?= htmlspecialchars($teacher['email']) ?></td>
-    <td style="text-align: center;">
-  <button class="delete-btn" style="background: none; border: none; cursor: pointer;" title="Delete">
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="red" viewBox="0 0 24 24">
-      <path d="M3 6h18v2H3V6zm2 3h14l-1.5 13h-11L5 9zm4 2v9h2v-9H9zm4 0v9h2v-9h-2z"/>
-    </svg>
-  </button>
-</td>
-
-  </tr>
-<?php endforeach; ?>
-            </tbody>
-          </table>
+      <div class="upload-section" style="max-width: 900px; width: 100%;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+          <h2 style="margin: 0;">List of Teachers</h2>
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search by name or email..."
+            style="padding: 8px; border-radius: 6px; border: 1px solid #ccc; width: 250px;"
+          >
         </div>
-      <?php endif; ?>
+
+        <?php if (empty($teachers)): ?>
+          <p>No teachers registered yet.</p>
+        <?php else: ?>
+          <div style="max-height: 400px; overflow-y: auto; border: 1px solid #ccc; border-radius: 6px;">
+            <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+              <thead>
+                <tr style="background-color: #f3f3f3;">
+                  <th style="text-align: left;">Name</th>
+                  <th style="text-align: left;">Email</th>
+                  <th style="text-align: left;">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach ($teachers as $teacher): ?>
+                  <tr data-email="<?= htmlspecialchars($teacher['email']) ?>">
+                    <td><?= htmlspecialchars($teacher['name']) ?></td>
+                    <td><?= htmlspecialchars($teacher['email']) ?></td>
+                    <td style="text-align: center;">
+                      <button class="delete-btn" style="background: none; border: none; cursor: pointer;" title="Delete">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="red" viewBox="0 0 24 24">
+                          <path d="M3 6h18v2H3V6zm2 3h14l-1.5 13h-11L5 9zm4 2v9h2v-9H9zm4 0v9h2v-9h-2z"/>
+                        </svg>
+                      </button>
+                    </td>
+                  </tr>
+                <?php endforeach; ?>
+              </tbody>
+            </table>
+          </div>
+        <?php endif; ?>
+      </div>
     </div>
   </main>
 
@@ -144,8 +145,9 @@ function updateClock() {
 }
 setInterval(updateClock, 1000);
 updateClock();
+</script>
 
-// ✅ SINGLE SEARCH for Name or Email
+<script>
 document.getElementById('searchInput').addEventListener('input', function () {
   const filter = this.value.toLowerCase();
   const rows = document.querySelectorAll("tbody tr");
@@ -158,6 +160,7 @@ document.getElementById('searchInput').addEventListener('input', function () {
   });
 });
 </script>
+
 <script>
 document.querySelectorAll(".delete-btn").forEach(button => {
   button.addEventListener("click", function () {
