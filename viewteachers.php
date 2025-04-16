@@ -79,7 +79,7 @@ $calendar .= "</div></div>";
     <div class="main-scroll">
       <h1>Registered Teachers</h1>
 
-      <div class="upload-section" style="max-width: 900px; width: 100%;">
+      <div class="upload-section" style="max-width: 750px; width: 100%;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
           <h2 style="margin: 0;">List of Teachers</h2>
           <input
