@@ -1,44 +1,36 @@
 <?php
-session_start();
 include 'db_connect.php';
 
-if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION["user_type"] !== "admin") {
-    header("Location: login.php");
-    exit;
-}
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $lessonId = $_POST['lesson_id'];
+    $newTeacherName = trim($_POST['new_teacher_name']);
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $date = $_POST['date'] ?? '';
-    $access_time = $_POST['access_time'] ?? '';
-    $original_teacher_email = $_POST['original_teacher_email'] ?? '';
-    $new_teacher_email = $_POST['new_teacher_email'] ?? '';
+    if (!empty($lessonId) && !empty($newTeacherName)) {
+        $stmt = $conn->prepare("SELECT email FROM teachers WHERE LOWER(name) = LOWER(?)");
+        $stmt->bind_param("s", $newTeacherName);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-    if ($date && $access_time && $original_teacher_email && $new_teacher_email) {
-        // Prepare SQL to update only the matching lesson
-        $stmt = $conn->prepare("
-            UPDATE lessons 
-            SET teacher_email = ? 
-            WHERE date = ? AND access_time = ? AND teacher_email = ?
-        ");
+        if ($row = $result->fetch_assoc()) {
+            $newEmail = $row['email'];
 
-        $stmt->bind_param("ssss", $new_teacher_email, $date, $access_time, $original_teacher_email);
+            $update = $conn->prepare("UPDATE lessons SET teacher_email = ? WHERE id = ?");
+            $update->bind_param("si", $newEmail, $lessonId);
 
-        if ($stmt->execute()) {
-            if ($stmt->affected_rows > 0) {
-                $_SESSION['upload_message'] = "✅ Lesson successfully reassigned to <strong>$new_teacher_email</strong> for <strong>$date</strong> at <strong>$access_time</strong>.";
+            if ($update->execute()) {
+                header("Location: lessonupdate.php?success=1");
+                exit;
             } else {
-                $_SESSION['upload_message'] = "⚠️ No matching lesson found. Please double-check the teacher and time.";
+                header("Location: lessonupdate.php?success=0");
+                exit;
             }
         } else {
-            $_SESSION['upload_message'] = "❌ Error updating lesson: " . $stmt->error;
+            header("Location: lessonupdate.php?success=0");
+            exit;
         }
-
-        $stmt->close();
     } else {
-        $_SESSION['upload_message'] = "❌ All fields are required.";
+        header("Location: lessonupdate.php?success=0");
+        exit;
     }
 }
-
-header("Location: lessonupdate.php");
-exit;
 ?>

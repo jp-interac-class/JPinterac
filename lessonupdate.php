@@ -7,7 +7,6 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION
     exit;
 }
 
-// Calendar Setup
 date_default_timezone_set('Asia/Tokyo');
 $today = date("j");
 $month = date("n");
@@ -18,38 +17,49 @@ $startDay = date("w", $firstDayOfMonth);
 $daysInMonth = date("t", $firstDayOfMonth);
 
 $calendar = "<div class='calendar'>
-  <div class='calendar-header'>
-    <span class='month'>$monthName</span>
-    <span class='year'>$year</span>
-  </div>
+  <div class='calendar-header'><span class='month'>$monthName</span><span class='year'>$year</span></div>
   <div class='calendar-grid'>
     <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>";
-for ($i = 0; $i < $startDay; $i++) {
-    $calendar .= "<div></div>";
-}
+for ($i = 0; $i < $startDay; $i++) $calendar .= "<div></div>";
 for ($i = 1; $i <= $daysInMonth; $i++) {
     $highlight = ($i == $today) ? "today" : "";
     $calendar .= "<div class='$highlight'>$i</div>";
 }
 $calendar .= "</div></div>";
 
-$lessons = [];
+$selectedTeacher = $_GET['teacher_name'] ?? '';
 $selectedDate = $_GET['date'] ?? '';
 $selectedTime = $_GET['access_time'] ?? '';
-$selectedTeacher = $_GET['teacher_name'] ?? '';
+$lessons = [];
 
-if ($selectedDate && $selectedTime && $selectedTeacher) {
-    $stmt = $conn->prepare("SELECT lessons.teacher_email, teachers.name AS teacher_name, lessons.area, lessons.meeting_group, lessons.start_time, lessons.end_time 
-                            FROM lessons 
-                            LEFT JOIN teachers ON lessons.teacher_email = teachers.email 
-                            WHERE lessons.date = ? AND lessons.access_time = ? AND teachers.name LIKE ?");
-    $likeTeacher = "%" . $selectedTeacher . "%";
-    $stmt->bind_param("sss", $selectedDate, $selectedTime, $likeTeacher);
+if ($selectedTeacher) {
+    $sql = "SELECT lessons.id, lessons.date, lessons.access_time, lessons.start_time, lessons.end_time,
+                   lessons.area, lessons.meeting_group, lessons.teacher_email, teachers.name AS teacher_name
+            FROM lessons
+            LEFT JOIN teachers ON lessons.teacher_email = teachers.email
+            WHERE teachers.name LIKE ?";
+    $params = ["%$selectedTeacher%"];
+    $types = "s";
+
+    if (!empty($selectedDate)) {
+        $sql .= " AND lessons.date = ?";
+        $params[] = $selectedDate;
+        $types .= "s";
+    }
+
+    if (!empty($selectedTime)) {
+        $sql .= " AND lessons.access_time = ?";
+        $params[] = $selectedTime;
+        $types .= "s";
+    }
+
+    $sql .= " ORDER BY lessons.date ASC, lessons.access_time ASC";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param($types, ...$params);
     $stmt->execute();
     $result = $stmt->get_result();
-    while ($row = $result->fetch_assoc()) {
-        $lessons[] = $row;
-    }
+
+    while ($row = $result->fetch_assoc()) $lessons[] = $row;
 }
 ?>
 
@@ -60,16 +70,14 @@ if ($selectedDate && $selectedTime && $selectedTeacher) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lesson Update</title>
   <link rel="stylesheet" href="lessonupdate.css" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 <div class="container">
   <aside class="sidebar">
     <div class="logo">
       <img src="Logo/logo1.png" alt="Logo" />
-      <div class="logo-text">
-        <strong>J-P Network English Corp</strong><br />
-        <span>Admin Panel</span>
-      </div>
+      <div class="logo-text"><strong>J-P Network English Corp</strong><br /><span>Admin Panel</span></div>
     </div>
     <div class="nav-wrapper">
       <nav class="nav">
@@ -86,51 +94,53 @@ if ($selectedDate && $selectedTime && $selectedTeacher) {
     <h1>Lesson Update</h1>
     <div class="lesson-update-wrapper">
       <form method="GET" class="lesson-update-form">
+        <label>Enter Teacher Name:</label>
+        <input type="text" name="teacher_name" value="<?= htmlspecialchars($selectedTeacher) ?>" required>
+
         <label>Select Date:</label>
-        <input type="date" name="date" value="<?= htmlspecialchars($selectedDate) ?>" required>
+        <input type="date" name="date" value="<?= htmlspecialchars($selectedDate) ?>">
 
         <label>Select Access Time:</label>
-        <input type="time" name="access_time" value="<?= htmlspecialchars($selectedTime) ?>" required>
-
-        <label>Enter Teacher Name:</label>
-        <input type="text" name="teacher_name" value="<?= htmlspecialchars($selectedTeacher) ?>" placeholder="e.g. Maria Santos" required>
+        <input type="time" name="access_time" value="<?= htmlspecialchars($selectedTime) ?>">
 
         <button type="submit">🔍 Preview Lessons</button>
       </form>
 
       <?php if (!empty($lessons)): ?>
-        <?php $lesson = $lessons[0]; ?>
         <div class="scroll-section">
           <table class="lesson-preview-table">
             <tr>
-              <th>Teacher Name</th>
+              <th>Date</th>
+              <th>Access</th>
+              <th>Start</th>
+              <th>End</th>
               <th>Area</th>
               <th>Meeting Group</th>
-              <th>Start Time</th>
-              <th>End Time</th>
+              <th>Teacher</th>
+              <th>Action</th>
             </tr>
-            <tr>
-              <td><?= htmlspecialchars($lesson['teacher_name']) ?></td>
-              <td><?= htmlspecialchars($lesson['area']) ?></td>
-              <td><?= htmlspecialchars($lesson['meeting_group']) ?></td>
-              <td><?= htmlspecialchars($lesson['start_time']) ?></td>
-              <td><?= htmlspecialchars($lesson['end_time']) ?></td>
-            </tr>
+            <?php foreach ($lessons as $lesson): ?>
+              <tr>
+                <td><?= htmlspecialchars($lesson['date']) ?></td>
+                <td><?= htmlspecialchars($lesson['access_time']) ?></td>
+                <td><?= htmlspecialchars($lesson['start_time']) ?></td>
+                <td><?= htmlspecialchars($lesson['end_time']) ?></td>
+                <td><?= htmlspecialchars($lesson['area']) ?></td>
+                <td><?= htmlspecialchars($lesson['meeting_group']) ?></td>
+                <td><?= htmlspecialchars($lesson['teacher_name']) ?></td>
+                <td>
+                  <form action="processlessonupdate.php" method="POST" class="inline-form">
+                    <input type="hidden" name="lesson_id" value="<?= htmlspecialchars($lesson['id']) ?>">
+                    <input type="text" name="new_teacher_name" placeholder="New teacher name" required>
+                    <button type="submit">Edit</button>
+                  </form>
+                </td>
+              </tr>
+            <?php endforeach; ?>
           </table>
         </div>
-
-        <form action="processlessonupdate.php" method="POST" class="lesson-update-form">
-          <input type="hidden" name="date" value="<?= htmlspecialchars($selectedDate) ?>">
-          <input type="hidden" name="access_time" value="<?= htmlspecialchars($selectedTime) ?>">
-          <input type="hidden" name="original_teacher_email" value="<?= htmlspecialchars($lesson['teacher_email']) ?>">
-
-          <label>Enter New Teacher Email to Assign:</label>
-          <input type="text" name="new_teacher_email" placeholder="e.g. backup@jpnetwork.com" required>
-
-          <button type="submit">✅ Update Lesson</button>
-        </form>
-      <?php elseif ($selectedDate && $selectedTime && $selectedTeacher): ?>
-        <p style="margin-top:20px;color:darkred;">❌ No lesson found for the selected values.</p>
+      <?php elseif ($selectedTeacher || $selectedDate || $selectedTime): ?>
+        <p style="margin-top:20px;color:darkred;">❌ No lessons found with those search filters.</p>
       <?php endif; ?>
     </div>
   </main>
@@ -156,5 +166,20 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 </script>
+
+<?php if (isset($_GET['success'])): ?>
+<script>
+Swal.fire({
+  title: "<?= $_GET['success'] == 1 ? 'Success!' : 'Error' ?>",
+  text: "<?= $_GET['success'] == 1 ? 'Lesson has been updated.' : 'Update failed. Please check the teacher name.' ?>",
+  icon: "<?= $_GET['success'] == 1 ? 'success' : 'error' ?>",
+  confirmButtonText: "OK"
+}).then(() => {
+  const url = new URL(window.location);
+  url.searchParams.delete("success");
+  window.history.replaceState({}, document.title, url);
+});
+</script>
+<?php endif; ?>
 </body>
 </html>
