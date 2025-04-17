@@ -67,6 +67,7 @@ if ($selectedTeacher) {
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lesson Update</title>
   <link rel="stylesheet" href="lessonupdate.css" />
@@ -117,7 +118,7 @@ if ($selectedTeacher) {
               <th>Area</th>
               <th>Meeting Group</th>
               <th>Teacher</th>
-              <th>Action</th>
+              <th>Transfer to:</th>
             </tr>
             <?php foreach ($lessons as $lesson): ?>
               <tr>
@@ -171,7 +172,7 @@ updateClock();
 <script>
 Swal.fire({
   title: "<?= $_GET['success'] == 1 ? 'Success!' : 'Error' ?>",
-  text: "<?= $_GET['success'] == 1 ? 'Lesson has been updated.' : 'Update failed. Please check the teacher name.' ?>",
+  text: "<?= $_GET['success'] == 1 ? 'Lesson has been transferred.' : 'Transfer failed. Please check the teacher name.' ?>",
   icon: "<?= $_GET['success'] == 1 ? 'success' : 'error' ?>",
   confirmButtonText: "OK"
 }).then(() => {

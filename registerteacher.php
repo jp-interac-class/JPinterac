@@ -103,11 +103,10 @@ $calendar .= "</div></div>";
   <!-- MAIN CONTENT -->
   <main class="main">
     <div class="main-scroll">
-      <h1>Hi, Admin!</h1>
+      <h1>Register New Teacher</h1>
 
       <div class="upload-section">
-        <h2>Register New Teacher</h2>
-
+        <h2>Registration</h2>
         <?php if ($success): ?>
           <script>
             Swal.fire({
