@@ -146,6 +146,8 @@ $result = $stmt->get_result();
             <li>Send "I will finish" on Zoom 2 minutes before the end.</li>
             <li>Message us on Viber if Zoom channel isn’t available.</li>
             <li>Report any issues to Customer Support immediately.</li>
+            <li>Please be online 45 - 30 mins before the lesson time.</li>
+            <li>Please enter on the link 5 minutes before the lesson time.</li>
           </ul>
         </div>
       </div>
