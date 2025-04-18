@@ -26,9 +26,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($check->num_rows > 0) {
             $error = "A teacher with this email already exists.";
         } else {
-            $stmt = $conn->prepare("INSERT INTO teachers (name, email, password, created_at) VALUES (?, ?, ?, NOW())");
-            $stmt->bind_param("sss", $name, $email, $password);
-
+          $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+          $stmt = $conn->prepare("INSERT INTO teachers (name, email, password, created_at) VALUES (?, ?, ?, NOW())");
+          $stmt->bind_param("sss", $name, $email, $hashedPassword);
+          
             if ($stmt->execute()) {
                 $success = "Teacher successfully registered.";
             } else {
@@ -104,7 +105,6 @@ $calendar .= "</div></div>";
   <main class="main">
     <div class="main-scroll">
       <h1>Register New Teacher</h1>
-
       <div class="upload-section">
         <h2>Registration</h2>
         <?php if ($success): ?>

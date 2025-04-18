@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    // ✅ First, check if it's an admin
+    // Check if it's an admin
     $adminStmt = $conn->prepare("SELECT password FROM admins WHERE email = ?");
     $adminStmt->bind_param("s", $email);
     $adminStmt->execute();
@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $adminStmt->bind_result($admin_password);
         $adminStmt->fetch();
 
-        if ($password === $admin_password) {
+        if (password_verify($password, $admin_password)) {
             $_SESSION["loggedin"] = true;
             $_SESSION["admin_email"] = $email;
             $_SESSION["user_type"] = "admin";
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $adminStmt->close();
     } else {
-        // ✅ Then check if it's a teacher
+        // Check if it's a teacher
         $stmt = $conn->prepare("SELECT name, password FROM teachers WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_result($name, $db_password);
             $stmt->fetch();
 
-            if ($password === $db_password) {
+            if (password_verify($password, $db_password)) {
                 $_SESSION["loggedin"] = true;
                 $_SESSION["teacher_name"] = $name;
                 $_SESSION["teacher_email"] = $email;
@@ -58,8 +58,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->close();
 }
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
