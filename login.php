@@ -1,12 +1,11 @@
 <?php
 session_start();
-include 'db_connect.php'; // Connects to teachers_db
+include 'db_connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    // Check if it's an admin
     $adminStmt = $conn->prepare("SELECT password FROM admins WHERE email = ?");
     $adminStmt->bind_param("s", $email);
     $adminStmt->execute();
@@ -28,7 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $adminStmt->close();
     } else {
-        // Check if it's a teacher
         $stmt = $conn->prepare("SELECT name, password FROM teachers WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
@@ -62,26 +60,68 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <link rel="stylesheet" href="login.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login Page</title>
+  <link rel="stylesheet" href="login.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    .password-container {
+      position: relative;
+    }
+
+    .password-container input {
+      width: 100%;
+      padding-right: 40px;
+    }
+
+    .toggle-password {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #666;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="left">
-            <h2>Welcome Back!</h2>
-            <p>Please enter your details.</p>
-            <?php if (isset($error)) { echo "<p class='error'>$error</p>"; } ?>
-            <form action="login.php" method="POST">
-                <input type="email" name="email" placeholder="Enter your email" required>
-                <input type="password" name="password" placeholder="Password" required>
-                <button type="submit">Sign in</button>
-            </form>
+  <div class="container">
+    <div class="left">
+      <h2>Welcome Back!</h2>
+      <p>Please enter your details.</p>
+      <?php if (isset($error)) { echo "<p class='error'>$error</p>"; } ?>
+      <form action="login.php" method="POST">
+        <input type="email" name="email" placeholder="Enter your email" required>
+
+        <div class="password-container">
+          <input type="password" name="password" id="password" placeholder="Password" required>
+          <i class="fas fa-eye toggle-password" id="togglePassword"></i>
         </div>
-        <div class="right">
-            <img src="Logo/Logo.png" alt="J-P NETWORK ENGLISH" class="logo">
-        </div>
+
+        <button type="submit">Sign in</button>
+      </form>
     </div>
+    <div class="right">
+      <img src="Logo/Logo.png" alt="J-P NETWORK ENGLISH" class="logo">
+    </div>
+  </div>
+
+  <script>
+    const togglePassword = document.querySelector("#togglePassword");
+    const passwordInput = document.querySelector("#password");
+
+    togglePassword.addEventListener("click", function () {
+      const isPassword = passwordInput.type === "password";
+      passwordInput.type = isPassword ? "text" : "password";
+      this.classList.toggle("fa-eye");
+      this.classList.toggle("fa-eye-slash");
+    });
+  </script>
 </body>
 </html>
