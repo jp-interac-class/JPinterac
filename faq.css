@@ -135,6 +135,11 @@ h1 {
 }
 
 /* SECTION HEADER */
+.faq-section {
+  max-width: 680px;
+  width: 100%;
+}
+
 .faq-section-header {
   font-size: 20px;
   font-weight: 600;
@@ -146,16 +151,15 @@ h1 {
   gap: 10px;
 }
 
-/* SHORT LEFT-ALIGNED DIVIDER */
+/* UNIFIED DIVIDER */
 .faq-divider-short {
+  display: block;
   width: 100%;
-  max-width: 640px; /* matches block width */
   height: 2px;
   background-color: #4a4a2f;
+  border-radius: 1px;
   margin: 6px 0 20px;
-  border-radius: 2px;
 }
-
 
 /* FAQ CONTENT AREA */
 .faq-container {
@@ -198,6 +202,47 @@ h1 {
 
 .faq-item a:hover {
   text-decoration: none;
+}
+
+/* TABS FOR TRAINING MATERIALS */
+.tabbed-container {
+  margin-top: 10px;
+}
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.tab-button {
+  background-color: #e0e0e0;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.tab-button.active {
+  background-color: #4a4a2f;
+  color: white;
+}
+
+.tab-content {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* RIGHT PANEL */
@@ -285,4 +330,43 @@ h1 {
   color: white;
   border-radius: 50%;
   font-weight: bold;
+}
+
+/* COLLAPSIBLE DETAILS */
+details {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+details summary {
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 6px;
+  list-style: none;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+details summary::before {
+  content: '\276F';
+  display: inline-block;
+  margin-right: 6px;
+  transition: transform 0.3s ease;
+}
+
+details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+details ul {
+  list-style: none;
+  margin-left: 20px;
+  padding-left: 10px;
+}
+
+details ul li {
+  margin-bottom: 5px;
+  padding-left: 10px;
 }
