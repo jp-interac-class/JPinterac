@@ -76,7 +76,7 @@ while ($row = $result->fetch_assoc()) {
       <nav class="nav">
         <a href="teacherdashboard.php" class="nav-item">🏠 Dashboard</a>
         <a href="weeklyschedule.php" class="nav-item">📖 Schedule</a>
-        <a href="faq.php" class="nav-item">✔️ FAQ</a>
+        <a href="faq.php" class="nav-item">🧰 Resources</a>
       </nav>
     </div>
     <a href="logout.php" class="logout">🔓 Logout</a>

@@ -6,7 +6,7 @@ html, body {
   background: #f9f9f9;
   color: #222;
   height: 100vh;
-  overflow: hidden; /* Prevent full-page scroll */
+  overflow: hidden;
 }
 
 .container {
@@ -110,7 +110,6 @@ html, body {
   box-sizing: border-box;
 }
 
-/* SCROLLABLE CONTENT INSIDE MAIN */
 .main-scroll {
   flex: 1;
   overflow-y: auto;
@@ -135,13 +134,38 @@ h1 {
   color: #111;
 }
 
-h2 {
-  font-size: 22px;
-  margin-bottom: 20px;
+/* SECTION HEADERS */
+.faq-section-header {
+  font-size: 20px;
+  font-weight: 600;
   color: #2b2b2b;
+  margin-top: 30px;
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-/* FAQ CONTENT AREA */
+/* Gradient separator */
+.faq-divider {
+  border: none;
+  height: 1px;
+  background-color: #ddd;
+  margin: 6px 0 18px;
+}
+
+
+
+/* Accent bar (left short bar under header) */
+.faq-divider-left {
+  width: 60px;
+  height: 3px;
+  background-color: #4a4a2f;
+  margin: 6px 0 16px;
+  border-radius: 2px;
+}
+
+/* FAQ CONTAINER */
 .faq-container {
   display: flex;
   flex-direction: column;
@@ -163,6 +187,10 @@ h2 {
   margin: 0 0 10px;
   font-size: 18px;
   color: #2c2c1e;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .faq-item p {
@@ -221,6 +249,7 @@ h2 {
   color: #555;
 }
 
+/* CALENDAR */
 .calendar {
   background: white;
   color: #000;
@@ -265,3 +294,4 @@ h2 {
   border-radius: 50%;
   font-weight: bold;
 }
+

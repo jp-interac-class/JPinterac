@@ -41,7 +41,7 @@ $calendar .= "</div></div>";
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Resources</title>
+  <title>Announcements</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="faq.css" />
 </head>
@@ -68,65 +68,22 @@ $calendar .= "</div></div>";
 
   <!-- Main Content -->
   <main class="main">
-    <h1>🛠️ Resources, Guidelines, & Announcements</h1>
+    <h1>📢 Announcements</h1>
     <div class="main-scroll">
       <div class="faq-container">
-
-        <!-- NEWS & UPDATES -->
-        <h2 class="faq-section-header">🗞️ News & Updates</h2>
-        <div class="faq-divider-left"></div>
-        <hr class="faq-divider" />
         <div class="faq-item">
-          <h3>📢 Important Announcements</h3>
-          <p>This section contains updates from management, system maintenance, award notices, and new school policies.</p>
-          <a href="announcement.php">Read Announcements</a>
-        </div>
-
-        <!-- GUIDELINES & POLICIES -->
-        <h2 class="faq-section-header">📢 Guidelines & Policies</h2>
-        <div class="faq-divider-left"></div>
-        <hr class="faq-divider" />
-        <div class="faq-item">
-          <h3>🚫 Offenses and Penalties</h3>
-          <p>Be guided by our updated policy on conduct, penalties, and compliance with lesson expectations.</p>
-          <a href="https://docs.google.com/spreadsheets/d/1G_kRRavs20TfnA2JYou5fLbRVeeASA6mshi3dlI0KiA/edit?gid=0#gid=0" target="_blank">View Penalty Guide</a>
-        </div>
-
-        <!-- TRAINING MATERIALS -->
-        <h2 class="faq-section-header">📝 Training Materials</h2>
-        <div class="faq-divider-left"></div>
-        <hr class="faq-divider" />
-        <div class="faq-item">
-          <h3>📘 General Orientation Files</h3>
-          <p>Includes company rules, login procedures, lesson structure, expectations, and other onboarding guides.</p>
-          <a href="https://docs.google.com/document/d/general-orientation-file-link" target="_blank">View Orientation Guide</a>
+          <h3>🛠️ System Maintenance</h3>
+          <p>There will be scheduled system maintenance on April 25 from 12:00AM to 4:00AM JST. Please avoid logging in during this time.</p>
         </div>
         <div class="faq-item">
-          <h3>📚 Book Training Materials</h3>
-          <p>Get to know textbook structure, question types, lesson pacing, and strategies for effective delivery.</p>
-          <a href="https://docs.google.com/document/d/book-training-material-link" target="_blank">Access Book Training</a>
+          <h3>🎓 Teacher of the Month</h3>
+          <p>Congratulations to Ms. Jane for being selected as the Teacher of the Month! 🎉</p>
         </div>
-
-        <!-- HELP & SUPPORT -->
-        <h2 class="faq-section-header">❓ Help & Support</h2>
-        <div class="faq-divider-left"></div>
-        <hr class="faq-divider" />
         <div class="faq-item">
-          <h3>❓ Frequently Asked Questions</h3>
-          <p>Answers to most common inquiries from teachers regarding classes, conduct, and technical support.</p>
-          <a href="https://docs.google.com/document/d/faq-link" target="_blank">Open FAQ Document</a>
+          <h3>🚨 Policy Reminder</h3>
+          <p>Always double-check lesson materials and schedules before starting a class to avoid penalties.</p>
+          <a href="https://docs.google.com/spreadsheets/d/1G_kRRavs20TfnA2JYou5fLbRVeeASA6mshi3dlI0KiA/edit?gid=0#gid=0" target="_blank">Review Policy</a>
         </div>
-
-        <!-- TOOLS -->
-        <h2 class="faq-section-header">🧰 Tools</h2>
-        <div class="faq-divider-left"></div>
-        <hr class="faq-divider" />
-        <div class="faq-item">
-          <h3>🎙️ Recommended Recorders</h3>
-          <p>List of suggested tools for recording video/audio for demo, feedback, or troubleshooting purposes.</p>
-          <a href="https://docs.google.com/document/d/recommended-recorder-link" target="_blank">See Recommended Tools</a>
-        </div>
-
       </div>
     </div>
   </main>

@@ -78,7 +78,7 @@ $result = $stmt->get_result();
         <nav class="nav">
           <a href="teacherdashboard.php" class="nav-item">🏠 Dashboard</a>
           <a href="weeklyschedule.php" class="nav-item">📖 Schedule</a>
-          <a href="faq.php" class="nav-item">✔️ FAQ</a>
+          <a href="faq.php" class="nav-item">🧰 Resources</a>
         </nav>
       </div>
       <a href="logout.php" class="logout">🔓 Logout</a>
@@ -146,7 +146,7 @@ $result = $stmt->get_result();
             <li>Send "I will finish" on Zoom 2 minutes before the end.</li>
             <li>Message us on Viber if Zoom channel isn’t available.</li>
             <li>Report any issues to Customer Support immediately.</li>
-            <li>Please be online 45 - 30 mins before the lesson time.</li>
+            <li>Please be online 30 - 45 mins before the lesson time.</li>
             <li>Please enter on the link 5 minutes before the lesson time.</li>
           </ul>
         </div>
