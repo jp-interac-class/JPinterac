@@ -5,9 +5,11 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
   exit;
 }
 
+include 'db_connect.php';
+
 date_default_timezone_set('Asia/Tokyo');
 
-// Calendar logic
+// Calendar setup
 $today = date("j");
 $month = date("n");
 $year = date("Y");
@@ -34,6 +36,51 @@ for ($i = $startDay; $i < $startDay + $daysInMonth; $i++) {
   $day++;
 }
 $calendar .= "</div></div>";
+
+// Emoji replacement
+$emojiMap = [
+  '(heart)' => '❤️',
+  '(sun)' => '☀️',
+  '(happy)' => '😊',
+  '(cool)' => '😎',
+  '(paperclip)' => '📎',
+  '(smile)' => '😄',
+  '(star)' => '⭐',
+  '(thumbsup)' => '👍',
+  '(fire)' => '🔥',
+  '(warning)' => '⚠️',
+  '(check)' => '✅',
+  '(x)' => '❌',
+  '(wave)' => '👋',
+  '(clap)' => '👏',
+  '(sparkles)' => '✨',
+  '(confetti)' => '🎉',
+  '(idea)' => '💡',
+  '(book)' => '📖',
+  '(calendar)' => '📅',
+  '(mic)' => '🎤',
+  '(video)' => '🎥',
+  '(zoom)' => '🧿',
+  '(google)' => '🌐',
+  '(arrow)' => '➡️',
+  '(music)' => '🎵',
+  '(sunflower)' => '🌻',
+  '(v)' => '✌️'
+];
+
+function convertEmojis($text, $emojiMap) {
+  return str_replace(array_keys($emojiMap), array_values($emojiMap), $text);
+}
+
+// Fetch announcements
+$announcements = [];
+$sql = "SELECT * FROM announcements ORDER BY date DESC";
+$result = $conn->query($sql);
+if ($result && $result->num_rows > 0) {
+  while ($row = $result->fetch_assoc()) {
+    $announcements[] = $row;
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +90,7 @@ $calendar .= "</div></div>";
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Announcements</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="faq.css" />
+  <link rel="stylesheet" href="announcement.css" />
 </head>
 <body>
 <div class="container">
@@ -61,6 +108,7 @@ $calendar .= "</div></div>";
         <a href="teacherdashboard.php" class="nav-item">🏠 Dashboard</a>
         <a href="weeklyschedule.php" class="nav-item">📖 Schedule</a>
         <a href="faq.php" class="nav-item">🧰 Resources</a>
+        <a href="announcement.php" class="nav-item">📢 Announcements</a>
       </nav>
     </div>
     <a href="logout.php" class="logout">🔓 Logout</a>
@@ -71,19 +119,33 @@ $calendar .= "</div></div>";
     <h1>📢 Announcements</h1>
     <div class="main-scroll">
       <div class="faq-container">
-        <div class="faq-item">
-          <h3>🛠️ System Maintenance</h3>
-          <p>There will be scheduled system maintenance on April 25 from 12:00AM to 4:00AM JST. Please avoid logging in during this time.</p>
-        </div>
-        <div class="faq-item">
-          <h3>🎓 Teacher of the Month</h3>
-          <p>Congratulations to Ms. Jane for being selected as the Teacher of the Month! 🎉</p>
-        </div>
-        <div class="faq-item">
-          <h3>🚨 Policy Reminder</h3>
-          <p>Always double-check lesson materials and schedules before starting a class to avoid penalties.</p>
-          <a href="https://docs.google.com/spreadsheets/d/1G_kRRavs20TfnA2JYou5fLbRVeeASA6mshi3dlI0KiA/edit?gid=0#gid=0" target="_blank">Review Policy</a>
-        </div>
+        <?php foreach ($announcements as $item): ?>
+          <div class="faq-item">
+            <h3><?php echo date("F j, Y", strtotime($item['date'])); ?></h3>
+            <p><?php echo nl2br(convertEmojis(htmlspecialchars($item['content']), $emojiMap)); ?></p>
+            <?php if (!empty($item['file'])): ?>
+              <?php
+                $files = json_decode($item['file'], true);
+                if (is_array($files)) {
+                  foreach ($files as $file):
+                    $file = trim($file);
+                    $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+                    $path = "uploads/" . $file;
+              ?>
+                <?php if (in_array($ext, ['jpg', 'jpeg', 'png', 'gif'])): ?>
+                  <img src="<?php echo $path; ?>" class="announcement-image" alt="attachment" />
+                <?php elseif (in_array($ext, ['mp4', 'webm'])): ?>
+                  <video controls class="announcement-video">
+                    <source src="<?php echo $path; ?>" type="video/<?php echo $ext; ?>">
+                    Your browser does not support the video tag.
+                  </video>
+                <?php else: ?>
+                  <p><a href="<?php echo $path; ?>" target="_blank">📎 Download <?php echo basename($file); ?></a></p>
+                <?php endif; ?>
+              <?php endforeach; } ?>
+            <?php endif; ?>
+          </div>
+        <?php endforeach; ?>
       </div>
     </div>
   </main>

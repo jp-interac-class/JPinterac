@@ -25,14 +25,11 @@ $daysInMonth = date("t", $firstDayOfMonth);
   <title>Admin Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="admin.css">
-
-  <!-- SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
 
-<!-- SweetAlert2 Upload Notification -->
 <?php if (isset($_SESSION['upload_message'])): ?>
   <script>
     Swal.fire({
@@ -61,6 +58,7 @@ $daysInMonth = date("t", $firstDayOfMonth);
         <a href="registerteacher.php" class="nav-item">🖊️ Register New Teacher</a>
         <a href="viewteachers.php" class="nav-item">👩‍🏫 View Teachers</a>
         <a href="lessonupdate.php" class="nav-item">🛠️ Lesson Update</a>
+        <a href="announcement.php" class="nav-item">📢 View Announcements</a>
       </nav>
     </div>
     <a href="logout.php" class="logout">🔓 Logout</a>
@@ -71,11 +69,28 @@ $daysInMonth = date("t", $firstDayOfMonth);
     <div class="main-scroll">
       <h1>Hi, Admin!</h1>
 
+      <!-- Upload Lesson File -->
       <div class="upload-section">
         <h2>Upload Lesson File</h2>
         <form action="upload_handler.php" method="POST" enctype="multipart/form-data">
           <input type="file" name="lesson_file" required>
           <button type="submit">Upload</button>
+        </form>
+      </div>
+
+      <!-- Add Announcement -->
+      <div class="upload-section" style="margin-top: 30px">
+        <h2>📢 Post an Announcement</h2>
+        <form action="save_announcement.php" method="POST" enctype="multipart/form-data">
+          <label>Date of Announcement:</label>
+          <input type="date" name="announcement_date" required style="margin-bottom: 10px; padding: 6px; border-radius: 6px; border: 1px solid #ccc; font-family: 'Inter', sans-serif; font-size: 15px;">
+
+          <textarea name="announcement" rows="6" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc; font-family: 'Inter', sans-serif; font-size: 15px;" placeholder="Paste your announcement here..." required></textarea>
+          
+          <label style="margin-top: 12px; display: block; font-weight: 500;">Attach files (optional):</label>
+          <input type="file" name="announcement_file[]" multiple style="margin-top: 6px;" />
+
+          <button type="submit" style="margin-top: 16px;">Post Announcement</button>
         </form>
       </div>
     </div>
@@ -106,7 +121,6 @@ $daysInMonth = date("t", $firstDayOfMonth);
   </section>
 </div>
 
-<!-- Live Clock Script -->
 <script>
 function updateClock() {
   const now = new Date();

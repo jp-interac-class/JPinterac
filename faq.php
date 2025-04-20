@@ -190,8 +190,8 @@ $calendar .= "</div></div>";
           <div class="faq-item">
             <h3>🎧 Recommended Recorders</h3>
             <p>Recommended tools for recording lessons, as required by our teaching standards.</p>
-            <li><a href="https://drive.google.com/file/d/1UM9lrDLRaRCrKIY0T-tN0eB9OKdAMD3M/view" target="_blank">Audio and Video Recorder for JP Classes Part 1</li>
-            <li><a href="https://drive.google.com/file/d/1rVDEN3HsylyDUujsfNodYjcADWZbPf2q/view" target="_blank">Audio and Video Recorder for JP Classes Part 2</a></li>
+            <p>🎙️<a href="https://drive.google.com/file/d/1UM9lrDLRaRCrKIY0T-tN0eB9OKdAMD3M/view" target="_blank">Audio and Video Recorder for JP Classes Part 1</a></p>
+            <p>🎙️<a href="https://drive.google.com/file/d/1rVDEN3HsylyDUujsfNodYjcADWZbPf2q/view" target="_blank">Audio and Video Recorder for JP Classes Part 2</a></p>
           </div>
         </div>
 
