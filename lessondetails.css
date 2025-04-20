@@ -190,11 +190,16 @@ h2 {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
-/* ✅ Apply white to any child like emoji/spans/icons */
-.back-button *,
-.back-btn * {
+.back-button * {
   color: white !important;
   fill: white !important;
+}
+
+
+/* ✅ Apply white to any child like emoji/spans/icons */
+.back-btn .icon {
+  color: white !important;
+  font-size: 16px;
 }
 
 .back-button:hover,
@@ -292,3 +297,4 @@ a, a:visited, a:hover, a:active {
   text-decoration: none !important;
   color: inherit !important;
 }
+

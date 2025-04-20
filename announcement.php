@@ -108,7 +108,6 @@ if ($result && $result->num_rows > 0) {
         <a href="teacherdashboard.php" class="nav-item">🏠 Dashboard</a>
         <a href="weeklyschedule.php" class="nav-item">📖 Schedule</a>
         <a href="faq.php" class="nav-item">🧰 Resources</a>
-        <a href="announcement.php" class="nav-item">📢 Announcements</a>
       </nav>
     </div>
     <a href="logout.php" class="logout">🔓 Logout</a>

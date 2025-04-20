@@ -109,8 +109,8 @@ $formattedDate = $lesson ? date("F j, Y", strtotime($lesson['date'])) : '';
           <p style="color: red; font-weight: bold;">❌ No lesson found for this slot.</p>
         <?php endif; ?>
         <a href="<?= $from === 'schedule' ? 'weeklyschedule.php' : 'teacherdashboard.php' ?>" class="back-btn">
-          ⬅️ Back to <?= $from === 'schedule' ? 'Weekly Schedule' : 'Dashboard' ?>
-        </a>
+  <span class="icon">⬅️</span> <span>Back to <?= $from === 'schedule' ? 'Weekly Schedule' : 'Dashboard' ?></span>
+</a>
       </div>
     </div>
   </main>
