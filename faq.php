@@ -74,8 +74,7 @@ $calendar .= "</div></div>";
 
         <!-- NEWS & UPDATES -->
         <h2 class="faq-section-header">🗞️ News & Updates</h2>
-        <div class="faq-divider-left"></div>
-        <hr class="faq-divider" />
+        <div class="faq-divider-short"></div>
         <div class="faq-item">
           <h3>📢 Important Announcements</h3>
           <p>This section contains updates from management, system maintenance, award notices, and new school policies.</p>
@@ -84,8 +83,7 @@ $calendar .= "</div></div>";
 
         <!-- GUIDELINES & POLICIES -->
         <h2 class="faq-section-header">📢 Guidelines & Policies</h2>
-        <div class="faq-divider-left"></div>
-        <hr class="faq-divider" />
+        <div class="faq-divider-short"></div>
         <div class="faq-item">
           <h3>🚫 Offenses and Penalties</h3>
           <p>Be guided by our updated policy on conduct, penalties, and compliance with lesson expectations.</p>
@@ -94,8 +92,7 @@ $calendar .= "</div></div>";
 
         <!-- TRAINING MATERIALS -->
         <h2 class="faq-section-header">📝 Training Materials</h2>
-        <div class="faq-divider-left"></div>
-        <hr class="faq-divider" />
+        <div class="faq-divider-short"></div>
         <div class="faq-item">
           <h3>📘 General Orientation Files</h3>
           <p>Includes company rules, login procedures, lesson structure, expectations, and other onboarding guides.</p>
@@ -109,8 +106,7 @@ $calendar .= "</div></div>";
 
         <!-- HELP & SUPPORT -->
         <h2 class="faq-section-header">❓ Help & Support</h2>
-        <div class="faq-divider-left"></div>
-        <hr class="faq-divider" />
+        <div class="faq-divider-short"></div>
         <div class="faq-item">
           <h3>❓ Frequently Asked Questions</h3>
           <p>Answers to most common inquiries from teachers regarding classes, conduct, and technical support.</p>
@@ -119,8 +115,7 @@ $calendar .= "</div></div>";
 
         <!-- TOOLS -->
         <h2 class="faq-section-header">🧰 Tools</h2>
-        <div class="faq-divider-left"></div>
-        <hr class="faq-divider" />
+        <div class="faq-divider-short"></div>
         <div class="faq-item">
           <h3>🎙️ Recommended Recorders</h3>
           <p>List of suggested tools for recording video/audio for demo, feedback, or troubleshooting purposes.</p>

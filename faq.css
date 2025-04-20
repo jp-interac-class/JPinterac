@@ -134,38 +134,30 @@ h1 {
   color: #111;
 }
 
-/* SECTION HEADERS */
+/* SECTION HEADER */
 .faq-section-header {
   font-size: 20px;
   font-weight: 600;
   color: #2b2b2b;
   margin-top: 30px;
-  margin-bottom: 0;
+  margin-bottom: 6px;
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-/* Gradient separator */
-.faq-divider {
-  border: none;
-  height: 1px;
-  background-color: #ddd;
-  margin: 6px 0 18px;
-}
-
-
-
-/* Accent bar (left short bar under header) */
-.faq-divider-left {
-  width: 60px;
-  height: 3px;
+/* SHORT LEFT-ALIGNED DIVIDER */
+.faq-divider-short {
+  width: 100%;
+  max-width: 640px; /* matches block width */
+  height: 2px;
   background-color: #4a4a2f;
-  margin: 6px 0 16px;
+  margin: 6px 0 20px;
   border-radius: 2px;
 }
 
-/* FAQ CONTAINER */
+
+/* FAQ CONTENT AREA */
 .faq-container {
   display: flex;
   flex-direction: column;
@@ -294,4 +286,3 @@ h1 {
   border-radius: 50%;
   font-weight: bold;
 }
-
