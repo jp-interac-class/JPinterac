@@ -75,7 +75,7 @@ $calendar .= "</div></div>";
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Register Teacher</title>
   <link rel="stylesheet" href="registerteacher.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>

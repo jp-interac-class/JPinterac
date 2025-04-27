@@ -1,164 +1,268 @@
 /* RESET & LAYOUT */
-body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  background: #f9f9f9;
-  color: #222;
-  overflow: hidden;
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif; /* ✅ Inter to match admin.css */
+    background: #f9f9f9;
+    color: #222;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .container {
-  display: flex;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
 }
 
 /* SIDEBAR */
 .sidebar {
-  background-color: #111;
-  color: white;
-  width: 240px;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: space-between;
-  padding: 20px 0;
-  box-sizing: border-box;
+    background-color: #111;
+    color: white;
+    width: 240px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 0;
+    box-sizing: border-box;
 }
 
 .logo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 6px;
-  padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+    padding: 0 20px;
 }
 
 .logo img {
-  width: 160px;
+    width: 160px;
 }
 
 .logo-text strong {
-  font-size: 15px;
-  color: white;
+    font-size: 14px;
+    color: white;
 }
 
 .logo-text span {
-  font-size: 13px;
-  color: #bbb;
+    font-size: 13px;
+    color: #bbb;
 }
 
 .nav-wrapper {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .nav {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 0 20px;
+    width: 100%;
 }
 
 .nav-item {
-  color: white;
-  text-decoration: none;
-  font-size: 16px;
-  padding: 8px 20px;
-  border-radius: 8px;
-  transition: background 0.3s;
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.2s;
+    width: 100%;
 }
 
 .nav-item:hover {
-  background: #333;
+    background-color: #1a1a1a;
+    border-radius: 6px;
+    padding-left: 6px;
 }
 
 .logout {
-  text-align: center;
-  color: white;
-  font-size: 16px;
-  text-decoration: none;
-  margin-bottom: 20px;
+    color: #ffc107;
+    text-decoration: none;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-start;
+    padding: 10px 20px;
 }
 
-/* MAIN CONTENT */
+/* MAIN PANEL */
 .main {
-  flex: 1;
-  padding: 30px;
-  overflow-y: auto;
+    flex: 1;
+    padding: 40px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: 100vh;
+    overflow: hidden;
 }
 
-h1 {
-  font-size: 32px;
-  margin-bottom: 20px;
-}
-
+/* INNER SCROLL AREA */
 .main-scroll {
-  overflow-y: auto;
-  max-height: calc(100vh - 150px);
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 6px;
+    min-height: 0;
+    box-sizing: border-box;
 }
 
-/* FAQ-Style Announcement Display */
+.main-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.main-scroll::-webkit-scrollbar-thumb {
+    background-color: #bbb;
+    border-radius: 4px;
+}
+
+/* HEADER */
+h1 {
+    font-family: 'Roboto', cursive; /* Match your admin.css */
+    font-size: 50px;
+    font-weight: 600;
+    color: #111;
+}
+
+/* ANNOUNCEMENT LIST STYLE */
 .faq-container {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
 }
 
 .faq-item {
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background: #ffffff;
+    padding: 20px 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    transition: background 0.3s;
+}
+
+.faq-item:hover {
+    background: #f8f8f8;
 }
 
 .faq-item h3 {
-  margin-top: 0;
-  font-size: 20px;
-  color: #333;
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: #333;
 }
 
 .faq-item p {
-  font-size: 16px;
-  line-height: 1.6;
+    margin-top: 10px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #555;
 }
 
 .announcement-image {
-  max-width: 100%;
-  height: auto;
-  margin-top: 15px;
-  border-radius: 8px;
+    max-width: 100%;
+    height: auto;
+    margin-top: 15px;
+    border-radius: 8px;
 }
 
 .announcement-video {
-  width: 100%;
-  height: auto;
-  margin-top: 15px;
-  border-radius: 8px;
+    width: 100%;
+    height: auto;
+    margin-top: 15px;
+    border-radius: 8px;
 }
 
 /* RIGHT PANEL */
 .right-panel {
-  width: 240px;
-  background: #fff;
-  padding: 20px;
-  border-left: 1px solid #ddd;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
+    width: 320px;
+    padding: 40px 20px;
+    background-color: #f3f3ef;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    height: 100vh;
+    box-sizing: border-box;
 }
 
 .clock {
-  text-align: center;
-  margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    padding: 30px 10px;
+    border: 3px solid #4a4a2f;
+    border-radius: 10px;
+    width: 100%;
+    height: 160px;
+    box-sizing: border-box;
 }
 
-#time {
-  font-size: 28px;
-  font-weight: bold;
+.clock span#time {
+    font-size: 48px;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 100%;
+}
+
+.clock span:last-child {
+    font-size: 14px;
+    color: #555;
+}
+
+/* CALENDAR */
+.calendar {
+    background: white;
+    color: #000;
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 18px;
+    background: #000;
+    color: #fff;
+    padding: 10px;
+    border-radius: 4px 4px 0 0;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    font-size: 14px;
+    padding: 10px;
+    color: #000;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+}
+
+.calendar-grid div {
+    padding: 8px 0;
+}
+
+.today {
+    background-color: #4a4a2f;
+    color: white;
+    border-radius: 50%;
+    font-weight: bold;
 }

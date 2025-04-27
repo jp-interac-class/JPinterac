@@ -39,33 +39,13 @@ $calendar .= "</div></div>";
 
 // Emoji replacement
 $emojiMap = [
-  '(heart)' => '❤️',
-  '(sun)' => '☀️',
-  '(happy)' => '😊',
-  '(cool)' => '😎',
-  '(paperclip)' => '📎',
-  '(smile)' => '😄',
-  '(star)' => '⭐',
-  '(thumbsup)' => '👍',
-  '(fire)' => '🔥',
-  '(warning)' => '⚠️',
-  '(check)' => '✅',
-  '(x)' => '❌',
-  '(wave)' => '👋',
-  '(clap)' => '👏',
-  '(sparkles)' => '✨',
-  '(confetti)' => '🎉',
-  '(idea)' => '💡',
-  '(book)' => '📖',
-  '(calendar)' => '📅',
-  '(mic)' => '🎤',
-  '(video)' => '🎥',
-  '(zoom)' => '🧿',
-  '(google)' => '🌐',
-  '(arrow)' => '➡️',
-  '(music)' => '🎵',
-  '(sunflower)' => '🌻',
-  '(v)' => '✌️'
+  '(heart)' => '❤️', '(sun)' => '☀️', '(happy)' => '😊', '(cool)' => '😎',
+  '(paperclip)' => '📎', '(smile)' => '😄', '(star)' => '⭐', '(thumbsup)' => '👍',
+  '(fire)' => '🔥', '(warning)' => '⚠️', '(check)' => '✅', '(x)' => '❌',
+  '(wave)' => '👋', '(clap)' => '👏', '(sparkles)' => '✨', '(confetti)' => '🎉',
+  '(idea)' => '💡', '(book)' => '📖', '(calendar)' => '📅', '(mic)' => '🎤',
+  '(video)' => '🎥', '(zoom)' => '🧿', '(google)' => '🌐', '(arrow)' => '➡️',
+  '(music)' => '🎵', '(sunflower)' => '🌻', '(v)' => '✌️'
 ];
 
 function convertEmojis($text, $emojiMap) {
@@ -89,7 +69,7 @@ if ($result && $result->num_rows > 0) {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Announcements</title>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="announcement.css" />
 </head>
 <body>
@@ -117,11 +97,15 @@ if ($result && $result->num_rows > 0) {
   <main class="main">
     <h1>📢 Announcements</h1>
     <div class="main-scroll">
-      <div class="faq-container">
+      <div class="announcement-grid">
         <?php foreach ($announcements as $item): ?>
-          <div class="faq-item">
-            <h3><?php echo date("F j, Y", strtotime($item['date'])); ?></h3>
+          <div class="announcement-card">
+            <div class="announcement-icon">
+              <img src="Logo/announcement.png" alt="Announcement Icon" />
+            </div>
+            <h2><?php echo date("F j, Y", strtotime($item['date'])); ?></h2>
             <p><?php echo nl2br(convertEmojis(htmlspecialchars($item['content']), $emojiMap)); ?></p>
+
             <?php if (!empty($item['file'])): ?>
               <?php
                 $files = json_decode($item['file'], true);

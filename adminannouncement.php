@@ -9,6 +9,15 @@ include 'db_connect.php';
 
 date_default_timezone_set('Asia/Tokyo');
 
+$currentTime = date("H:i:s");
+$today = date("j");
+$month = date("n");
+$year = date("Y");
+$monthName = date("F");
+$firstDayOfMonth = mktime(0, 0, 0, $month, 1, $year);
+$startDay = date("w", $firstDayOfMonth);
+$daysInMonth = date("t", $firstDayOfMonth);
+
 // Fetch announcements
 $announcements = [];
 $sql = "SELECT * FROM announcements ORDER BY date DESC";
@@ -41,9 +50,12 @@ function convertEmojis($text, $emojiMap) {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Announcements</title>
-  <link rel="stylesheet" href="announcement.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="adminannouncement.css"> <!-- ✅ Correct CSS file -->
 </head>
+
 <body>
+
 <div class="container">
   <!-- Sidebar -->
   <aside class="sidebar">
@@ -56,10 +68,11 @@ function convertEmojis($text, $emojiMap) {
     </div>
     <div class="nav-wrapper">
       <nav class="nav">
-        <a href="admin.php" class="nav-item">🏠 Admin Dashboard</a>
-        <a href="registerteacher.php" class="nav-item">➕ Register Teacher</a>
-        <a href="viewteachers.php" class="nav-item">👀 View Teachers</a>
-        <a href="adminannouncement.php" class="nav-item">📢 Announcements</a>
+        <a href="admin.php" class="nav-item">🏠 Dashboard</a>
+        <a href="registerteacher.php" class="nav-item">🖊️ Register New Teacher</a>
+        <a href="viewteachers.php" class="nav-item">👩‍🏫 View Teachers</a>
+        <a href="lessonupdate.php" class="nav-item">🛠️ Lesson Update</a>
+        <a href="adminannouncement.php" class="nav-item">📢 View Announcements</a>
       </nav>
     </div>
     <a href="logout.php" class="logout">🔓 Logout</a>
@@ -67,13 +80,15 @@ function convertEmojis($text, $emojiMap) {
 
   <!-- Main Content -->
   <main class="main">
-    <h1>📢 Admin Announcements</h1>
     <div class="main-scroll">
+      <h1>📢 Announcements</h1>
+
       <div class="faq-container">
         <?php foreach ($announcements as $item): ?>
           <div class="faq-item">
             <h3><?php echo date("F j, Y", strtotime($item['date'])); ?></h3>
             <p><?php echo nl2br(convertEmojis(htmlspecialchars($item['content']), $emojiMap)); ?></p>
+
             <?php if (!empty($item['file'])): ?>
               <?php
                 $files = json_decode($item['file'], true);
@@ -98,14 +113,31 @@ function convertEmojis($text, $emojiMap) {
           </div>
         <?php endforeach; ?>
       </div>
+
     </div>
   </main>
 
-  <!-- Right Panel (optional clock/calendar if you want) -->
+  <!-- Right Panel -->
   <section class="right-panel">
-    <div class="clock" id="live-clock">
-      <span id="time">--:--:--</span><br/>
+    <div class="clock">
+      <span id="time">--:--:--</span>
       <span>Japanese Standard Time</span>
+    </div>
+    <div class="calendar">
+      <div class="calendar-header">
+        <span class="month"><?php echo $monthName; ?></span>
+        <span class="year"><?php echo $year; ?></span>
+      </div>
+      <div class="calendar-grid">
+        <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+        <?php
+        for ($i = 0; $i < $startDay; $i++) echo "<div></div>";
+        for ($day = 1; $day <= $daysInMonth; $day++) {
+          $highlight = ($day == $today) ? "today" : "";
+          echo "<div class='$highlight'>$day</div>";
+        }
+        ?>
+      </div>
     </div>
   </section>
 </div>
@@ -122,5 +154,6 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 </script>
+
 </body>
 </html>
