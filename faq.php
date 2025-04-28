@@ -181,6 +181,95 @@ $calendar .= "</div></div>";
             <p>Answers to most common inquiries from teachers regarding classes, conduct, and technical support.</p>
             <a href="https://drive.google.com/file/d/15_-7uhffGuM2BfuDl6R70C_z4JvCaCu-/view" target="_blank">Open FAQ Document</a>
           </div>
+
+          <div class="faq-item">
+            <h3>💬 Contact Us</h3>
+            <div class="tab-wrapper">
+              <div class="tab-buttons">
+                <button class="tab-button">KEC</button>
+                <button class="tab-button">Monitoring Team</button>
+                <button class="tab-button">Training and QA Team</button>
+                <button class="tab-button">Recruitment Team</button>
+                <button class="tab-button">HR and Accounting Team</button>
+              </div>
+
+              <div class="tab-content">
+                <p>The accounts listed below are the Zoom accounts used by KEC staff. Please make sure to add them to your Zoom contacts.</p>
+                <details>
+                  <summary><strong>👩‍💻 KEC Staff (Zoom)</strong></summary>
+                  <ul>
+                    <li><strong>admin@chattyonline.com</strong></li>
+                    <li><strong>admin2@chattyonline.com</strong></li>
+                    <li><strong>chatty@kec.gr.jp</strong></li>
+                    <li><strong>support2@chatty-kec.com</strong></li>
+                    <li><strong>005267hashimoto-na@kec.gr.jp</strong></li>
+                    <li><strong>020359shiroshita-a@kec.gr.jp</strong></li>
+                    <li><strong>020364honda-yu@kec.gr.jp</strong></li>
+                    <li><strong>kameda-ko@kec.gr.jp</strong></li>
+                    <li><strong>020004ushiro-ma@kec.gr.jp</strong></li>
+                    <li><strong>020412wakabayashi-ka@kec.gr.jp</strong></li>
+                </details>
+              </div>
+
+              <div class="tab-content">
+                <p>The accounts listed below are the Zoom accounts used by JP staff. Please make sure to add them to your Zoom contacts.</p>
+                <details>
+                  <summary><strong>🎦 Monitoring Team: Customer Support (Zoom)</strong></summary>
+                  <ul>
+                    <li><strong>jpnetwork@jp-network-e.com</strong></li>
+                    <li><strong>zap.jpenglish@gmail.com</strong></li>
+                    <li><strong>mira.jpenglish12@gmail.com</strong></li>
+                    <li><strong>gel.jpenglish32@gmail.com</strong></li>
+                    <li><strong>halley.jpenglish59@gmail.com</strong></li>
+                    <li><strong>paul.jpenglish72@gmail.com</strong></li>
+                    <li><strong>lucky.jpenglish57@gmail.com</strong></li>
+                    <li><strong>jeni.jpenglish60@gmail.com</strong></li>
+                    <li><strong>joan.jpenglish73@gmail.com</strong></li>
+                    <li><strong>glenda.jpnenglish78@gmail.com</strong></li>
+                    <li><strong>rose.jpenglish80@gmail.com</strong></li>
+                    <li><strong>lette.jpenglish81@gmail.com</strong></li>
+                    <li><strong>roi.jpenglish78@gmail.com</strong></li>
+                    <li><strong>linette.jpenglish83@gmail.com</strong></li>
+                    <li><strong>ann.jpenglish86@gmail.com</strong></li>
+                    <li><strong>rhonn.jpenglish87@gmail.com</strong></li>
+                    <li><strong>razell.jpenglish89@gmail.com</strong></li>
+                  </ul>
+                </details>
+
+                <details>
+                  <summary><strong>📞 Monitoring Team: Customer Support (Viber)</strong></summary>
+                  <ul>
+                    <li><strong>09273546687</strong></li>
+                  </ul>
+                </details>
+
+                <details>
+                  <summary><strong>📧 Monitoring Team: Customer Support (Email)</strong></summary>
+                  <ul>
+                    <li><strong>mt@jp-network.net</strong></li>
+                    <li><strong>monitoring.jpnetwork@gmail.com</strong></li>
+                  </ul>
+                </details>
+              </div>
+
+              <div class="tab-content">
+                <p>The accounts listed below are the Zoom accounts used by JP staff. Please make sure to add them to your Zoom contacts.</p>
+            
+                <details>
+                  <summary><strong>📞 Training and QA Team (Viber)</strong></summary>
+                  <ul>
+                    <li><strong>09399623284</strong></li>
+                  </ul>
+                </details>
+
+                <details>
+                  <summary><strong>📧 Training and QA Team (Email)</strong></summary>
+                  <ul>
+                    <li><strong>trainingqa.jpenglish@gmail.com</strong></li>
+                  </ul>
+                </details>
+              </div>
+          </div>
         </div>
 
         <!-- TOOLS -->

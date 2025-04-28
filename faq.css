@@ -179,6 +179,10 @@ h1 {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
 }
 
+.faq-item + .faq-item {
+  margin-top: 20px; /* ✅ space between FAQ bubbles */
+}
+
 .faq-item h3 {
   margin: 0 0 10px;
   font-size: 18px;

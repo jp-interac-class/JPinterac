@@ -52,18 +52,15 @@ function convertEmojis($text, $emojiMap) {
   return str_replace(array_keys($emojiMap), array_values($emojiMap), $text);
 }
 
-// Allow clickable links inside content
 function allowLinks($text) {
   $text = htmlspecialchars($text);
 
-  // 1. Convert raw URLs into clickable links
   $text = preg_replace(
     '/(https?:\/\/[^\s]+)/',
     '<a href="$1" target="_blank">$1</a>',
     $text
   );
 
-  // 2. Also allow manually-typed <a> links
   $text = preg_replace(
     '/&lt;a href="(.*?)"&gt;(.*?)&lt;\/a&gt;/i',
     '<a href="$1" target="_blank">$2</a>',
@@ -164,6 +161,14 @@ if ($result && $result->num_rows > 0) {
   </section>
 </div>
 
+<!-- ✨ MODAL for Announcements -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-content">
+    <span class="modal-close" id="modalClose">&times;</span>
+    <div class="modal-body"></div>
+  </div>
+</div>
+
 <script>
 function updateClock() {
   const now = new Date();
@@ -175,6 +180,31 @@ function updateClock() {
 }
 setInterval(updateClock, 1000);
 updateClock();
+
+// 📢 Expand bubble script
+document.addEventListener('DOMContentLoaded', function() {
+  const cards = document.querySelectorAll('.announcement-card');
+  const modalOverlay = document.getElementById('modalOverlay');
+  const modalBody = modalOverlay.querySelector('.modal-body');
+  const closeModal = document.getElementById('modalClose');
+
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      modalBody.innerHTML = card.innerHTML; // Copy card content into modal
+      modalOverlay.style.display = 'flex';
+    });
+  });
+
+  closeModal.addEventListener('click', () => {
+    modalOverlay.style.display = 'none';
+  });
+
+  modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) {
+      modalOverlay.style.display = 'none';
+    }
+  });
+});
 </script>
 </body>
 </html>
