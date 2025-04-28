@@ -84,13 +84,24 @@ while ($row = $result->fetch_assoc()) {
 
   <!-- Main -->
   <main class="main">
-    <div class="header-center">
-      <a href="weeklyschedule.php?week_offset=<?= $offset - 1 ?>" class="arrow">&#9664;</a>
+    <div class="header-bar">
+      <div class="arrow-box">
+        <a href="weeklyschedule.php?week_offset=<?= $offset - 1 ?>">
+          <img src="Logo/arrow-left.png" class="nav-arrow" alt="Previous Week" />
+        </a>
+      </div>
+
       <div class="header-text">
         <h1>Weekly Schedule</h1>
         <h2><?= $weekStart . " - " . $weekEnd ?></h2>
+        <a href="weeklyschedule.php" class="today-button">Today</a>
       </div>
-      <a href="weeklyschedule.php?week_offset=<?= $offset + 1 ?>" class="arrow">&#9654;</a>
+
+      <div class="arrow-box">
+        <a href="weeklyschedule.php?week_offset=<?= $offset + 1 ?>">
+          <img src="Logo/arrow-right.png" class="nav-arrow" alt="Next Week" />
+        </a>
+      </div>
     </div>
 
     <div class="week-schedule">

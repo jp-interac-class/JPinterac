@@ -172,29 +172,9 @@ h2 {
 .lesson-scroll::-webkit-scrollbar {
   width: 6px;
 }
-
 .lesson-scroll::-webkit-scrollbar-thumb {
   background-color: #bbb;
   border-radius: 4px;
-}
-
-/* CLEAN LINK STYLES */
-a, a:visited, a:hover, a:active {
-  text-decoration: none !important;
-  color: inherit !important;
-}
-
-.lesson-link {
-  display: block;
-}
-
-.lesson-link *, .lesson-link *:visited,
-.lesson-link *:hover, .lesson-link *:active {
-  text-decoration: none !important;
-  color: inherit !important;
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
 }
 
 /* RIGHT PANEL */
@@ -216,7 +196,6 @@ a, a:visited, a:hover, a:active {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: 'Inter', sans-serif;
   background-color: #fff;
   padding: 30px 10px;
   border: 3px solid #4a4a2f;
@@ -396,15 +375,24 @@ a, a:visited, a:hover, a:active {
   line-height: 1.5;
 }
 
+/* ✅ WEEKLY SCHEDULE LINK */
 .check-week {
   font-size: 14px;
+  color: #0077cc;
+  font-weight: 600;
   text-decoration: none;
-  color: #2a6edb;
-  font-weight: 500;
+  transition: color 0.3s;
 }
 
 .check-week:hover {
-  text-decoration: underline;
+  color: #005fa3;
+  text-decoration: none;
+}
+
+/* CLEAN RESET ONLY for other normal links */
+a:not(.check-week), a:not(.check-week):visited, a:not(.check-week):hover, a:not(.check-week):active {
+  text-decoration: none !important;
+  color: inherit !important;
 }
 
 /* ANIMATION */

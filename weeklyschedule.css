@@ -1,3 +1,4 @@
+/* RESET */
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
@@ -101,17 +102,41 @@ body {
   overflow-y: auto;
 }
 
-/* HEADER */
-.header-center {
+/* HEADER AREA */
+.header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  padding: 0 40px;
+}
+
+/* Arrow Box */
+.arrow-box {
+  width: 80px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
-  margin-bottom: 40px;
 }
 
+/* Arrow Images */
+.nav-arrow {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.nav-arrow:hover {
+  transform: scale(1.2);
+}
+
+/* Header Text */
 .header-text {
   text-align: center;
+  flex-grow: 1;
 }
 
 .header-text h1 {
@@ -121,26 +146,29 @@ body {
 
 .header-text h2 {
   font-size: 16px;
-  margin: 0;
+  margin: 4px 0;
   color: #666;
 }
 
-.arrow {
-  font-size: 28px;
-  cursor: pointer;
-  user-select: none;
-  color: #333;
+/* TODAY Button */
+.today-button {
+  display: inline-block;
+  margin-top: 10px;
+  background-color: #ffc107;
+  color: black;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 8px;
   text-decoration: none;
-  padding: 5px 10px;
-  transition: background-color 0.2s ease;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
 }
 
-.arrow:hover {
-  background-color: #eee;
-  border-radius: 6px;
+.today-button:hover {
+  background-color: #e6b800;
 }
 
-/* Weekly Schedule Grid */
+/* WEEKLY SCHEDULE */
 .week-schedule {
   display: flex;
   justify-content: space-between;
@@ -159,22 +187,23 @@ body {
   min-width: 160px;
   display: flex;
   flex-direction: column;
-  max-height: 600px; /* Set a limit to enable scrolling inside */
+  max-height: 600px;
 }
 
+/* Today's Highlight */
 .today-column {
   background-color: #fffde7;
   border: 2px solid #ffcc00;
 }
 
-/* Day header */
+/* Day Header */
 .day-header {
   text-align: center;
   background: #e0e0e0;
   padding: 10px;
   border-radius: 8px;
   flex-shrink: 0;
-  margin-bottom: 12px; /* ✅ Adds spacing between header and lessons */
+  margin-bottom: 12px;
 }
 
 .day-name {
@@ -189,7 +218,7 @@ body {
   margin-top: 2px;
 }
 
-/* SLOTS - SCROLLABLE PER COLUMN */
+/* SLOTS (LESSONS) */
 .slots {
   flex: 1;
   overflow-y: auto;
@@ -197,18 +226,18 @@ body {
   flex-direction: column;
   gap: 12px;
   padding-right: 4px;
-  /* margin-top: 12px; ← no longer needed */
 }
 
 .slots::-webkit-scrollbar {
   width: 6px;
 }
+
 .slots::-webkit-scrollbar-thumb {
   background-color: #ccc;
   border-radius: 4px;
 }
 
-/* Lesson card with clickable link */
+/* Lesson Card */
 .lesson-card {
   display: block;
   background-color: white;
@@ -238,7 +267,7 @@ body {
   line-height: 1.4;
 }
 
-/* No lessons placeholder */
+/* No Lessons Placeholder */
 .no-lesson {
   text-align: center;
   background-color: #fafafa;

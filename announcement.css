@@ -307,3 +307,14 @@ h1 {
   border-radius: 50%;
   font-weight: bold;
 }
+
+/* 🔵 ADDITION: MAKE LINKS INSIDE ANNOUNCEMENTS LOOK GOOD */
+.announcement-card p a {
+  color: #007BFF; /* Blue color for links */
+  text-decoration: none; /* No underline normally */
+  word-break: break-word;
+}
+
+.announcement-card p a:hover {
+  text-decoration: underline; /* Underline on hover */
+}

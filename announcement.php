@@ -52,6 +52,27 @@ function convertEmojis($text, $emojiMap) {
   return str_replace(array_keys($emojiMap), array_values($emojiMap), $text);
 }
 
+// Allow clickable links inside content
+function allowLinks($text) {
+  $text = htmlspecialchars($text);
+
+  // 1. Convert raw URLs into clickable links
+  $text = preg_replace(
+    '/(https?:\/\/[^\s]+)/',
+    '<a href="$1" target="_blank">$1</a>',
+    $text
+  );
+
+  // 2. Also allow manually-typed <a> links
+  $text = preg_replace(
+    '/&lt;a href="(.*?)"&gt;(.*?)&lt;\/a&gt;/i',
+    '<a href="$1" target="_blank">$2</a>',
+    $text
+  );
+
+  return nl2br($text);
+}
+
 // Fetch announcements
 $announcements = [];
 $sql = "SELECT * FROM announcements ORDER BY date DESC";
@@ -104,7 +125,7 @@ if ($result && $result->num_rows > 0) {
               <img src="Logo/announcement.png" alt="Announcement Icon" />
             </div>
             <h2><?php echo date("F j, Y", strtotime($item['date'])); ?></h2>
-            <p><?php echo nl2br(convertEmojis(htmlspecialchars($item['content']), $emojiMap)); ?></p>
+            <p><?php echo convertEmojis(allowLinks($item['content']), $emojiMap); ?></p>
 
             <?php if (!empty($item['file'])): ?>
               <?php
