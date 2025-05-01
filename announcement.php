@@ -70,7 +70,7 @@ function allowLinks($text) {
   return nl2br($text);
 }
 
-// Fetch announcements
+// Fetch announcements from the database
 $announcements = [];
 $sql = "SELECT * FROM announcements ORDER BY date DESC";
 $result = $conn->query($sql);

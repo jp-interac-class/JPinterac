@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION["user_type"] !== "admin") {
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
   header("Location: login.php");
   exit;
 }
@@ -9,24 +9,33 @@ include 'db_connect.php';
 
 date_default_timezone_set('Asia/Tokyo');
 
-$currentTime = date("H:i:s");
+// Calendar setup
 $today = date("j");
 $month = date("n");
 $year = date("Y");
-$monthName = date("F");
 $firstDayOfMonth = mktime(0, 0, 0, $month, 1, $year);
-$startDay = date("w", $firstDayOfMonth);
 $daysInMonth = date("t", $firstDayOfMonth);
+$monthName = date("F", $firstDayOfMonth);
+$startDay = date("w", $firstDayOfMonth);
 
-// Fetch announcements
-$announcements = [];
-$sql = "SELECT * FROM announcements ORDER BY date DESC";
-$result = $conn->query($sql);
-if ($result && $result->num_rows > 0) {
-  while ($row = $result->fetch_assoc()) {
-    $announcements[] = $row;
-  }
+$calendar = "<div class='calendar'>
+  <div class='calendar-header'>
+    <span class='month'>$monthName</span>
+    <span class='year'>$year</span>
+  </div>
+  <div class='calendar-grid'>
+    <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>";
+
+$day = 1;
+for ($i = 0; $i < $startDay; $i++) {
+  $calendar .= "<div></div>";
 }
+for ($i = $startDay; $i < $startDay + $daysInMonth; $i++) {
+  $highlight = ($day == $today) ? "today" : "";
+  $calendar .= "<div class='$highlight'>$day</div>";
+  $day++;
+}
+$calendar .= "</div></div>";
 
 // Emoji replacement
 $emojiMap = [
@@ -42,6 +51,34 @@ $emojiMap = [
 function convertEmojis($text, $emojiMap) {
   return str_replace(array_keys($emojiMap), array_values($emojiMap), $text);
 }
+
+function allowLinks($text) {
+  $text = htmlspecialchars($text);
+
+  $text = preg_replace(
+    '/(https?:\/\/[^\s]+)/',
+    '<a href="$1" target="_blank">$1</a>',
+    $text
+  );
+
+  $text = preg_replace(
+    '/&lt;a href="(.*?)"&gt;(.*?)&lt;\/a&gt;/i',
+    '<a href="$1" target="_blank">$2</a>',
+    $text
+  );
+
+  return nl2br($text);
+}
+
+// Fetch announcements from the database
+$announcements = [];
+$sql = "SELECT * FROM announcements ORDER BY date DESC";
+$result = $conn->query($sql);
+if ($result && $result->num_rows > 0) {
+  while ($row = $result->fetch_assoc()) {
+    $announcements[] = $row;
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -49,13 +86,11 @@ function convertEmojis($text, $emojiMap) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Announcements</title>
+  <title>Announcements</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="adminannouncement.css"> <!-- ✅ Correct CSS file -->
+  <link rel="stylesheet" href="announcement.css" />
 </head>
-
 <body>
-
 <div class="container">
   <!-- Sidebar -->
   <aside class="sidebar">
@@ -63,7 +98,7 @@ function convertEmojis($text, $emojiMap) {
       <img src="Logo/logo1.png" alt="Logo" />
       <div class="logo-text">
         <strong>J-P Network English Corp</strong><br />
-        <span>Admin Panel</span>
+        <span>Interac Classes</span>
       </div>
     </div>
     <div class="nav-wrapper">
@@ -80,14 +115,16 @@ function convertEmojis($text, $emojiMap) {
 
   <!-- Main Content -->
   <main class="main">
+    <h1>📢 Announcements</h1>
     <div class="main-scroll">
-      <h1>📢 Announcements</h1>
-
-      <div class="faq-container">
+      <div class="announcement-grid">
         <?php foreach ($announcements as $item): ?>
-          <div class="faq-item">
-            <h3><?php echo date("F j, Y", strtotime($item['date'])); ?></h3>
-            <p><?php echo nl2br(convertEmojis(htmlspecialchars($item['content']), $emojiMap)); ?></p>
+          <div class="announcement-card">
+            <div class="announcement-icon">
+              <img src="Logo/announcement.png" alt="Announcement Icon" />
+            </div>
+            <h2><?php echo date("F j, Y", strtotime($item['date'])); ?></h2>
+            <p><?php echo convertEmojis(allowLinks($item['content']), $emojiMap); ?></p>
 
             <?php if (!empty($item['file'])): ?>
               <?php
@@ -113,33 +150,25 @@ function convertEmojis($text, $emojiMap) {
           </div>
         <?php endforeach; ?>
       </div>
-
     </div>
   </main>
 
   <!-- Right Panel -->
   <section class="right-panel">
-    <div class="clock">
-      <span id="time">--:--:--</span>
+    <div class="clock" id="live-clock">
+      <span id="time">--:--:--</span><br/>
       <span>Japanese Standard Time</span>
     </div>
-    <div class="calendar">
-      <div class="calendar-header">
-        <span class="month"><?php echo $monthName; ?></span>
-        <span class="year"><?php echo $year; ?></span>
-      </div>
-      <div class="calendar-grid">
-        <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
-        <?php
-        for ($i = 0; $i < $startDay; $i++) echo "<div></div>";
-        for ($day = 1; $day <= $daysInMonth; $day++) {
-          $highlight = ($day == $today) ? "today" : "";
-          echo "<div class='$highlight'>$day</div>";
-        }
-        ?>
-      </div>
-    </div>
+    <?php echo $calendar; ?>
   </section>
+</div>
+
+<!-- ✨ MODAL for Announcements -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-content">
+    <span class="modal-close" id="modalClose">&times;</span>
+    <div class="modal-body"></div>
+  </div>
 </div>
 
 <script>
@@ -153,7 +182,31 @@ function updateClock() {
 }
 setInterval(updateClock, 1000);
 updateClock();
-</script>
 
+// 📢 Expand bubble script
+document.addEventListener('DOMContentLoaded', function() {
+  const cards = document.querySelectorAll('.announcement-card');
+  const modalOverlay = document.getElementById('modalOverlay');
+  const modalBody = modalOverlay.querySelector('.modal-body');
+  const closeModal = document.getElementById('modalClose');
+
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      modalBody.innerHTML = card.innerHTML; // Copy card content into modal
+      modalOverlay.style.display = 'flex';
+    });
+  });
+
+  closeModal.addEventListener('click', () => {
+    modalOverlay.style.display = 'none';
+  });
+
+  modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) {
+      modalOverlay.style.display = 'none';
+    }
+  });
+});
+</script>
 </body>
 </html>
